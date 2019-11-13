@@ -2,7 +2,7 @@
 
 ## _Borderline_: A look into border barriers and the people they keep apart
 
-###Week 1:
+### Week 1:
 - Jovin to sort out the layout and some of the basic section areas
 - Jovin to work on the documentation and directory structure
 - Jovin to set up the front cover page and incorporate what's been discussed
