@@ -168,13 +168,13 @@ var scrollVis = function () {
       .attr('class', 'title openvis-title')
       .attr('x', width / 2)
       .attr('y', height / 3)
-      .text('Borderline');
+      .text('2013');
 
     g.append('text')
       .attr('class', 'sub-title openvis-title')
       .attr('x', width / 2)
       .attr('y', (height / 3) + (height / 5))
-      .text('CS171 Final Project');
+      .text('OpenVis Conf');
 
     g.selectAll('.openvis-title')
       .attr('opacity', 0);
