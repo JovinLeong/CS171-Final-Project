@@ -2,42 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73ef7e08-6ac3-42fb-a57c-686a45d16ac4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/implementation/img/brazil Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/india Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/kazakhstan Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/korea Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/mexico Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/morrocco Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/saudi Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/ukraine Cropped.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementation/img/usa Cropped.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CS171-Final-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CS171-Final-Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/css/border_years.css" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/css/border_years.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/data/border_years.csv" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/data/border_years.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/data/variables_CLEAN.csv" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/data/variables_CLEAN.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/data/variables_with_translations_0.2_csv.csv" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/data/variables_with_translations_0.2_csv.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/data/words.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/data/words.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/js/Tobias.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/Tobias.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/js/border_years.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/border_years.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/js/scroller.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/scroller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/js/sections.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/sections.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/lib/d3.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/lib/d3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/lib/d3.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/lib/d3.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/lib/topojson.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/lib/topojson.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/post.md" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/post.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +50,7 @@
       <workItem from="1573679613007" duration="450000" />
       <workItem from="1574019730375" duration="32000" />
       <workItem from="1574019763216" duration="745000" />
-      <workItem from="1574042983228" duration="883000" />
+      <workItem from="1574042983228" duration="3991000" />
     </task>
     <servers />
   </component>
