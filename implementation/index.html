@@ -5,6 +5,8 @@
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <link rel="stylesheet" type="text/css" href="css/border_years.css"/>
+  <link rel="stylesheet" type="text/css" href="css/flickity.min.css"/>
+
 </head>
 <body>
 <div class="container">
@@ -298,9 +300,8 @@
   <div class="row" id="Tobias-scatter">
   </div>
 
-</div>
 
-<div class="container-fluid" div id="Tobias section">
+
   <div class="row">
     <h1>Increase in borders around the world</h1>
     <p>
@@ -313,13 +314,33 @@
 
   <div class="row" id="border_years"></div>
 
+
+  <div class="row" id="carousel-section">
+
+    <div class="main-carousel" id="carousel">
+      <div class="carousel-cell"> carousel content 1 </div>
+      <div class="carousel-cell"> carousel content 2 </div>
+      <div class="carousel-cell"> carousel content 3 </div>
+      <div class="carousel-cell"> carousel content 4 </div>
+      <div class="carousel-cell"> carousel content 5 </div>
+
+            </div>
+
+<p> hello</p>
+
+</div>
+
 </div>
 
 
 <!--libraries-->
 <script src="lib/d3.js"></script>
+<script src="lib/jquery.min.js"></script>
 <script src="lib/queue.min.js"></script>
 <script src="lib/topojson.min.js"></script>
+<script src="lib/topojson.min.js"></script>
+<script src="lib/flickity.pkgd.min.js"></script>
+
 
 <!--layout js files-->
 <script src="js/scroller.js"></script>
@@ -330,6 +351,20 @@
 
 <!--Sids' individual js file-->
 <script src="js/border_years.js"></script>
+
+
+<script>
+  $(document).ready(function() {
+    $('.main-carousel').flickity({
+      // options
+      cellAlign: 'center',
+      contain: true,
+      pageDots: true
+    });
+
+  })
+
+</script>
 
 </body>
 </html>
