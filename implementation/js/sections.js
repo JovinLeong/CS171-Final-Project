@@ -300,7 +300,7 @@ var scrollVis = function () {
     activateFunctions[6] = showHistAll;
     activateFunctions[7] = showCough;
     activateFunctions[8] = showHistAll;
-    activateFunctions[9] = showLine;
+
     // updateFunctions are called while
     // in a particular section to update
     // the scroll progress in that section.
@@ -599,8 +599,6 @@ var scrollVis = function () {
    * to hide the axis
    *
    */
-
-
   function hideAxis() {
     g.select('.x.axis')
       .transition().duration(500)
