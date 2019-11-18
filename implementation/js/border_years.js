@@ -63,7 +63,7 @@ d3.csv("data/border_years.csv", function(error, data) {
         .enter()
         .append('path')
         .attr('class', 'line')
-        .style('stroke', "red")
+        .style('stroke', "#008080")
         .attr('clip-path', 'url(#clip)')
         .attr('d', function(d) {
             return line(d);
