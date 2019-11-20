@@ -178,9 +178,17 @@
 /* Michael's CSS stuff ends */
 
 
-
 /* Tobias css */
 .carousel-cell{
   width: 50%
 
 }
+
+path:hover {
+  fill: black;
+}
+
+.scatter-circle:hover{
+  fill:black;
+}
+

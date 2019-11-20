@@ -112,14 +112,24 @@ TobiasMap.prototype.updateVis = function() {
     // update the domain
     vis.colorScale.domain(vis.minMaxY)
 
+    console.log(vis.Germany)
+
     // render a map of Germany using the path generator
     vis.map = vis.svg.selectAll("path")
         .data(vis.Germany)
         .enter().append("path")
         .attr("d", vis.path)
+        .attr("id", function(d,i){return "map_"+ (d.properties.Kennziffer)})
         .attr("fill", function(d,i){
             return vis.colorScale(d.properties[vis.varY])
         })
+        .on("mouseover", function(d,i){
+            document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "black";
+        })
+        .on("mouseout", function(d,i){
+            document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "";
+        })
+
 
     // East v West
         // .attr("fill", function(d,i){
@@ -230,6 +240,8 @@ TobiasScatter.prototype.updateVis = function(){
     vis.x.domain(vis.minMaxX);
     vis.y.domain(vis.minMaxY);
 
+    console.log(vis.data)
+
     // update all the bubbles
     vis.svg.selectAll("circle")
         .data(vis.data)
@@ -237,7 +249,9 @@ TobiasScatter.prototype.updateVis = function(){
         .append("circle")
         .attr("cx", function(d,i){return vis.x(d[vis.varX])})
         .attr("cy", function(d,i){return vis.y(d[vis.varY])})
+        .attr("class", "scatter-circle")
         .attr("r", 5)
+        .attr("id", function(d,i){return ("scatter_" + d.ID)})
         .attr("fill", function(d,i){
             if(d[vis.varZ] == 3){
                 return "blue"
@@ -247,6 +261,14 @@ TobiasScatter.prototype.updateVis = function(){
             }
             else {return "green"}
         })
+        .on("mouseover", function(d,i){
+            document.getElementById(('map_'+ d.ID)).style.fill = "black";
+        })
+        .on("mouseout", function(d,i){
+            document.getElementById(('map_'+ d.ID)).style.fill = "";
+        })
+
+
 
     // Call axis function with the new domain
     vis.svg.select(".y-axis").call(vis.yAxis);
