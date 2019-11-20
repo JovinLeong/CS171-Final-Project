@@ -125,22 +125,24 @@ TobiasMap.prototype.updateVis = function() {
         })
         .on("mouseover", function(d,i){
             document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "black";
+            console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
+            document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 7)
         })
         .on("mouseout", function(d,i){
             document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "";
+            document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
+
         })
-
-
     // East v West
-        // .attr("fill", function(d,i){
-        //     if(d.properties[vis.varX] == 1){
-        //         return "grey"
-        //     }
-        //     else if(d.properties[vis.varX] == 2){
-        //         return "blue"
-        //     }
-        //         else{return "orange"}
-        // })
+        .attr("fill", function(d,i){
+            if(d.properties[vis.varX] == 1){
+                return "grey"
+            }
+            else if(d.properties[vis.varX] == 2){
+                return "blue"
+            }
+                else{return "orange"}
+        })
 
 }
 
