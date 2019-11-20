@@ -1,7 +1,12 @@
-
-.container {
-  width: 890px;
+.center-title {
+    text-align: center;
 }
+
+.key-section {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
 
 #graphic {
   padding-top: 60px;

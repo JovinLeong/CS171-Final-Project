@@ -5,9 +5,6 @@ queue()
     .defer(d3.json, "data/Kreise15map.json")
     .defer(d3.csv, "data/variables_clean.csv")
     .await(function(error, mapTopJson, germanData) {
-            console.log(mapTopJson)
-            console.log(germanData)
-
         var tobias_map = new TobiasMap("Tobias-map",mapTopJson, germanData)
 
         var tobias_scatter = new TobiasScatter ("Tobias-scatter", germanData)
@@ -89,7 +86,6 @@ TobiasMap.prototype.wrangleData = function() {
     vis.minMaxY= d3.extent(vis.data.map(function(d){ return d[vis.varY]; }));
 
     // inject data into json map object
-    console.log(vis.Germany)
     vis.Germany.forEach(function(d,i){
 
         vis.data.forEach(function(data, index){
@@ -102,7 +98,6 @@ TobiasMap.prototype.wrangleData = function() {
         })
 
     })
-    console.log(vis.Germany)
 
 
 

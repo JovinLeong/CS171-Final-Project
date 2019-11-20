@@ -5,7 +5,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
     height = 500 - margin.top - margin.bottom;
 
 // parse the date / time
-var parseTime = d3.timeFormat("%Y")
+var parseTime = d3.timeFormat("%Y");
 
 // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
 var x = d3.scaleLinear().range([0, width]);
@@ -24,8 +24,6 @@ d3.csv("data/border_years.csv", function(error, data) {
         d.year = parseInt(d.year);
         d.walls = +d.walls;
     });
-
-    console.log(data);
 
     // Compute the minimum and maximum date, and the maximum walls.
     x.domain([data[0].year, data[data.length - 1].year]);

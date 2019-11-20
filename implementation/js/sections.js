@@ -101,50 +101,50 @@ var scrollVis = function () {
    *  to draw the visualization in. For this
    *  example, we will be drawing it in #vis
    */
-  var chart = function (selection) {
-    selection.each(function (rawData) {
-      // create svg and give it a width and height
-      svg = d3.select(this).selectAll('svg').data([wordData]);
-      var svgE = svg.enter().append('svg');
-      // @v4 use merge to combine enter and existing selection
-      svg = svg.merge(svgE);
-
-      svg.attr('width', width + margin.left + margin.right);
-      svg.attr('height', height + margin.top + margin.bottom);
-
-      svg.append('g');
-
-
-      // this group element will be used to contain all
-      // other elements.
-      g = svg.select('g')
-        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-      // perform some preprocessing on raw data
-      var wordData = getWords(rawData);
-      // filter to just include filler words
-      var fillerWords = getFillerWords(wordData);
-
-      // get the counts of filler words for the
-      // bar chart display
-      var fillerCounts = groupByWord(fillerWords);
-      // set the bar scale's domain
-      var countMax = d3.max(fillerCounts, function (d) { return d.value;});
-      xBarScale.domain([0, countMax]);
-
-      // get aggregated histogram data
-
-      var histData = getHistogram(fillerWords);
-      // set histogram's domain
-      var histMax = d3.max(histData, function (d) { return d.length; });
-      yHistScale.domain([0, histMax]);
-
-      setupVis(wordData, fillerCounts, histData);
-
-      setupSections();
-    });
-  };
-
+  // var chart = function (selection) {
+  //   selection.each(function (rawData) {
+  //     // create svg and give it a width and height
+  //     svg = d3.select(this).selectAll('svg').data([wordData]);
+  //     var svgE = svg.enter().append('svg');
+  //     // @v4 use merge to combine enter and existing selection
+  //     svg = svg.merge(svgE);
+  //
+  //     svg.attr('width', width + margin.left + margin.right);
+  //     svg.attr('height', height + margin.top + margin.bottom);
+  //
+  //     svg.append('g');
+  //
+  //
+  //     // this group element will be used to contain all
+  //     // other elements.
+  //     g = svg.select('g')
+  //       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+  //
+  //     // perform some preprocessing on raw data
+  //     var wordData = getWords(rawData);
+  //     // filter to just include filler words
+  //     var fillerWords = getFillerWords(wordData);
+  //
+  //     // get the counts of filler words for the
+  //     // bar chart display
+  //     var fillerCounts = groupByWord(fillerWords);
+  //     // set the bar scale's domain
+  //     var countMax = d3.max(fillerCounts, function (d) { return d.value;});
+  //     xBarScale.domain([0, countMax]);
+  //
+  //     // get aggregated histogram data
+  //
+  //     var histData = getHistogram(fillerWords);
+  //     // set histogram's domain
+  //     var histMax = d3.max(histData, function (d) { return d.length; });
+  //     yHistScale.domain([0, histMax]);
+  //
+  //     setupVis(wordData, fillerCounts, histData);
+  //
+  //     setupSections();
+  //   });
+  // };
+  //
 
   /**
    * setupVis - creates initial elements for all
@@ -293,13 +293,13 @@ var scrollVis = function () {
     // time the active section changes
     activateFunctions[0] = showTitle;
     activateFunctions[1] = showFillerTitle;
-    activateFunctions[2] = showGrid;
-    activateFunctions[3] = highlightGrid;
-    activateFunctions[4] = showBar;
-    activateFunctions[5] = showHistPart;
-    activateFunctions[6] = showHistAll;
-    activateFunctions[7] = showCough;
-    activateFunctions[8] = showHistAll;
+    // activateFunctions[2] = showGrid;
+    // activateFunctions[3] = highlightGrid;
+    // activateFunctions[4] = showBar;
+    // activateFunctions[5] = showHistPart;
+    // activateFunctions[6] = showHistAll;
+    // activateFunctions[7] = showCough;
+    // activateFunctions[8] = showHistAll;
 
     // updateFunctions are called while
     // in a particular section to update
@@ -307,10 +307,10 @@ var scrollVis = function () {
     // Most sections do not need to be updated
     // for all scrolling and so are set to
     // no-op functions.
-    for (var i = 0; i < 9; i++) {
+    for (var i = 0; i < 2; i++) {
       updateFunctions[i] = function () {};
     }
-    updateFunctions[7] = updateCough;
+    // updateFunctions[7] = updateCough;
   };
 
   /**
@@ -760,37 +760,37 @@ var scrollVis = function () {
  * sets up the scroller and
  * displays the visualization.
  *
- * @param data - loaded tsv data
- */
-function display(data) {
-  // create a new plot and
-  // display it
-  var plot = scrollVis();
-  d3.select('#vis')
-    .datum(data)
-    .call(plot);
-
-  // setup scroll functionality
-  var scroll = scroller()
-    .container(d3.select('#graphic'));
-
-  // pass in .step selection as the steps
-  scroll(d3.selectAll('.step'));
-
-  // setup event handling
-  scroll.on('active', function (index) {
-    // highlight current step text
-    d3.selectAll('.step')
-      .style('opacity', function (d, i) { return i === index ? 1 : 0.1; });
-
-    // activate current section
-    plot.activate(index);
-  });
-
-  scroll.on('progress', function (index, progress) {
-    plot.update(index, progress);
-  });
-}
-
-// load data and display
-d3.tsv('data/words.tsv', display);
+//  * @param data - loaded tsv data
+//  */
+// // function display(data) {
+// //   // create a new plot and
+// //   // display it
+// //   var plot = scrollVis();
+// //   d3.select('#vis')
+// //     .datum(data)
+// //     .call(plot);
+// //
+// //   // setup scroll functionality
+// //   var scroll = scroller()
+// //     .container(d3.select('#graphic'));
+// //
+// //   // pass in .step selection as the steps
+// //   scroll(d3.selectAll('.step'));
+// //
+// //   // setup event handling
+// //   scroll.on('active', function (index) {
+// //     // highlight current step text
+// //     d3.selectAll('.step')
+// //       .style('opacity', function (d, i) { return i === index ? 1 : 0.1; });
+// //
+// //     // activate current section
+// //     plot.activate(index);
+// //   });
+// //
+// //   scroll.on('progress', function (index, progress) {
+// //     plot.update(index, progress);
+// //   });
+// // }
+//
+// // load data and display
+// d3.tsv('data/words.tsv', display);
