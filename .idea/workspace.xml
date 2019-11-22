@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="73ef7e08-6ac3-42fb-a57c-686a45d16ac4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementation/js/Tobias.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/Tobias.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,7 +19,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HKS lectures/Fall 2019/CS 171 - Visualisation/submission4/hw/implementation" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HKS lectures/Fall 2019/CS 171 - Visualisation/midterm_template" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -52,7 +53,8 @@
       <workItem from="1574019730375" duration="32000" />
       <workItem from="1574019763216" duration="745000" />
       <workItem from="1574042983228" duration="3991000" />
-      <workItem from="1574221406403" duration="6150000" />
+      <workItem from="1574221406403" duration="12425000" />
+      <workItem from="1574361363509" duration="3015000" />
     </task>
     <servers />
   </component>
