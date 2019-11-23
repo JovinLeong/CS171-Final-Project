@@ -4,10 +4,18 @@
 queue()
     .defer(d3.json, "data/Kreise15map.json")
     .defer(d3.csv, "data/variables_clean.csv")
-    .await(function(error, mapTopJson, germanData) {
+    .defer(d3.csv, "data/east_west.csv")
+    .defer(d3.csv, "data/east_west2.csv")
+    .await(function(error, mapTopJson, germanData, time_data,time_data2) {
+        console.log(time_data)
+        console.log(time_data2)
+
         tobias_map = new TobiasMap("Tobias-map",mapTopJson, germanData)
 
         tobias_scatter = new TobiasScatter ("Tobias-scatter", germanData)
+
+        tobias_line = new TobiasLine ("Tobias-line", time_data)
+
 
 
     })
@@ -300,6 +308,92 @@ TobiasScatter.prototype.updateVis = function(){
     vis.svg.select(".y-axis").call(vis.yAxis);
     vis.svg.select(".x-axis").call(vis.xAxis);
 }
+
+// create object for line chart
+TobiasLine = function(_parentElement, _data, _eventHandler){
+    this.parentElement = _parentElement;
+    this.data = _data;
+    this.eventHandler = _eventHandler;
+    this.initVis()
+}
+
+TobiasLine.prototype.initVis = function() {
+    var vis = this;
+
+    // --> CREATE SVG DRAWING AREA
+    vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
+    vis.width = 500 - vis.margin.left - vis.margin.right;
+    vis.height = 600 - vis.margin.top - vis.margin.bottom;
+
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+    // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
+    vis.x = d3.scaleLinear().range([0, vis.width]);
+    vis.y = d3.scaleLinear().range([vis.height, 0]);
+
+    // define the clip path
+    // Add the clip path.
+    vis.svg.append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", vis.width)
+        .attr("height", vis.height);
+    this.wrangleData()
+}
+
+TobiasLine.prototype.wrangleData = function(){
+
+    // calcualte the domain in wrangle data
+    scatter_var = "Arbeitslosenquote"
+    scatter_beginning = 1998;
+    scatter_end = 2017;
+
+
+    // Compute the minimum and maximum date, and the maximum walls.
+    vis.x.domain();
+    vis.y.domain().nice();
+
+
+
+    // define the line, helper function
+    vis.line = d3.line()
+        .curve(d3.curveMonotoneX)
+        .x(function(d) { return vis.x(d.year); })
+        .y(function(d) { return vis.y(d.walls); });
+
+    // draw the line
+    svg.selectAll('.line')
+        .data([vis.data])
+        .enter()
+        .append('path')
+        .attr('class', 'line')
+        .style('stroke', "#008080")
+        .attr('clip-path', 'url(#clip)')
+        .attr('d', function(d) {
+            return vis.line(d);
+        })
+
+
+    // Add the X Axis
+    vis.svg.append("g")
+        .attr("transform", "translate(0," + vis.height + ")")
+        .call(d3.axisBottom(vis.x)
+            .ticks(20)
+            .tickFormat(d3.format("d")));
+
+    // Add the Y Axis
+    vis.svg.append("g")
+        .call(d3.axisLeft(vis.y));
+
+
+
+    }
+
+
+
 
 function updateMap(){
     console.log("click")
