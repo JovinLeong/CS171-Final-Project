@@ -1,7 +1,7 @@
 
 // set the dimensions and margins of the graph
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
+    width = 650 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 // parse the date / time
@@ -46,6 +46,7 @@ d3.csv("data/border_years.csv", function(error, data) {
 
     // Add the X Axis
     svg.append("g")
+        .attr('class', 'axisLines')
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x)
             .ticks(20)
@@ -54,6 +55,7 @@ d3.csv("data/border_years.csv", function(error, data) {
 
     // Add the Y Axis
     svg.append("g")
+        .attr('class', 'axisLines')
         .call(d3.axisLeft(y));
 
     svg.selectAll('.line')
@@ -75,7 +77,7 @@ d3.csv("data/border_years.csv", function(error, data) {
         .attr('width', width)
         .attr('class', 'curtain')
         .attr('transform', 'rotate(180)')
-        .style('fill', '#ffffff');
+        .style('fill', '#1D1D1D');
 
     /* Create a shared transition for anything we're animating */
     var t = svg.transition()

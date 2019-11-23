@@ -1,398 +1,777 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+
+<html lang="en">
+
 <head>
-  <title>Scrolling Sections</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>
-  <link rel="stylesheet" type="text/css" href="css/sequences.css"/>
-  <link rel="stylesheet" type="text/css" href="css/border_years.css"/>
-  <link rel="stylesheet" type="text/css" href="css/flickity.min.css"/>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
+  <!-- Page Title Here -->
+  <title>Borderlines</title>
+
+  <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+  <!-- Web fonts and Web Icons -->
+  <link rel="stylesheet" href="./fonts/opensans/stylesheet.css">
+  <link rel="stylesheet" href="./fonts/bebas/stylesheet.css">
+  <link rel="stylesheet" href="./fonts/ionicons.min.css">
+  <link rel="stylesheet" href="./fonts/font-awesome.min.css">
+
+  <!-- Vendor CSS style -->
+  <link rel="stylesheet" href="./css/pageloader.css">
+
+  <!-- Uncomment below to load individualy vendor CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./js/vendor/swiper.min.css">
+  <link rel="stylesheet" href="./js/vendor/jquery.fullpage.min.css">
+
+
+  <!-- Main CSS files -->
+  <link rel="stylesheet" href="./css/main.css">
+
+
+  <!-- add layout here -->
+  <link rel="stylesheet" href="./css/style-color.css">
+
+  <script src="./js/vendor/modernizr-2.7.1.min.js"></script>
 </head>
-<body>
 
+<body id="menu" class="body-page">
 
+  <!-- Page Loader -->
+  <div class="page-loader" id="page-loader">
+    <div>
+      <div class="icon ion-spin"></div>
+      <p>loading...</p>
+    </div>
+  </div>
 
-<div class="container-fluid">
-  <h1 class="center-title">Borderline</h1>
-  <br>
-  <h3 class="center-title">Visualizing border barriers and the people they keep apart</h3>
-  <br>
-  <h4>We haven't done the formatting because we want to standardize all the styles subsequently all at once such that we don't get conflict - especially with margins.</h4>
-  <h4>We have much of the data for our main visualizations but we haven't related some of the visualizations to the data yet; we plan to implement that when we are doing up the interactive elements</h4>
-      <div class="row key-section">
-
-        <br><br>
-        <div class="row" id="carousel-section">
-          General interest in government and how patterns and variations in economic inequality and quality of life can be visualised both across countries and across subnational regions and municipalities within countries.
-
-          Borders are a particularly contentious issue in mainstream media presently; interstate and inter-region boundaries have been very much politicized in places such as the US, Austria, and Ireland.
-          We hope to provide individuals with a more informed position concerning borders in order to enable them to make more conscious political decisions and better understand how the creation or destruction of these man-made divides might impact them
-
-          <br><br>
-          <div class="main-carousel" id="carousel">
-            <div class="carousel-cell"> news article </div>
-            <div class="carousel-cell"> news article </div>
-            <div class="carousel-cell"> news article </div>
-            <div class="carousel-cell"> news article </div>
-            <div class="carousel-cell"> news article </div>
-            <div class="carousel-cell"> news article </div>
-            <div class="carousel-cell"> news article </div>
-            <div class="carousel-cell"> news article </div>
-          </div>
-        </div>
-      </div>
-
-    <div class="row key-section">
-      <div class="col-sm-5">
-        Globally, the incidence of physical border barriers hsa been rising since WWII. The visualization below illustrates the increase in walls built around the world since
-        the end of WWII. The data was collected by Elisabeth Vallet, Zoe Barry and Josselyn Guillarmou,
-        who define "walls" in the broadest sense "as a political divider that comprises complex technologies,
-        control methods, legislative provisions and "securing the border" discourse."
-
-        <ul> To add
-          <li>Axes and labels</li>
-          <li>Additional text and graphics</li>
-          <li>Fix up sunburst</li>
+  <!-- SIDE MENU -->
+  <header class="page-header navbar page-header-alpha scrolled-white menu-right topmenu-right">
+    
+      <!-- Begin of sidebar nav menu -->
+      <nav class="navbar-sidebar ">
+        <ul class="navbar-nav" id="qmenu">
+          <li class="nav-item">
+            <a href="#section1">
+              <span class="txt">Section 1: Intro</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#section2">
+              <span class="txt">Section 2: Case Study</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#section3">
+              <span class="txt">Section 3: Outlook</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#about">
+              <span class="txt">About</span>
+            </a>
+          </li>
         </ul>
+      </nav>
+      <!-- End of sidebar nav menu -->
+    </div>
+    <!-- end of menu wrapper -->
 
-        The percentage should go inside the center of the circle.
+  </header>
+  <!-- END SIDE MENU -->
 
-        <div id="main">
-          <div id="sequence"></div>
-          <div id="chart">
-            <div id="explanation" style="visibility: hidden;">
-              <span id="percentage"></span><br/>
-              of visits begin with this sequence of pages
+
+
+
+  <!-- MAIN PAGE -->
+  <main class="page-main page-fullpage main-anim" id="mainpage">
+
+
+    <!-- TITLE -->
+    <div class="section section-home fullscreen-md fp-auto-height-responsive main-home"
+    data-section="home">
+
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper">
+        <!-- content -->
+        <div class="section-content anim">
+          <div class="row">
+            <div class="col-12 text-left">
+              <!-- title and description -->
+              <div class="title-desc">
+                <h2 class="display-4 display-title home-title bordered anim-1">Borderline
+                  <br>
+                </h2>
+                <h4 class="anim-2">A look at borders around the world...</h4>
+              </div>
             </div>
           </div>
         </div>
-        <div id="sidebar">
-          <input type="checkbox" id="togglelegend"> Legend<br/>
-          <div id="legend" style="visibility: hidden;"></div>
-        </div>
+
+        <!-- Arrows scroll down/up CHANGE ICON TO REGULAR ARROW -->
+        <footer class="section-footer scrolldown">
+          <a class="down">
+            <span class="icon"></span>
+            <span class="txt">Scroll</span>
+          </a>
+        </footer>
 
 
       </div>
-      <div class="col-sm-5">
-        <div class="row" id="border_years">
-          <h1>Increase in borders around the world</h1>
+      <!-- End of section wrapper -->
+
+    </div>
+    <!-- End TITLE -->
+
+
+
+
+
+    <!-- SECTION 1: INTRO -->
+    <div class="section section-pricelist " data-section="section1">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Section 1: Intro</h2>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+
+
+    <!-- HISTORY -->
+    <div class="section section-twoside fp-auto-height-responsive">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside center-vh dir-col">
+
+        <div class="item row justify-content-between">
+
+          <!-- img-frame-legend-alpha demo -->
+          <div class="col-12 col-sm-6 center-vh">
+            <div class="row" id="border_years">
+              <h1>Increase in borders around the world</h1>
+            </div>
+          </div>
+
+
+          <!-- img-frame-legend-alpha portrait mode bottom demo -->
+          <div class="col-12 col-sm-6 col-md-5">
+            <div class="section-content anim">
+              <!-- title and description -->
+              <div>
+                <h5 class="display-4 display-title anim-2">History</h5>
+
+                <p>General interest in government and how patterns and variations in economic inequality and
+                  quality of life can be visualised both across countries and across subnational regions and
+                  municipalities within countries. Borders are a particularly contentious issue in mainstream
+                  media presently; interstate and inter-region boundaries have been very much politicized in
+                  places such as the US, Austria, and Ireland. We hope to provide individuals with a more
+                  informed position concerning borders in order to enable them to make more conscious political
+                  decisions and better understand how the creation or destruction of these man-made divides might impact them.
+                </p>
+                <p>Globally, the incidence of physical border barriers hsa been rising since WWII.
+                  The visualization below illustrates the increase in walls built around the world
+                  since the end of WWII. The data was collected by Elisabeth Vallet, Zoe Barry and
+                  Josselyn Guillarmou, who define "walls" in the broadest sense "as a political divider
+                  that comprises complex technologies, control methods, legislative provisions and
+                  "securing the border" discourse."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+    <!-- END HISTORY -->
+
+
+
+
+    <!-- SECTION 2: CASE STUDY -->
+    <div class="section section-pricelist " data-section="section2">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Section 2: Case Study</h2>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+
+
+    <!-- GERMANY CASE -->
+    <div class="section section-twoside fp-auto-height-responsive">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside center-vh dir-col">
+
+        <div class="item row justify-content-between">
+
+          <!-- img-frame-legend-alpha demo -->
+          <div class="col-12 col-sm-6 center-vh">
+            <div class="section-content anim translateUp">
+              <div class="images text-center">
+                <div class="img-frame-legend-alpha">
+                  <div class="img-1 shadow">
+                    <img class="img" src="img/items/img-sample7.jpg" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- img-frame-legend-alpha portrait mode bottom demo -->
+          <div class="col-12 col-sm-6 col-md-5">
+            <div class="section-content anim">
+              <!-- title and description -->
+              <div>
+                <h5 class="display-4 display-title anim-2">Germany Case</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet
+                  malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum
+                  ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id
+                  pretium leo. Pellentesque luctus massa non elit viverra pellentesque.
+                  Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui.
+                  Fusce in urna sem.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+    <!-- END GERMANY CASE -->
+
+
+
+    <!-- SECTION 3: Outlook -->
+    <div class="section section-pricelist " data-section="section3">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Section 3: Outlook</h2>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+
+
+    <!-- OUTLOOK TEXT -->
+    <div class="section section-twoside fp-auto-height-responsive">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside center-vh dir-col">
+
+        <div class="item row justify-content-between">
+
+          <!-- img-frame-legend-alpha demo -->
+          <div class="col-12 col-sm-6 center-vh">
+            <div class="section-content anim translateUp">
+              <div class="images text-center">
+                <div class="img-frame-legend-alpha">
+                  <div class="img-1 shadow">
+                    <img class="img" src="img/items/img-sample7.jpg" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- img-frame-legend-alpha portrait mode bottom demo -->
+          <div class="col-12 col-sm-6 col-md-5">
+            <div class="section-content anim">
+              <!-- title and description -->
+              <div>
+                <h5 class="display-4 display-title anim-2">OUTLOOK TEXT</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet
+                  malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum
+                  ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id
+                  pretium leo. Pellentesque luctus massa non elit viverra pellentesque.
+                  Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui.
+                  Fusce in urna sem.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+    <!-- END OUTLOOK TEXT -->
+
+
+
+    <!-- Country Tiles -->
+    <div class="section section-pricelist ">
+
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Explore some of the most contentious border barriers</h2>
+        </div>
+
+            <div class="row">
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/brazil%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">Brazil</h4>
+                          <p class="card-text">
+                            Here we can talk about Brazil's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/india%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">India</h4>
+                          <p class="card-text">
+                            Here we can talk about India's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/kazakhstan%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">Kazakhstan</h4>
+                          <p class="card-text">
+                            Here we can talk about Kazakhstan's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/korea%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">Korea</h4>
+                          <p class="card-text">
+                            Here we can talk about Korea's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/mexico%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">Mexico</h4>
+                          <p class="card-text">
+                            Here we can talk about Mexico's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/morrocco%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">Morocco</h4>
+                          <p class="card-text">
+                            Here we can talk about Morocco's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/saudi%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">Saudi Arabia</h4>
+                          <p class="card-text">
+                            Here we can talk about Saudi Arabia's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/ukraine%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">Ukraine</h4>
+                          <p class="card-text">
+                            Here we can talk about Ukraine's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+              <!-- Border Card -->
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                  <div class="mainflip">
+                    <div class="frontside">
+                      <div class="card">
+                        <div class="card-body text-center">
+                          <p><img class=" img-fluid" src="img/borders/usa%20Cropped.png" alt="card image"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="backside">
+                      <div class="card">
+                        <div class="card-body text-center mt-4">
+                          <h4 class="card-title">USA</h4>
+                          <p class="card-text">
+                            Here we can talk about USA's border wall.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ./Border Card -->
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <!-- END Country Tiles -->
+
+
+
+
+
+
+
+
+    <!-- SLIDESHOW?? -->
+    <div class="section section-twoside fp-auto-height-responsive " data-section="projects">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h5 class="display-4 display-title anim-2">SLIDESHOW??</h5>
+        </div>
+
+        <!-- begin of carousel-swiper-beta -->
+        <div class="slider-wrapper carousel-swiper-beta carousel-smalls carousel-swiper-beta-demo mt-40">
+          <!-- slider -->
+          <div class="slider-container swiper-container">
+            <ul class="item-list swiper-wrapper">
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample2-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Mountain</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample3-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Cloud</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample4-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Garden</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample5-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Sky</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- pagination -->
+          <div class="items-pagination bar"></div>
+
+          <!-- navigation -->
+          <div class="items-button bottom fit items-button-prev">
+            <a class="btn btn-transp-arrow btn-primary icon-left" href="">
+              <span class="icon arrow-left"></span>
+              <span class="text">Prev</span>
+            </a>
+          </div>
+          <div class="items-button bottom fit items-button-next">
+            <a class="btn btn-transp-arrow btn-primary" href="">
+              <span class="icon arrow-right"></span>
+              <span class="text">Next</span>
+            </a>
+          </div>
+        </div>
+        <!-- end of carousel-swiper-beta -->
+
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+    <!-- End SLIDESHOW -->
+
+
+
+    <!-- ABOUT -->
+    <div class="section section-description fp-auto-height-responsive" data-section="about">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">About</h2>
+        </div>
+
+        <!-- content -->
+        <div class="section-content reduced anim text-center">
+          <!-- title and description -->
+          <div class="title-desc anim-3">
+            <p>This page was created for CS171...</p>
+          </div>
+        </div>
+
+        <!-- content -->
+        <div class="section-content anim text-center">
+          <div class="item row justify-content-between">
+
+            <!-- PERSON1-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/jovin.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Jovin Leong</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PERSON2-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/michael.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Michael Huang</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PERSON3-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/sid.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Sid Beaumaster</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- PERSON4-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/tobias.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Tobias Haefele</h5>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-
-  <div class="row key-section">
-    <h4>Explore some of the most contentious border barriers</h4>
-    <div class="container">
-      <!--            <h5 class="section-title h1">OUR TEAM</h5>-->
-      <div class="row">
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/brazil%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">Brazil</h4>
-                    <p class="card-text">
-                      Here we can talk about Brazil's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/india%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">India</h4>
-                    <p class="card-text">
-                      Here we can talk about India's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/kazakhstan%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">Kazakhstan</h4>
-                    <p class="card-text">
-                      Here we can talk about Kazakhstan's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/korea%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">Korea</h4>
-                    <p class="card-text">
-                      Here we can talk about Korea's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/mexico%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">Mexico</h4>
-                    <p class="card-text">
-                      Here we can talk about Mexico's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/morrocco%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">Morocco</h4>
-                    <p class="card-text">
-                      Here we can talk about Morocco's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/saudi%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">Saudi Arabia</h4>
-                    <p class="card-text">
-                      Here we can talk about Saudi Arabia's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/ukraine%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">Ukraine</h4>
-                    <p class="card-text">
-                      Here we can talk about Ukraine's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-        <!-- Border Card -->
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-            <div class="mainflip">
-              <div class="frontside">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <p><img class=" img-fluid" src="img/usa%20Cropped.png" alt="card image"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="backside">
-                <div class="card">
-                  <div class="card-body text-center mt-4">
-                    <h4 class="card-title">USA</h4>
-                    <p class="card-text">
-                      Here we can talk about USA's border wall.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- ./Border Card -->
-      </div>
-    </div>
-  </div>
+    <!-- END ABOUT -->
 
 
 
 
-  <div class="row key-section">
-    <h2>Visualizing the German case: even when borders disappear, differences persist for a long time after</h2>
-    </div>
+  </main>
+  <!-- END OF page main content -->
 
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-4" id="Tobias-map">
-      German socioeconomic metrics by region
-    </div>
 
-    <div class="col-md-4" id="Tobias-map-text">
-      <h3> Germany was split in two until 1990</h3>
-      <p> but the differences persist today...</p>
-      <p> While you can see the map toda</p>
-      <button onclick="updateMap()"> see next </button>
-    </div>
+  <!-- scripts -->
+  <!-- All Javascript plugins goes here -->
+  <script src="./js/vendor/jquery-1.12.4.min.js"></script>
 
-    <div class="col-md-2"></div>
+  <!-- All vendor scripts -->
+  <script src="./js/vendor/scrolloverflow.min.js"></script>
+  <script src="./js/vendor/all.js"></script>
 
-  </div>
+  <script src="./js/d3.js"></script>
+  <script src="./js/d3.min.js"></script>
 
-    <div class="row" id="Tobias-scatter">
-      Scatter that illustrates the same data but with axes
-    </div>
+  <!-- Countdown script -->
+  <script src="./js/jquery.downCount.js"></script>
 
-  <div class="radarChart">
-    <h2>East-West split; data needs to be touched up and made interactive</h2>
-    <h2>Bug here; somehow the interactivity breaks down when the sunburst is used; something to do with d.ancestors</h2>
-  </div>
+  <!-- Form script -->
+  <script src="./js/form_script.js"></script>
 
-  </div>
+  <!-- Javascript main files -->
+  <script src="./js/main.js"></script>
+
+
+  <!--Sid's individual js file-->
+  <script src="./js/border_years.js"></script>
 
 
 
-<!--libraries-->
-<script src="lib/d3.js"></script>
-<script src="lib/jquery.min.js"></script>
-<script src="lib/popper.min.js"></script>
-<script src="lib/bootstrap.min.js"></script>
-<script src="lib/queue.min.js"></script>
-<script src="lib/topojson.min.js"></script>
-<script src="lib/topojson.min.js"></script>
-<script src="lib/flickity.pkgd.min.js"></script>
-<script src="lib/d3.min.js"></script>
-
-
-<!--layout js files-->
-<script src="js/scroller.js"></script>
-<script src="js/sections.js"></script>
-
-<!--Tobias' individual js file-->
-<script src="js/Tobias.js"></script>
-
-<!--Sid's individual js file-->
-<script src="js/border_years.js"></script>
-
-<!--Jovin's individual js file-->
-<script src="js/reasons_sunburst.js"></script>
-<script src="js/radarChart.js"></script>
-
-
-<script>
-  $(document).ready(function() {
-    $('.main-carousel').flickity({
-      // options
-      cellAlign: 'center',
-      contain: true,
-      pageDots: true
-    });
-
-  })
-
-</script>
 
 </body>
-</html>
 
+</html>
