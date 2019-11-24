@@ -1,86 +1,102 @@
 
-// set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 650 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
 
-// parse the date / time
-var parseTime = d3.timeFormat("%Y");
+// import data
+d3.queue()
+    .defer(d3.csv, "data/border_years.csv")
+    .await(function(error, borderData) {
+        border_years = new borderYears("border_years",borderData)
+    })
 
-// Scales and axes. Note the inverted domain for the y-scale: bigger is up!
-var x = d3.scaleLinear().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
 
-// define the line
-var line = d3.line()
-    .curve(d3.curveMonotoneX)
-    .x(function(d) { return x(d.year); })
-    .y(function(d) { return y(d.walls); });
+// add border years visualizations
+borderYears = function(_parentElement, _data){
+    this.parentElement = _parentElement;
+    this.data = _data;
 
-d3.csv("data/border_years.csv", function(error, data) {
+    this.createVis()
+}
+
+borderYears.prototype.createVis = function() {
+    var vis = this;
+
+    // set the dimensions and margins of the graph
+        vis.margin = {top: 20, right: 20, bottom: 30, left: 50},
+        vis.width = 650 - vis.margin.left - vis.margin.right,
+        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+
+    // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
+    vis.x = d3.scaleLinear().range([0, vis.width]);
+    vis.y = d3.scaleLinear().range([vis.height, 0]);
+
+    // define the line
+    vis.line = d3.line()
+        .curve(d3.curveMonotoneX)
+        .x(function(d) { return vis.x(d.year); })
+        .y(function(d) { return vis.y(d.walls); });
+
 
     // format the data
-    data.forEach(function(d) {
+    vis.data.forEach(function(d) {
         d.year = parseInt(d.year);
         d.walls = +d.walls;
     });
 
     // Compute the minimum and maximum date, and the maximum walls.
-    x.domain([data[0].year, data[data.length - 1].year]);
-    y.domain([0, d3.max(data, function(d) { return d.walls; })]).nice();
+    vis.x.domain([vis.data[0].year, vis.data[vis.data.length - 1].year]);
+    vis.y.domain([0, d3.max(vis.data, function(d) { return d.walls; })]).nice();
 
     // Add an SVG element with the desired dimensions and margin.
-    var svg = d3.select("#border_years").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
+        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+            "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
     // Add the clip path.
-    svg.append("clipPath")
+    vis.svg.append("clipPath")
         .attr("id", "clip")
         .append("rect")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", vis.width)
+        .attr("height", vis.height);
 
     // Add the X Axis
-    svg.append("g")
+    vis.svg.append("g")
         .attr('class', 'axisLines')
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x)
+        .attr("transform", "translate(0," + vis.height + ")")
+        .call(d3.axisBottom(vis.x)
             .ticks(20)
             .tickFormat(d3.format("d")));
 
 
     // Add the Y Axis
-    svg.append("g")
+    vis.svg.append("g")
         .attr('class', 'axisLines')
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(vis.y));
 
-    svg.selectAll('.line')
-        .data([data])
+    vis.svg.selectAll('.line')
+        .data([vis.data])
         .enter()
         .append('path')
         .attr('class', 'line')
         .style('stroke', "#008080")
         .attr('clip-path', 'url(#clip)')
         .attr('d', function(d) {
-            return line(d);
+            return vis.line(d);
         })
 
-    /* Add 'curtain' rectangle to hide entire graph */
-    var curtain = svg.append('rect')
-        .attr('x', -1 * width)
-        .attr('y', -1 * height)
-        .attr('height', height)
-        .attr('width', width)
+    //Add 'curtain' rectangle to hide entire graph
+    vis.curtain = vis.svg.append('rect')
+        .attr('x', -1 * vis.width)
+        .attr('y', -1 * vis.height)
+        .attr('height', vis.height)
+        .attr('width', vis.width)
         .attr('class', 'curtain')
         .attr('transform', 'rotate(180)')
         .style('fill', '#1D1D1D');
 
-    /* Create a shared transition for anything we're animating */
-    var t = svg.transition()
+    // Create a shared transition for anything we're animating
+    vis.t = vis.svg.transition()
         .delay(0)
         .duration(16000)
         .ease(d3.easeLinear)
@@ -91,10 +107,11 @@ d3.csv("data/border_years.csv", function(error, data) {
                 .remove()
         });
 
-    t.select('rect.curtain')
+    vis.t.select('rect.curtain')
         .attr('width', 0);
-    t.select('line.guide')
-        .attr('transform', 'translate(' + width + ', 0)')
+    vis.t.select('line.guide')
+        .attr('transform', 'translate(' + vis.width + ', 0)')
 
 
-});
+
+}
