@@ -277,7 +277,6 @@ $(document).on('ready', function () {
 		}
 	});
 
-
 	// 9. Page Loader : hide loader when all are loaded
 	contextWindow.on('load', function () {
 		$('#page-loader').addClass('p-hidden');
