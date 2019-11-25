@@ -16,7 +16,7 @@ borderReason = function(_parentElement, _data){
 
 borderReason.prototype.createVis = function() {
     var vis = this;
-    console.log("tester")
+
 
     // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -68,6 +68,10 @@ borderReason.prototype.createVis = function() {
         .append("g")
         .attr("transform",
             "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+    vis.pieChart.append("text")
+        .text("Test")
+        .style("fill", "#fff")
 
     // // Add the clip path.
     // vis.svg.append("clipPath")
