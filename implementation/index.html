@@ -1,23 +1,316 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+
+<html lang="en">
+
 <head>
-  <title>Scrolling Sections</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>
-  <link rel="stylesheet" type="text/css" href="css/border_years.css"/>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!-- Page Title Here -->
+  <title>Borderlines</title>
+
+  <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+  <!-- Web fonts and Web Icons -->
+  <link rel="stylesheet" href="./fonts/opensans/stylesheet.css">
+  <link rel="stylesheet" href="./fonts/bebas/stylesheet.css">
+  <link rel="stylesheet" href="./fonts/ionicons.min.css">
+  <link rel="stylesheet" href="./fonts/font-awesome.min.css">
+
+  <!-- Vendor CSS style -->
+  <link rel="stylesheet" href="./css/pageloader.css">
+
+  <!-- Uncomment below to load individualy vendor CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./js/vendor/swiper.min.css">
+  <link rel="stylesheet" href="./js/vendor/jquery.fullpage.min.css">
+
+
+  <!-- Main CSS files -->
+  <link rel="stylesheet" href="./css/main.css">
+
+
+  <!-- add layout here -->
+  <link rel="stylesheet" href="./css/style-color.css">
+
+  <script src="./js/vendor/modernizr-2.7.1.min.js"></script>
 </head>
-<body>
-<div class="container">
-  <div id='graphic'>
-    <div id='sections'>
-      <section class="step">
-        <div class="title">Intro place holder</div>
-        Describe team and our task
-      </section>
-        <section class="step">
-<!--          <div class="title">History</div>-->
-          <div class="container">
-<!--            <h5 class="section-title h1">OUR TEAM</h5>-->
+
+<body id="menu" class="body-page">
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="page-loader">
+    <div>
+      <div class="icon ion-spin"></div>
+      <p>loading...</p>
+    </div>
+  </div>
+
+  <!-- SIDE MENU -->
+  <header class="page-header navbar page-header-alpha scrolled-white menu-right topmenu-right">
+    
+      <!-- Begin of sidebar nav menu -->
+      <nav class="navbar-sidebar ">
+        <ul class="navbar-nav" id="qmenu">
+          <li class="nav-item">
+            <a href="#section1">
+              <span class="txt">Section 1: Intro</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#section2">
+              <span class="txt">Section 2: Case Study</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#section3">
+              <span class="txt">Section 3: Outlook</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#about">
+              <span class="txt">About</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- End of sidebar nav menu -->
+    </div>
+    <!-- end of menu wrapper -->
+
+  </header>
+  <!-- END SIDE MENU -->
+
+
+
+
+  <!-- MAIN PAGE -->
+  <main class="page-main page-fullpage main-anim" id="mainpage">
+
+
+    <!-- TITLE -->
+    <div class="section section-home fullscreen-md fp-auto-height-responsive main-home"
+    data-section="home">
+
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper">
+        <!-- content -->
+        <div class="section-content anim">
+          <div class="row">
+            <div class="col-12 text-left">
+              <!-- title and description -->
+              <div class="title-desc">
+                <h2 class="display-4 display-title home-title bordered anim-1">Borderline
+                  <br>
+                </h2>
+                <h4 class="anim-2">A look at borders around the world...</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrows scroll down/up CHANGE ICON TO REGULAR ARROW -->
+        <footer class="section-footer scrolldown">
+          <a class="down">
+            <span class="icon"></span>
+            <span class="txt">Scroll</span>
+          </a>
+        </footer>
+
+
+      </div>
+      <!-- End of section wrapper -->
+
+    </div>
+    <!-- End TITLE -->
+
+
+
+
+
+    <!-- SECTION 1: INTRO -->
+    <div class="section section-pricelist " data-section="section1">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Section 1: Intro</h2>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+
+
+    <!-- HISTORY -->
+    <div class="section section-twoside fp-auto-height-responsive">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside center-vh dir-col">
+
+        <div class="item row justify-content-between">
+
+          <!-- img-frame-legend-alpha demo -->
+          <div class="col-12 col-sm-6 center-vh">
+            <div class="row" id="border_reasons">
+              <div class="row" id="border_years">
+                <h2>Change in number of borders globally</h2>
+              </div>
+            </div>
+          </div>
+          
+          <!-- img-frame-legend-alpha portrait mode bottom demo -->
+          <div class="col-12 col-sm-6 col-md-5">
+            <div class="section-content anim">
+              <!-- title and description -->
+              <div>
+                <h5 class="display-4 display-title anim-2">History</h5>
+
+                <p>General interest in government and how patterns and variations in economic inequality and
+                  quality of life can be visualised both across countries and across subnational regions and
+                  municipalities within countries. Borders are a particularly contentious issue in mainstream
+                  media presently; interstate and inter-region boundaries have been very much politicized in
+                  places such as the US, Austria, and Ireland. We hope to provide individuals with a more
+                  informed position concerning borders in order to enable them to make more conscious political
+                  decisions and better understand how the creation or destruction of these man-made divides might impact them.
+                </p>
+                <p>Globally, the incidence of physical border barriers hsa been rising since WWII.
+                  The visualization below illustrates the increase in walls built around the world
+                  since the end of WWII. The data was collected by Elisabeth Vallet, Zoe Barry and
+                  Josselyn Guillarmou, who define "walls" in the broadest sense "as a political divider
+                  that comprises complex technologies, control methods, legislative provisions and
+                  "securing the border" discourse."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+    <!-- END HISTORY -->
+
+
+
+
+    <!-- SECTION 2: CASE STUDY -->
+    <div class="section section-pricelist " data-section="section2">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Section 2: Case Study</h2>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+
+
+    <!-- GERMANY CASE -->
+    <div class="section section-twoside fp-auto-height-responsive">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside center-vh dir-col">
+
+        <div class="item row justify-content-between">
+
+          <!-- img-frame-legend-alpha demo -->
+          <div class="col-12 col-sm-6 center-vh">
+            <div class="section-content anim translateUp">
+              <div class="images text-center">
+                <div class="img-frame-legend-alpha">
+                  <div class="img-1 shadow">
+                    <img class="img" src="img/items/img-sample7.jpg" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- img-frame-legend-alpha portrait mode bottom demo -->
+          <div class="col-12 col-sm-6 col-md-5">
+            <div class="section-content anim">
+              <!-- title and description -->
+              <div>
+                <h5 class="display-4 display-title anim-2">Germany Case</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet
+                  malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum
+                  ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id
+                  pretium leo. Pellentesque luctus massa non elit viverra pellentesque.
+                  Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui.
+                  Fusce in urna sem.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+    <!-- END GERMANY CASE -->
+
+
+
+    <!-- SECTION 3: Outlook -->
+    <div class="section section-pricelist " data-section="section3">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Section 3: Outlook</h2>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+
+
+    <!-- OUTLOOK TEXT -->
+    <div class="section section-twoside fp-auto-height-responsive">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside center-vh dir-col">
+
+        <div class="item row justify-content-between">
+
+          <!-- img-frame-legend-alpha demo -->
+          <div class="col-12 col-sm-6 center-vh">
+            <div class="section-content anim translateUp">
+              <div class="images text-center">
+                <div class="img-frame-legend-alpha">
+                  <div class="img-1 shadow">
+                    <img class="img" src="img/items/img-sample7.jpg" alt="Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- img-frame-legend-alpha portrait mode bottom demo -->
+          <div class="col-12 col-sm-6 col-md-5">
+            <div class="section-content anim">
+              <!-- title and description -->
+              <div>
+                <h5 class="display-4 display-title anim-2">OUTLOOK TEXT</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet
+                  malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum
+                  ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id
+                  pretium leo. Pellentesque luctus massa non elit viverra pellentesque.
+                  Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui.
+                  Fusce in urna sem.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of section wrapper -->
+    </div>
+    <!-- END OUTLOOK TEXT -->
+
+
+
+    <!-- Country Tiles -->
+    <div class="section section-pricelist ">
+
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">Explore some of the most contentious border barriers</h2>
+        </div>
+
             <div class="row">
               <!-- Border Card -->
               <div class="col-xs-12 col-sm-6 col-md-4">
@@ -26,7 +319,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/brazil%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/brazil%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -51,7 +344,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/india%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/india%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -76,7 +369,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/kazakhstan%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/kazakhstan%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -101,7 +394,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/korea%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/korea%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -126,7 +419,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/mexico%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/mexico%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -151,7 +444,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/morrocco%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/morrocco%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -176,7 +469,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/saudi%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/saudi%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -201,7 +494,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/ukraine%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/ukraine%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -226,7 +519,7 @@
                     <div class="frontside">
                       <div class="card">
                         <div class="card-body text-center">
-                          <p><img class=" img-fluid" src="img/usa%20Cropped.png" alt="card image"></p>
+                          <p><img class=" img-fluid" src="img/borders/usa%20Cropped.png" alt="card image"></p>
                         </div>
                       </div>
                     </div>
@@ -248,88 +541,239 @@
             </div>
           </div>
 
-        </section>
-      <section class="step">
-        <div class="title">My Talk</div>
-        Here are all 5,040 words of my talk.
-      </section>
-      <section class="step">
-        <div class="title">My Stumbles</div>
-        And here are all the fillers I used in those 30 minutes.
-      </section>
-      <section class="step">
-        <div class="title">Um's, Ah's &amp; Uh's</div>
-        I almost exclusively used these three fillers. Um's and Ah's made up over 80%, with Uh's trailing behind.
-      </section>
-      <section class="step">
-        <div class="title">Fillers Over Time</div>
-        I hoped that all these blunders were toward the beginning of my talk. And the data suggests that fewer fillers are used as I get into it. Perhaps the talk started out rough and improved as I found my groove.
-      </section>
-      <section class="step">
-        <div class="title">Ramping Back Up</div>
-        Unfortunately, the trend does not continue. Midway into the talk my Um's and Ah's spike. I continue to use them pretty consistently throughout the rest of the talk.
-      </section>
-      <section class="step">
-        <div class="title">The Cough Effect</div>
-        My theory is that at this critical halfway point in my talk, I heard a dry cough indicative of the audience's waning interest. This caused self-confidence to collapse and forced me out of my groove.<br/><br/>A competing theory is that I just hadn't practiced the last half of my speech as much.
-      </section>
-      <section class="step">
-        <div class="title">Best of Luck to Me in 2015</div>
-        The world may never know, or care, but hopefully these insights improve my speaking in 2015. Though preliminary results aren't looking so good.
-      </section>
+        </div>
+
+      </div>
     </div>
-    <div id='vis'>
+    <!-- END Country Tiles -->
+
+
+
+
+
+
+
+
+    <!-- SLIDESHOW?? -->
+    <div class="section section-twoside fp-auto-height-responsive " data-section="projects">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper twoside">
+        <!-- title -->
+        <div class="section-title text-center">
+          <h5 class="display-4 display-title anim-2">SLIDESHOW??</h5>
+        </div>
+
+        <!-- begin of carousel-swiper-beta -->
+        <div class="slider-wrapper carousel-swiper-beta carousel-smalls carousel-swiper-beta-demo mt-40">
+          <!-- slider -->
+          <div class="slider-container swiper-container">
+            <ul class="item-list swiper-wrapper">
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample2-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Mountain</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample3-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Cloud</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample4-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Garden</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+              <!-- item -->
+              <li class="slide-item swiper-slide">
+                <div class="item-wrapper">
+                  <div class="illustr">
+                    <img src="img/items/img-sample5-small.jpg" alt="Image" class="img">
+                  </div>
+                  <a class="legend" href="item-style2.html#project_url">
+                    <h3 class="display-3">Sky</h3>
+                    <h4>Music / Beats</h4>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- pagination -->
+          <div class="items-pagination bar"></div>
+
+          <!-- navigation -->
+          <div class="items-button bottom fit items-button-prev">
+            <a class="btn btn-transp-arrow btn-primary icon-left" href="">
+              <span class="icon arrow-left"></span>
+              <span class="text">Prev</span>
+            </a>
+          </div>
+          <div class="items-button bottom fit items-button-next">
+            <a class="btn btn-transp-arrow btn-primary" href="">
+              <span class="icon arrow-right"></span>
+              <span class="text">Next</span>
+            </a>
+          </div>
+        </div>
+        <!-- end of carousel-swiper-beta -->
+
+      </div>
+      <!-- End of section wrapper -->
     </div>
-    <div id="extra-space">
+    <!-- End SLIDESHOW -->
+
+
+
+    <!-- ABOUT -->
+    <div class="section section-description fp-auto-height-responsive" data-section="about">
+      <!-- Begin of section wrapper -->
+      <div class="section-wrapper center-vh dir-col anim">
+
+        <!-- title -->
+        <div class="section-title text-center">
+          <h2 class="display-4 display-title anim-2">About</h2>
+        </div>
+
+        <!-- content -->
+        <div class="section-content reduced anim text-center">
+          <!-- title and description -->
+          <div class="title-desc anim-3">
+            <p>This page was created for CS171...</p>
+          </div>
+        </div>
+
+        <!-- content -->
+        <div class="section-content anim text-center">
+          <div class="item row justify-content-between">
+
+            <!-- PERSON1-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/jovin.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Jovin Leong</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PERSON2-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/michael.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Michael Huang</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PERSON3-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/sid.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Sid Beaumaster</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- PERSON4-->
+            <div class="col-12 col-sm-6 col-md-3 center-vh">
+              <div class="section-content anim translateDown">
+                <div class="images text-center">
+                  <div class="img-avatar-alpha">
+                    <div class="img-1 shadow">
+                        <img class="img" src="img/items/tobias.jpg" alt="Image">
+                    </div>
+                    <div class="legend text-center pos-abs">
+                      <h5>Tobias Haefele</h5>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+    <!-- END ABOUT -->
 
 
-<div class="container-fluid" div id="Tobias section">
-  <div class="row">
-
-    <h1>World map</h1>
-  </div>
-
-  <div class="row" id="Tobias-map">
-  </div>
-
-  <div class="row" id="Tobias-scatter">
-  </div>
-
-</div>
-
-<div class="container-fluid" div id="Tobias section">
-  <div class="row">
-    <h1>Increase in borders around the world</h1>
-    <p>
-      The visualization below illustrates the increase in walls built around the world since
-      the end of WWII. The data was collected by Elisabeth Vallet, Zoe Barry and Josselyn Guillarmou,
-      who define "walls" in the broadest sense "as a political divider that comprises complex technologies,
-      control methods, legislative provisions and "securing the border" discourse."
-    </p>
-  </div>
-
-  <div class="row" id="border_years"></div>
-
-</div>
 
 
-<!--libraries-->
-<script src="lib/d3.js"></script>
-<script src="lib/queue.min.js"></script>
-<script src="lib/topojson.min.js"></script>
+  </main>
+  <!-- END OF page main content -->
 
-<!--layout js files-->
-<script src="js/scroller.js"></script>
-<script src="js/sections.js"></script>
 
-<!--Tobias' individual js file-->
-<script src="js/Tobias.js"></script>
+  <!-- scripts -->
+  <!-- All Javascript plugins goes here -->
+  <script src="./js/vendor/jquery-1.12.4.min.js"></script>
 
-<!--Sids' individual js file-->
-<script src="js/border_years.js"></script>
+  <!-- All vendor scripts -->
+  <script src="./js/vendor/scrolloverflow.min.js"></script>
+  <script src="./js/vendor/all.js"></script>
+
+  <script src="./js/d3.js"></script>
+  <script src="./js/d3.min.js"></script>
+
+  <!-- Countdown script -->
+  <script src="./js/jquery.downCount.js"></script>
+
+  <!-- Form script -->
+  <script src="./js/form_script.js"></script>
+
+  <!-- Javascript main files -->
+  <script src="./js/main.js"></script>
+
+
+  <!--Sid's individual js file-->
+  <script src="./js/border_years.js"></script>
+  <script src="./js/border_reasons.js"></script>
+
+
+
 
 </body>
+
 </html>

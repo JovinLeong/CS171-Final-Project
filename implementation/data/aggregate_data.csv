@@ -1,0 +1,55 @@
+Border Barrier,Established,Removed,Builder,Target,REASON,Interstate_dispute,Illegal_Immigration,Terrorism_and_Insurgency,Smuggling_and_contraband,Other
+Berlin Wall,1961,1989,Soviet Union,West Germany,Interstate disputes,1,1,0,0,1
+Botswana-Zimbabwe barrier,2003,2015,Bostwana,Zimbabwe,"Illegal Immigration, Disease",0,1,0,0,1
+Brunei-Malaysia barrier,2005,2015,Brunei,Malaysia,Illegal Immigration,0,1,0,0,0
+Bulgaria-Turkey barrier,2014,2015,Bulgaria,Turkey,Illegal Immigration,0,1,0,0,0
+China-Hong Kong border barrier,1960,2015,China,Hong Kong,Illegal Immigration,0,1,0,0,0
+China-North Korea barrier,2006,2015,China,North Korea,Illegal Immigration,0,1,0,1,0
+Egypt-Gaza barrier,1982,2015,Egypt,Gaza,Terrorism and Insurgency,0,0,0,1,0
+Egypt-Gaza barrier,2009,2015,Egypt,Gaza,Illegal Immigration,0,1,1,0,0
+French Algeria -Tunisia Border barrier,1957,2015,French Algeria,Tunisia,Terrorism and Insurgency,0,0,1,0,0
+Greece-Turkey barrier,2012,2015,Greece,Turkey,Illegal Immigration,0,1,0,0,0
+India-Bangladesh border barrier,1989,2015,India,Bangladesh,Illegal Immigration,0,1,0,1,0
+India-Myanmar barrier,2010,2015,India,Myanmar,Terrorism and Insurgency,0,0,1,0,1
+India-Pakistan barrier,1985,2015,India,Pakistan,Terrorism and Insurgency,0,0,1,1,1
+Inner German Border,1952,1989,Soviet Union,West Germany,Interstate disputes,1,1,0,0,1
+Iran-Afghanistan barrier,2000,2015,Iran,Afghanistan,Smuggling and contraband,0,0,0,1,0
+Iran-Pakistan barrier,1990,2015,Iran,Pakistan,Smuggling and contraband,0,0,0,1,0
+Israel-Egypt barrier,2010,2015,Israel,Egypt,Terrorism and Insurgency,0,0,0,1,0
+Israel-Gaza barrier,1994,2015,Israel,Gaza,"Terrorism and Insurgency, Illegal immigration",0,0,1,0,0
+Israel-Jordan barrier,1981,2015,Israel,Jordan,Terrorism and Insurgency,0,0,0,1,0
+Israel-Lebanon barrier,2012,2015,Israel,Lebanon,Interstate disputes,1,0,0,0,0
+Israel-Lebanon Border,1975,2015,Israel,Lebanon,Interstate disputes,1,0,0,0,0
+Israel-Syria barrier,1984,2015,Israel,Syria,Interstate disputes,1,0,0,0,0
+Israel-Syria barrier,2013,2015,Israel,Syria,Interstate disputes,1,0,0,0,0
+Israel-West Bank wall,2002,2015,Israel,West Bank,Terrorism and Insurgency,0,0,0,1,0
+Kazakhstan-Kyrgyzstan barrier,2010,2015,Kazakhstan,Kyrgyzstan,Smuggling and contraband,0,0,0,1,0
+Kazakhstan-Uzbekistan barrier,2006,2015,Kazakhstan,Uzbekistan,Smuggling and contraband,0,0,0,1,0
+Kuwait-Iraq barrier,1994,2015,Kuwait,Iraq,Interstate disputes,1,0,0,0,0
+Malaysia-Thailand border,1993,2015,Malaysia,Thailand,"Smuggling and contraband, Terrorism and Insurgency, Interstate dispute",1,1,0,1,1
+Morocco-Western Sahara barrier,1980,2015,Morocco,Western Sahara,Terrorism and Insurgency,0,0,1,0,0
+Myanmar-Bangladesh barrier,2009,2015,Myanmar,Bangladesh,Illegal Immigration,0,1,0,0,0
+Pakistan-Afghanistan barrier,2007,2015,Pakistan,Afghanistan,"Illegal Immigration, Terrorism and Insurgency",0,1,1,0,1
+Romania- Soviet Hungary barrier,1989,1991,Romania,Hungary,"Ideological differences, Illegal immigration, Smuggling and contraband",0,1,0,1,1
+Romania-Yugoslavia barrier,1989,1992,Romania,Yugoslavia,"Ideological differences, Illegal immigration, Smuggling and contraband",0,1,0,1,1
+Saudi Arabia-Iraq barrier,2008,2015,Saudi Arabia,Iraq,Terrorism and Insurgency,1,0,1,0,0
+Saudi Arabia-Yemen barrier,2003,2015,Saudi Arabia,Yemen,"Terrorism and Insurgency, Smuggling and contraband",0,0,0,1,1
+South Africa-Mozambique barrier,1976,2002,South Africa,Mozambique,"Terrorism and Insurgency, Ideological differences",0,1,1,0,1
+South Africa-Swaziland barrier,1985,2015,South Africa,Swaziland,Smuggling and contraband,0,0,0,1,0
+South Africa-Zimbabwe barrier,1979,2015,South Africa,Zimbabwe,"Illegal immigration, Smuggling and contraband",0,1,0,1,0
+South Korea-North Korea DMZ,1953,2015,South Korea,North Korea,Interstate disputes,1,1,0,1,0
+Soviet Hungary -Austria border,1988,1989,Soviet Union,Austria,"Ideological differences, Illegal immigration, Smuggling and contraband",0,1,0,1,1
+Soviet Union - Norway border,1976,2015,Soviet Union,Norway,"Ideological differences, Illegal immigration, Smuggling and contraband",0,1,0,1,1
+Soviet Union - Finland border,1978,2015,Soviet Union,Finland,"Ideological differences, Illegal immigration, Smuggling and contraband",0,1,0,1,1
+Spain (Ceuta)-Morocco border,1995,2015,Spain,Morocco,"Illegal Immigration, Smuggling and contraband",0,1,0,1,0
+Spain (Melilla)-Morocco border,1998,2015,Spain,Morocco,"Illegal Immigration, Smuggling and contraband",0,1,0,1,0
+Thailand-Cambodia barrier,1987,2015,Thailand,Cambodia,"Interstate dispute, landmines",1,0,0,0,1
+Thailand-Malaysia barrier,2004,2015,Thailand,Malaysia,Terrorism and Insurgency,0,0,1,0,0
+Turkey-Syria barrier,2012,2015,Turkey,Syria,"Terrorism and Insurgency, Illegal immigration, Smuggling and contraband",0,1,1,1,0
+Turkmenistan-Uzbekistan border barrier,2001,2015,Turkmenistan,Uzbekistan,Interstate disputes,1,1,0,0,0
+United Arab Emirates-Oman barrier,2000,2015,UAE,Oman,Illegal immigration,0,1,0,0,0
+United Arab Emirates-Saudi Arabia barrier,2000,2015,UAE,Saudi Arabia,"Interstate disputes, resources",1,0,0,0,1
+United States-Mexico border,2007,2015,USA,Mexico,"Terrorism and Insurgency, Illegal immigration, Smuggling and contraband",0,1,1,1,0
+Uzbekistan-Afghanistan barrier,2001,2015,Uzbekistan,Afghanistan,Illegal immigration,0,0,0,1,0
+Uzbekistan-Kazakhstan barrier,2004,2015,Uzbekistan,Kazakhstan,Smuggling and contraband,0,0,0,1,0
+Uzbekistan-Kyrgyzstan barrier,1999,2015,Uzbekistan,Kyrgyzstan,Interstate disputes,1,0,0,0,0

@@ -7,8 +7,7 @@
       <change beforePath="$PROJECT_DIR$/implementation/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementation/data/border_years.csv" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/data/border_years.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/js/border_years.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/border_years.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/js/sections.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/sections.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementation/js/Tobias.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/Tobias.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,9 +19,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1TZtCRQUv8jTdlCPtruPZWr63cR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HKS lectures/Fall 2019/CS 171 - Visualisation/midterm_template" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -56,7 +56,8 @@
       <workItem from="1574019730375" duration="32000" />
       <workItem from="1574019763216" duration="745000" />
       <workItem from="1574042983228" duration="3991000" />
-      <workItem from="1574112442777" duration="664000" />
+      <workItem from="1574221406403" duration="12425000" />
+      <workItem from="1574361363509" duration="3015000" />
     </task>
     <servers />
   </component>

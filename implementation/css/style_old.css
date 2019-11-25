@@ -1,7 +1,12 @@
-
-.container {
-  width: 890px;
+.center-title {
+    text-align: center;
 }
+
+.key-section {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
 
 #graphic {
   padding-top: 60px;
@@ -171,3 +176,19 @@
   border-radius: 50%;
 }
 /* Michael's CSS stuff ends */
+
+
+/* Tobias css */
+.carousel-cell{
+  width: 50%
+
+}
+
+path:hover {
+  fill: black;
+}
+
+.scatter-circle:hover{
+  fill:black;
+}
+
