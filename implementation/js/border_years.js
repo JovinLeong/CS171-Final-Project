@@ -1,10 +1,9 @@
-
-
 // import data
 d3.queue()
     .defer(d3.csv, "data/aggregate_data.csv")
     .await(function(error, borderData) {
-        border_years = new borderYears("border_years",borderData)
+        border_years = new borderYears("border_years",borderData);
+        // border_reasons = new borderReasons("border_years", borderData);
     });
 
 
@@ -12,9 +11,15 @@ d3.queue()
 borderYears = function(_parentElement, _data){
     this.parentElement = _parentElement;
     this.data = _data;
-
     this.createVis()
 };
+//
+// borderReasons = function(_parentElement, _data){
+//     this.parentElement = _parentElement;
+//     this.data = _data;
+//     this.createVis()
+// };
+
 
 borderYears.prototype.createVis = function() {
     var vis = this;
@@ -22,7 +27,7 @@ borderYears.prototype.createVis = function() {
     // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 30, left: 50},
         vis.width = 650 - vis.margin.left - vis.margin.right,
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     vis.x = d3.scaleLinear().range([0, vis.width]);
@@ -34,8 +39,6 @@ borderYears.prototype.createVis = function() {
         .x(function(d) { return vis.x(d.year); })
         .y(function(d) { return vis.y(d.walls); });
 
-
-    // format the data
     // format the data
     vis.data.forEach (function(d) {
         d.Established = +d.Established;
@@ -47,11 +50,6 @@ borderYears.prototype.createVis = function() {
         d.Other = +d.Other;
 
     });
-
-    // vis.data.forEach(function(d) {
-    //     d.year = parseInt(d.year);
-    //     d.walls = +d.walls;
-    // });
 
     // Creating a date range to aggregate data per year
     vis.dateRange = d3.range(1945,2015,1);
@@ -74,8 +72,6 @@ borderYears.prototype.createVis = function() {
     // Compute the minimum and maximum date, and the maximum walls.
     vis.x.domain([vis.dateRange[0], vis.dateRange[vis.dateRange.length - 1]]);
     vis.y.domain([0, d3.max(vis.borderIncidence)]).nice();
-    // vis.x.domain([vis.data[0].year, vis.data[vis.data.length - 1].year]);
-    // vis.y.domain([0, d3.max(vis.data, function(d) { return d.walls; })]).nice();
 
     // Add an SVG element with the desired dimensions and margin.
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -142,8 +138,31 @@ borderYears.prototype.createVis = function() {
     vis.t.select('rect.curtain')
         .attr('width', 0);
     vis.t.select('line.guide')
-        .attr('transform', 'translate(' + vis.width + ', 0)')
+        .attr('transform', 'translate(' + vis.width + ', 0)');
+
+
+    vis.brush = d3.brushX()
+        .extent([[0,0], [vis.width, vis.height]])
+        .on("brush", brushed);
 
 
 
-}
+    vis.svg.append("g")
+        .attr("class", "x brush")
+        .call(vis.brush)
+        .select("rect")
+        .attr("y", -6)
+        .attr("height", vis.height + 7);
+
+
+    // vis.absoluteSum =
+
+
+
+    // vis.pieChart = d3.select("#" + vis.parentElement).append("svg")
+    //     .attr("width", vis.width + vis.margin.left + vis.margin.right)
+    //     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+    //     .append("g")
+    //     .attr("transform",
+    //         "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+};
