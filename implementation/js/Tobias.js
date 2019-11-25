@@ -66,6 +66,8 @@ TobiasMap.prototype.initVis = function(){
     vis.Germany = topojson.feature(vis.map, vis.map.objects.Kreise15map).features
     vis.currentMapState = 0;
 
+    vis.firstLoad = true;
+
     // set up initial data and potential data options
     // Option A
     vis.varX = "East_West, 1990"
@@ -73,15 +75,21 @@ TobiasMap.prototype.initVis = function(){
 
     // hh income looks great;
     // // List of alternative variables
-    vis.reserveVars = ["GDP per employee, 2017", "household income, 2016",
-
-        "forecase demand for new housing, 2030", "slots in pension homes (per 100), 2017","tax revenues, 2015",
-        "total tax earnings per capita, 2017",
-        "long term unemployment rate, 2018",
-        "rate of long time unemployment, 2018",
-        "pre tax earnings, 2017",
+    vis.reserveVars = [
         "household income, 2016",
-        "retirees recieving social security recipients (indicator of poverty in old age), 2017",
+        // "averae population age, 2017",
+        // "unemployment rate (%), 2018",
+        // "GDP per employee, 2017",
+
+        // "forecase demand for new housing, 2030",
+        // "slots in pension homes (per 100), 2017",
+        // "tax revenues, 2015",
+        // "total tax earnings per capita, 2017",
+        // "long term unemployment rate, 2018",
+        // "rate of long time unemployment, 2018",
+        // "pre tax earnings, 2017",
+        // "household income, 2016",
+        // "retirees recieving social security recipients (indicator of poverty in old age), 2017",
         "avg contribution based pension payout, 2015",
         "people in vocational training per 1.000 employed, 2015",
         "averae population age, 2017"]
@@ -129,14 +137,19 @@ TobiasMap.prototype.updateVis = function() {
     var vis = this;
 
     // update the domain
+
+
     vis.colorScale.domain(vis.minMaxY)
+
+    // console.log(vis.currentMapState)
+    // console.log(vis.varY)
 
     // console.log(vis.colorScale.domain())
     // console.log(vis.Germany)
     // console.log(vis.varY)
     // console.log(vis.currentState)
     // render a map of Germany using the path generator
-    if (vis.currentMapState == 0){
+    if (vis.firstLoad == true){
     vis.map = vis.svg.selectAll("path")
         .data(vis.Germany)
         .enter().append("path")
@@ -144,7 +157,13 @@ TobiasMap.prototype.updateVis = function() {
         .attr("class", "tobias-map-element")
         .attr("id", function(d,i){return "map_"+ (d.properties.Kennziffer)})
         .attr("fill", function(d,i){
-            return vis.colorScale(d.properties[vis.varY])
+            if(d.properties[vis.varX] == 1){
+                return "grey"
+            }
+            else if(d.properties[vis.varX] == 2){
+                return "blue"
+            }
+            else{return "orange"}
         })
         .on("mouseover", function(d,i){
             document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "black";
@@ -156,6 +175,22 @@ TobiasMap.prototype.updateVis = function() {
             document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
         })
     }
+
+    if(vis.currentMapState == 0){
+
+        vis.svg.selectAll("path")
+            .data(vis.Germany)
+    .attr("fill", function(d,i){
+            if(d.properties[vis.varX] == 1){
+                return "grey"
+            }
+            else if(d.properties[vis.varX] == 2){
+                return "blue"
+            }
+            else{return "orange"}
+        })
+
+    }
     else{
         vis.svg.selectAll("path")
             .data(vis.Germany)
@@ -164,17 +199,9 @@ TobiasMap.prototype.updateVis = function() {
         })
     }
 
+    vis.firstLoad = false;
 
-    // // East v West
-    //     .attr("fill", function(d,i){
-    //         if(d.properties[vis.varX] == 1){
-    //             return "grey"
-    //         }
-    //         else if(d.properties[vis.varX] == 2){
-    //             return "blue"
-    //         }
-    //             else{return "orange"}
-    //     })
+
 
 }
 
@@ -353,9 +380,17 @@ TobiasLine.prototype.initVis = function() {
 
 
     // calcualte the domain in wrangle data
-    vis.potentialLineVars = ["Arbeitslosenquote", "Bruttowertschöpfung", "Bruttoinlandsprodukt je Einwohner", "Altersarmut",
-        "Schulabbrecherquote", "Langzeitarbeitslosenquote", "Bruttoverdienst",
-        "Haushaltseinkommen", "Ausbildungsplätze", "Empfänger von Grundsicherung im Alter (Altersarmut)"]
+    vis.potentialLineVars = [
+        "Arbeitslosenquote",
+        "Bruttowertschöpfung",
+        "Bruttoinlandsprodukt je Einwohner",
+        "Altersarmut",
+        "Schulabbrecherquote",
+        "Langzeitarbeitslosenquote",
+        "Bruttoverdienst",
+        "Haushaltseinkommen",
+        // "Ausbildungsplätze",
+        "Empfänger von Grundsicherung im Alter (Altersarmut)"]
 
     vis.lineVar = vis.potentialLineVars[0]
     vis.currentState = 1;
@@ -368,11 +403,14 @@ TobiasLine.prototype.wrangleData = function(){
     var vis = this;
 
 
-    vis.displayData = []
+    vis.displayData = [];
 
-    console.log(vis.data)
+    // console.log(vis.data)
     console.log(vis.lineVar)
     vis.data.forEach(function(d,i){
+
+        console.log(vis.data[i])
+
         if (d.Aggregat == vis.lineVar) {
         if(d.Raumeinheit == "West")
         {
@@ -389,6 +427,8 @@ TobiasLine.prototype.wrangleData = function(){
     vis.mins = []
     vis.maxs = []
 
+    console.log(vis.displayData)
+
     vis.displayData.forEach(function(d,i){
         vis.temporary_data = []
         vis.temporary_range = []
@@ -399,13 +439,14 @@ TobiasLine.prototype.wrangleData = function(){
             if(def[1] == "no data"){
                 delete vis.displayData[i][def[0]]
             }
-            if(def[0] != "Kennziffer" && def[0] != "Raumeinheit" && def[0] != "Aggregat" &&def[1] != "no data"){
+            if(def[0] != "Kennziffer" && def[0] != "Raumeinheit" && def[0] != "Aggregat" && def[1] != "no data" && isNaN(def[1]) != true){
                 vis.displayData[i][def[0]] = +def[1]
                 vis.temporary_data.push(+def[1])
                 vis.temporary_range.push(+def[0])
                 vis.temporary_combined.push({"date": +def[0], "data": +def[1]})
             }
         })
+        vis.displayData[i]["combined"] = [];
         vis.displayData[i]["data"] = []
         vis.displayData[i]["range"] = []
         vis.displayData[i]["data"] = vis.temporary_data
@@ -429,6 +470,9 @@ TobiasLine.prototype.updateVis = function(){
     var vis = this;
 
     console.log(vis.displayData)
+    // console.log(vis.displayData)
+    // console.log([vis.displayData[0]["range"][0],vis.displayData[0]["range"][vis.displayData[0]["range"].length-1]])
+
     // update domains
     vis.y.domain([vis.min, vis.max]);
     vis.x.domain([vis.displayData[0]["range"][0],vis.displayData[0]["range"][vis.displayData[0]["range"].length-1]])
@@ -592,17 +636,18 @@ function updateMap(){
     // update the map
     console.log("click")
     tobias_map.varY = tobias_map.reserveVars[tobias_map.currentMapState]
-    tobias_map.wrangleData()
 
     if(tobias_map.currentMapState <(tobias_map.reserveVars.length-1))
     {tobias_map.currentMapState +=1}
     else{tobias_map.currentMapState=0}
+    tobias_map.wrangleData()
 
-    // update the line chart:
-    console.log(tobias_line.lineVar)
-    console.log(tobias_line.potentialLineVars[tobias_line.currentState])
+
+    // // update the line chart:
+    // console.log(tobias_line.lineVar)
+    // console.log(tobias_line.potentialLineVars[tobias_line.currentState])
+
     tobias_line.lineVar = tobias_line.potentialLineVars[tobias_line.currentState]
-
 
     // reset the curtain
     // tobias_line.t.select('rect.curtain').transition();
@@ -613,9 +658,10 @@ function updateMap(){
 
     tobias_line.wrangleData()
 
+    // console.log(tobias_line.currentState)
     if(tobias_line.currentState <(tobias_line.potentialLineVars.length-1))
     {tobias_line.currentState +=1}
-    else{tobias_line.currentState=0}
+    else{tobias_line.currentState=1}
 
 
 }
