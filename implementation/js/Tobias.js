@@ -166,7 +166,7 @@ TobiasMap.prototype.updateVis = function() {
         .style("text-anchor", "middle")
         .attr("y", 20)
         .text("(former) East and West Germany, county level, 2018")
-        .attr("fill", "black")
+        .attr("fill", "white")
 
 
     vis.map = vis.svg.selectAll("path")
