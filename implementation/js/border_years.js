@@ -2,10 +2,10 @@
 
 // import data
 d3.queue()
-    .defer(d3.csv, "data/border_years.csv")
+    .defer(d3.csv, "data/aggregate_data.csv")
     .await(function(error, borderData) {
         border_years = new borderYears("border_years",borderData)
-    })
+    });
 
 
 // add border years visualizations
@@ -14,7 +14,7 @@ borderYears = function(_parentElement, _data){
     this.data = _data;
 
     this.createVis()
-}
+};
 
 borderYears.prototype.createVis = function() {
     var vis = this;
@@ -36,14 +36,46 @@ borderYears.prototype.createVis = function() {
 
 
     // format the data
-    vis.data.forEach(function(d) {
-        d.year = parseInt(d.year);
-        d.walls = +d.walls;
+    // format the data
+    vis.data.forEach (function(d) {
+        d.Established = +d.Established;
+        d.Removed = +d.Removed;
+        d.Illegal_Immigration = +d.Illegal_Immigration;
+        d.Interstate_dispute = +d.Interstate_dispute;
+        d.Smuggling_and_contraband = +d.Smuggling_and_contraband;
+        d.Terrorism_and_Insurgency = +d.Terrorism_and_Insurgency;
+        d.Other = +d.Other;
+
+    });
+
+    // vis.data.forEach(function(d) {
+    //     d.year = parseInt(d.year);
+    //     d.walls = +d.walls;
+    // });
+
+    // Creating a date range to aggregate data per year
+    vis.dateRange = d3.range(1945,2015,1);
+    vis.incidenceData = [];
+    vis.borderIncidence = [];
+
+    vis.dateRange.forEach(function (d) {
+        // borderData
+
+        var instanceCount = 0;
+        vis.data.forEach(function (e) {
+            if ((d >= e.Established) && (d <= e.Removed)) {
+                instanceCount += 1
+            }
+        });
+        vis.borderIncidence.push(instanceCount);
+        vis.incidenceData.push({year: +d, walls: +instanceCount});
     });
 
     // Compute the minimum and maximum date, and the maximum walls.
-    vis.x.domain([vis.data[0].year, vis.data[vis.data.length - 1].year]);
-    vis.y.domain([0, d3.max(vis.data, function(d) { return d.walls; })]).nice();
+    vis.x.domain([vis.dateRange[0], vis.dateRange[vis.dateRange.length - 1]]);
+    vis.y.domain([0, d3.max(vis.borderIncidence)]).nice();
+    // vis.x.domain([vis.data[0].year, vis.data[vis.data.length - 1].year]);
+    // vis.y.domain([0, d3.max(vis.data, function(d) { return d.walls; })]).nice();
 
     // Add an SVG element with the desired dimensions and margin.
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -75,7 +107,7 @@ borderYears.prototype.createVis = function() {
         .call(d3.axisLeft(vis.y));
 
     vis.svg.selectAll('.line')
-        .data([vis.data])
+        .data([vis.incidenceData])
         .enter()
         .append('path')
         .attr('class', 'line')
