@@ -145,6 +145,26 @@ borderYears.prototype.createVis = function() {
         .extent([[0,0], [vis.width, vis.height]])
         .on("brush", brushed);
 
+    vis.svg.append("text")
+        .attr("class", "axis-title y-title")
+        .transition()
+        .duration(800)
+        .attr("x", 0)
+        .attr("y", margin.top/2)
+        .attr("dy", ".1em")
+        .style("text-anchor", "left")
+        .text("placeholder");
+
+    vis.svg.append("text")
+        .attr("class", "axis-title x-title")
+        .transition()
+        .duration(800)
+        .attr("x", width)
+        .attr("y", height - margin.bottom)
+        .attr("dy", ".1em")
+        .style("text-anchor", "left")
+        .text("placeholder");
+
 
 
     vis.svg.append("g")
