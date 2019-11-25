@@ -438,10 +438,10 @@ TobiasLine.prototype.wrangleData = function(){
     vis.displayData = [];
 
     // console.log(vis.data)
-    console.log(vis.lineVar)
+    // console.log(vis.lineVar)
     vis.data.forEach(function(d,i){
 
-        console.log(vis.data[i])
+        // console.log(vis.data[i])
 
         if (d.Aggregat == vis.lineVar) {
         if(d.Raumeinheit == "West")
@@ -678,7 +678,7 @@ function updateMap(){
     // #TODO: fix on hover in css for both scatter plot and map
     // #TODO: add legend for map and line charts
 
-    console.log("click")
+    // console.log("click")
     $("#Tobias-map-subhead").text(tobias_map.reserveTitles[tobias_map.currentMapState]);
     // $("#Tobias-map-subhead").style.fill = "red";
 
