@@ -92,7 +92,17 @@ TobiasMap.prototype.initVis = function(){
         // "retirees recieving social security recipients (indicator of poverty in old age), 2017",
         "avg contribution based pension payout, 2015",
         "people in vocational training per 1.000 employed, 2015",
-        "averae population age, 2017"]
+        "averae population age, 2017",
+        "household income, 2016",
+    ]
+
+    vis.reserveTitles = [
+        "Household income, 2016",
+        "Average pension payouts, 2015",
+        "Vocational training per 1.000  employees, 2015",
+        "Average population age, 2017",
+        "(former) East and West Germany, county level, 2018"
+    ]
 
    this.wrangleData()
 
@@ -150,6 +160,15 @@ TobiasMap.prototype.updateVis = function() {
     // console.log(vis.currentState)
     // render a map of Germany using the path generator
     if (vis.firstLoad == true){
+    vis.title = vis.svg.append("text")
+        .attr("x", vis.width /2)
+        .attr("id", "Tobias-map-subhead")
+        .style("text-anchor", "middle")
+        .attr("y", 20)
+        .text("(former) East and West Germany, county level, 2018")
+        .attr("fill", "black")
+
+
     vis.map = vis.svg.selectAll("path")
         .data(vis.Germany)
         .enter().append("path")
@@ -392,6 +411,19 @@ TobiasLine.prototype.initVis = function() {
         // "Ausbildungsplätze",
         "Empfänger von Grundsicherung im Alter (Altersarmut)"]
 
+
+    vis.titleVars = [
+        "Unemployment rate",
+        "Gross value added",
+        "GDP per capita",
+        "Poverty in old age",
+        "School dropout rate",
+        "Long-term unemployment rate",
+        "Gross earnings",
+        "Average household income",
+        "Share of retired population on benefits"
+    ]
+
     vis.lineVar = vis.potentialLineVars[0]
     vis.currentState = 1;
     vis.firstLoad = true;
@@ -469,7 +501,7 @@ TobiasLine.prototype.wrangleData = function(){
 TobiasLine.prototype.updateVis = function(){
     var vis = this;
 
-    console.log(vis.displayData)
+    // console.log(vis.displayData)
     // console.log(vis.displayData)
     // console.log([vis.displayData[0]["range"][0],vis.displayData[0]["range"][vis.displayData[0]["range"].length-1]])
 
@@ -576,6 +608,15 @@ TobiasLine.prototype.updateVis = function(){
             .attr('d', function (d) {
                 return vis.line(d);
             })
+
+        // add title:
+        vis.svg.append("text")
+           .attr("x", vis.width /2)
+           .attr("id", "Tobias-line-subhead")
+            .style("text-anchor", "middle")
+            .attr("y", 20)
+            .text(vis.titleVars[0])
+            .attr("fill", "black")
     }
 
     vis.svg.select(".tobias-line2")
@@ -614,7 +655,7 @@ TobiasLine.prototype.updateVis = function(){
     /* Create a shared transition for anything we're animating */
     vis.t = vis.svg.transition()
         .delay(0)
-        .duration(5000)
+        .duration(2000)
         .ease(d3.easeLinear)
         // .on('end', function() {
         //     d3.select('line.guide')
@@ -634,7 +675,14 @@ TobiasLine.prototype.updateVis = function(){
 function updateMap(){
 
     // update the map
+    // #TODO: fix on hover in css for both scatter plot and map
+    // #TODO: add legend for map and line charts
+
     console.log("click")
+    $("#Tobias-map-subhead").text(tobias_map.reserveTitles[tobias_map.currentMapState]);
+    // $("#Tobias-map-subhead").style.fill = "red";
+
+
     tobias_map.varY = tobias_map.reserveVars[tobias_map.currentMapState]
 
     if(tobias_map.currentMapState <(tobias_map.reserveVars.length-1))
@@ -642,12 +690,17 @@ function updateMap(){
     else{tobias_map.currentMapState=0}
     tobias_map.wrangleData()
 
+}
 
-    // // update the line chart:
+function updateLineChart () {
+
+
+    // // update the line chart, choose next variable
     // console.log(tobias_line.lineVar)
     // console.log(tobias_line.potentialLineVars[tobias_line.currentState])
-
     tobias_line.lineVar = tobias_line.potentialLineVars[tobias_line.currentState]
+    $("#Tobias-line-subhead").text(tobias_line.titleVars[tobias_line.currentState]);
+
 
     // reset the curtain
     // tobias_line.t.select('rect.curtain').transition();
@@ -656,12 +709,12 @@ function updateMap(){
     tobias_line.svg.select('rect.curtain')
         .attr('width', (tobias_line.width))
 
+    // update data in chart
     tobias_line.wrangleData()
-
     // console.log(tobias_line.currentState)
+    //...set state to next variable
     if(tobias_line.currentState <(tobias_line.potentialLineVars.length-1))
     {tobias_line.currentState +=1}
     else{tobias_line.currentState=1}
-
 
 }
