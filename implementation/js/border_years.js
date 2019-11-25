@@ -67,6 +67,8 @@ d3.csv("data/border_years.csv", function(error, data) {
             return line(d);
         })
 
+
+
     /* Add 'curtain' rectangle to hide entire graph */
     var curtain = svg.append('rect')
         .attr('x', -1 * width)

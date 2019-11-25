@@ -14,7 +14,7 @@ queue()
 
         tobias_scatter = new TobiasScatter ("Tobias-scatter", germanData)
 
-        tobias_line = new TobiasLine ("Tobias-line", time_data)
+        tobias_line = new TobiasLine ("Tobias-line", time_data2)
 
 
 
@@ -64,7 +64,7 @@ TobiasMap.prototype.initVis = function(){
 
     // Convert TopoJSON to GeoJSON (target object = 'collection')
     vis.Germany = topojson.feature(vis.map, vis.map.objects.Kreise15map).features
-    vis.currentState = 0;
+    vis.currentMapState = 0;
 
     // set up initial data and potential data options
     // Option A
@@ -93,7 +93,7 @@ TobiasMap.prototype.initVis = function(){
 
 TobiasMap.prototype.wrangleData = function() {
     var vis = this;
-    console.log(vis.varY)
+    // console.log(vis.varY)
 
     // convert points into numbers
     vis.data.forEach(function(d,i){
@@ -131,12 +131,12 @@ TobiasMap.prototype.updateVis = function() {
     // update the domain
     vis.colorScale.domain(vis.minMaxY)
 
-    console.log(vis.colorScale.domain())
-    console.log(vis.Germany)
-    console.log(vis.varY)
-    console.log(vis.currentState)
+    // console.log(vis.colorScale.domain())
+    // console.log(vis.Germany)
+    // console.log(vis.varY)
+    // console.log(vis.currentState)
     // render a map of Germany using the path generator
-    if (vis.currentState == 0){
+    if (vis.currentMapState == 0){
     vis.map = vis.svg.selectAll("path")
         .data(vis.Germany)
         .enter().append("path")
@@ -148,7 +148,7 @@ TobiasMap.prototype.updateVis = function() {
         })
         .on("mouseover", function(d,i){
             document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "black";
-            console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
+            // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
             document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 7)
         })
         .on("mouseout", function(d,i){
@@ -183,8 +183,6 @@ TobiasMap.prototype.updateVis = function() {
 
 
 /// object for scatter plot
-
-/// object for map
 TobiasScatter = function(_parentElement, _data, _eventHandler){
     this.parentElement = _parentElement;
     this.data = _data;
@@ -211,6 +209,7 @@ TobiasScatter.prototype.initVis = function(){
     // scales and axes
     vis.x = d3.scaleLinear()
         .rangeRound([0, vis.width])
+
         // .domain()
 
     vis.y = d3.scaleLinear()
@@ -274,7 +273,7 @@ TobiasScatter.prototype.updateVis = function(){
     vis.x.domain(vis.minMaxX);
     vis.y.domain(vis.minMaxY);
 
-    console.log(vis.data)
+    // console.log(vis.data)
 
     // update all the bubbles
     vis.svg.selectAll("circle")
@@ -337,71 +336,286 @@ TobiasLine.prototype.initVis = function() {
     // define the clip path
     // Add the clip path.
     vis.svg.append("clipPath")
-        .attr("id", "clip")
+        .attr("id", "Tobias-line-clip")
         .append("rect")
         .attr("width", vis.width)
-        .attr("height", vis.height);
+        .attr("height", vis.height)
+        // .attr("transform", "translate(" + vis.margin.left + ", 0)");
+
+    // Add the X Axis
+    vis.xAxis = vis.svg.append("g")
+        .attr("transform", "translate(" + vis.margin.left + "," + vis.height + ")")
+
+    // Add the Y Axis
+    vis.yAxis = vis.svg.append("g")
+        .attr("transform", "translate(" + vis.margin.left + ", 0)")
+
+
+
+    // calcualte the domain in wrangle data
+    vis.potentialLineVars = ["Arbeitslosenquote", "Bruttowertschöpfung", "Bruttoinlandsprodukt je Einwohner", "Altersarmut",
+        "Schulabbrecherquote", "Langzeitarbeitslosenquote", "Bruttoverdienst",
+        "Haushaltseinkommen", "Ausbildungsplätze", "Empfänger von Grundsicherung im Alter (Altersarmut)"]
+
+    vis.lineVar = vis.potentialLineVars[0]
+    vis.currentState = 1;
+    vis.firstLoad = true;
+
     this.wrangleData()
 }
 
 TobiasLine.prototype.wrangleData = function(){
-
-    // calcualte the domain in wrangle data
-    scatter_var = "Arbeitslosenquote"
-    scatter_beginning = 1998;
-    scatter_end = 2017;
+    var vis = this;
 
 
+    vis.displayData = []
+
+    console.log(vis.data)
+    console.log(vis.lineVar)
+    vis.data.forEach(function(d,i){
+        if (d.Aggregat == vis.lineVar) {
+        if(d.Raumeinheit == "West")
+        {
+            vis.displayData[0] = vis.data[i]
+        }
+        else if(d.Raumeinheit == "Ost"){
+            vis.displayData[1] = vis.data[i]
+        }
+        else {
+            vis.displayData[2] = vis.data[i]
+        }
+        }
+    })
+    vis.mins = []
+    vis.maxs = []
+
+    vis.displayData.forEach(function(d,i){
+        vis.temporary_data = []
+        vis.temporary_range = []
+        vis.temporary_combined = []
+
+        Object.entries(d).forEach(function(def,index){
+
+            if(def[1] == "no data"){
+                delete vis.displayData[i][def[0]]
+            }
+            if(def[0] != "Kennziffer" && def[0] != "Raumeinheit" && def[0] != "Aggregat" &&def[1] != "no data"){
+                vis.displayData[i][def[0]] = +def[1]
+                vis.temporary_data.push(+def[1])
+                vis.temporary_range.push(+def[0])
+                vis.temporary_combined.push({"date": +def[0], "data": +def[1]})
+            }
+        })
+        vis.displayData[i]["data"] = []
+        vis.displayData[i]["range"] = []
+        vis.displayData[i]["data"] = vis.temporary_data
+        vis.displayData[i]["range"] = vis.temporary_range
+        vis.displayData[i]["combined"] = vis.temporary_combined
+
+        vis.mins.push(d3.min(vis.displayData[i]["data"]))
+        vis.maxs.push(d3.max(vis.displayData[i]["data"]))
+
+        // console.log(vis.displayData)
+    })
+
+    // caluclate minimum and maximum
+    vis.min = d3.min(vis.mins)
+    vis.max = d3.max(vis.maxs)
+
+    this.updateVis()}
     // Compute the minimum and maximum date, and the maximum walls.
-    vis.x.domain();
-    vis.y.domain().nice();
 
+TobiasLine.prototype.updateVis = function(){
+    var vis = this;
 
+    console.log(vis.displayData)
+    // update domains
+    vis.y.domain([vis.min, vis.max]);
+    vis.x.domain([vis.displayData[0]["range"][0],vis.displayData[0]["range"][vis.displayData[0]["range"].length-1]])
+        .nice()
 
     // define the line, helper function
     vis.line = d3.line()
         .curve(d3.curveMonotoneX)
-        .x(function(d) { return vis.x(d.year); })
-        .y(function(d) { return vis.y(d.walls); });
+        .x(function(d) {
+            // console.log(d.date)
+            return vis.x(d.date); })
+        .y(function(d) {
+            // console.log(d.data)
+            return vis.y(d.data); });
 
-    // draw the line
-    svg.selectAll('.line')
-        .data([vis.data])
-        .enter()
-        .append('path')
-        .attr('class', 'line')
-        .style('stroke', "#008080")
-        .attr('clip-path', 'url(#clip)')
+    // draw the line for West Germany
+
+
+    if(vis.firstLoad == true) {
+        vis.WestGermany = vis.svg.selectAll('.lineWest')
+            .data([vis.displayData[0].combined]);
+        vis.WestGermany
+            .enter()
+            .append('path')
+            .attr('class', 'line')
+            .attr("fill", "none")
+            .attr('class', 'tobias-line')
+            .attr('class', 'lineWest')
+            .attr('class', 'tobias-line0')
+            .attr("transform", "translate(" + vis.margin.left + ", 0)")
+            .style('stroke', "green")
+            .attr('clip-path', 'url(#Tobias-line-clip)')
+            .attr('d', function (d) {
+                return vis.line(d);
+            })
+            .merge(vis.WestGermany)
+            .attr('d', function (d) {
+                return vis.line(d);
+            })
+    }
+
+    vis.svg.select(".tobias-line0")
+        .data([vis.displayData[0].combined])
         .attr('d', function(d) {
             return vis.line(d);
         })
 
 
-    // Add the X Axis
-    vis.svg.append("g")
-        .attr("transform", "translate(0," + vis.height + ")")
+    vis.WestGermany.exit().remove()
+
+
+
+    // draw the line for east Germany
+    if(vis.firstLoad == true) {
+        vis.EastGermany = vis.svg.selectAll('.lineOst')
+            .data([vis.displayData[1].combined]);
+
+        vis.EastGermany
+            .enter()
+            .append('path')
+            .attr("transform", "translate(" + vis.margin.left + ", 0)")
+            .attr('class', 'line')
+            .attr("fill", "none")
+            .attr('class', 'tobias-line')
+            .attr('class', 'lineOst')
+            .attr('class', 'tobias-line1')
+            .style('stroke', "blue")
+            .attr('clip-path', 'url(#Tobias-line-clip)')
+            .attr('d', function (d) {
+                return vis.line(d);
+            })
+            .merge(vis.EastGermany)
+            .attr('d', function (d) {
+                return vis.line(d);
+            })
+    }
+    vis.svg.select(".tobias-line1")
+        .data([vis.displayData[1].combined])
+
+        .attr('d', function(d) {
+            return vis.line(d);
+        })
+
+    vis.EastGermany.exit().remove()
+
+    if(vis.firstLoad == true) {
+        // draw the line for overall Germany
+        vis.Germany = vis.svg.selectAll('.linecombined')
+            .data([vis.displayData[2].combined]);
+        vis.Germany
+            .enter()
+            .append('path')
+            .attr('class', 'line')
+            .attr("fill", "none")
+            .attr('class', 'tobias-line')
+            .attr('class', 'linecombined')
+            .attr('class', 'tobias-line2')
+            .style('stroke', "black")
+            .attr("transform", "translate(" + vis.margin.left + ", 0)")
+            .attr('clip-path', 'url(#Tobias-line-clip)')
+            .attr('d', function (d) {
+                return vis.line(d);
+            })
+    }
+
+    vis.svg.select(".tobias-line2")
+        .data([vis.displayData[2].combined])
+        .attr('d', function(d) {
+            return vis.line(d);
+        })
+
+
+
+    vis.Germany.exit().remove()
+
+    if(vis.firstLoad == true) {
+        /* Add 'curtain' rectangle to hide entire graph */
+        vis.curtain = vis.svg.append('rect')
+            .attr('x', -1 * (vis.width + vis.margin.left))
+            .attr('y', -1 * vis.height)
+            .attr('height', vis.height)
+            .attr('width', (vis.width))
+            .attr('class', 'curtain')
+            .attr('transform', 'rotate(180)')
+            // .attr("transform", "translate(" + -vis.margin.left + ", 0)")
+            .style('fill', '#ffffff');
+    }
+
+    // call X axis
+    vis.xAxis
         .call(d3.axisBottom(vis.x)
-            .ticks(20)
             .tickFormat(d3.format("d")));
 
-    // Add the Y Axis
-    vis.svg.append("g")
+    // call y Axis
+        vis.yAxis
         .call(d3.axisLeft(vis.y));
 
 
+    /* Create a shared transition for anything we're animating */
+    vis.t = vis.svg.transition()
+        .delay(0)
+        .duration(5000)
+        .ease(d3.easeLinear)
+        // .on('end', function() {
+        //     d3.select('line.guide')
+        //         .transition()
+        //         .style('opacity', 0)
+        //         .remove()
+        // });
 
-    }
+    vis.t.select('rect.curtain')
+        .attr('width', 0);
 
 
+    vis.firstLoad = false;
+}
 
 
 function updateMap(){
+
+    // update the map
     console.log("click")
-    tobias_map.varY = tobias_map.reserveVars[tobias_map.currentState]
+    tobias_map.varY = tobias_map.reserveVars[tobias_map.currentMapState]
     tobias_map.wrangleData()
 
-    if(tobias_map.currentState <(tobias_map.reserveVars.length-1))
-    {tobias_map.currentState +=1}
-    else{tobias_map.currentState=0}
+    if(tobias_map.currentMapState <(tobias_map.reserveVars.length-1))
+    {tobias_map.currentMapState +=1}
+    else{tobias_map.currentMapState=0}
+
+    // update the line chart:
+    console.log(tobias_line.lineVar)
+    console.log(tobias_line.potentialLineVars[tobias_line.currentState])
+    tobias_line.lineVar = tobias_line.potentialLineVars[tobias_line.currentState]
+
+
+    // reset the curtain
+    // tobias_line.t.select('rect.curtain').transition();
+    // tobias_line.t.duration(0)
+    tobias_line.svg.select('rect.curtain').interrupt()
+    tobias_line.svg.select('rect.curtain')
+        .attr('width', (tobias_line.width))
+
+    tobias_line.wrangleData()
+
+    if(tobias_line.currentState <(tobias_line.potentialLineVars.length-1))
+    {tobias_line.currentState +=1}
+    else{tobias_line.currentState=0}
+
 
 }
