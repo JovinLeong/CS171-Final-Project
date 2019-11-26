@@ -4,19 +4,21 @@
 queue()
     .defer(d3.json, "data/Kreise15map.json")
     .defer(d3.csv, "data/variables_clean.csv")
-    .defer(d3.csv, "data/east_west.csv")
     .defer(d3.csv, "data/east_west2.csv")
-    .await(function(error, mapTopJson, germanData, time_data,time_data2) {
+    .await(function(error, mapTopJson, germanData, time_data) {
         console.log(time_data)
-        console.log(time_data2)
+        console.log(germanData)
 
         tobias_map = new TobiasMap("Tobias-map",mapTopJson, germanData)
 
         tobias_scatter = new TobiasScatter ("Tobias-scatter", germanData)
 
-        tobias_line = new TobiasLine ("Tobias-line", time_data2)
+        tobias_line = new TobiasLine ("Tobias-line", time_data)
 
 
+        tobias_connected_map = new TobiasMap("Tobias-connected-map",mapTopJson, germanData)
+
+        tobias_connected_scatter = new TobiasScatter("Tobias-connected-scatter", germanData)
 
     })
 
@@ -162,7 +164,7 @@ TobiasMap.prototype.updateVis = function() {
     if (vis.firstLoad == true){
     vis.title = vis.svg.append("text")
         .attr("x", vis.width /2)
-        .attr("id", "Tobias-map-subhead")
+        .attr("id", vis.parentElement +"-subhead")
         .style("text-anchor", "middle")
         .attr("y", 20)
         .text("(former) East and West Germany, county level, 2018")
@@ -174,7 +176,7 @@ TobiasMap.prototype.updateVis = function() {
         .enter().append("path")
         .attr("d", vis.path)
         .attr("class", "tobias-map-element")
-        .attr("id", function(d,i){return "map_"+ (d.properties.Kennziffer)})
+        .attr("id", function(d,i){return vis.parentElement+ (d.properties.Kennziffer)})
         .attr("fill", function(d,i){
             if(d.properties[vis.varX] == 1){
                 return "grey"
@@ -185,13 +187,34 @@ TobiasMap.prototype.updateVis = function() {
             else{return "orange"}
         })
         .on("mouseover", function(d,i){
-            document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "black";
+            this.parentElement.appendChild(this);
+
+            tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
+                .transition()
+                .duration(350)
+                // .attr("fill", "white")
+                .attr("r", 12)
+
+            document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "white"
+            //     .transition()
+            //     .duration(400)
             // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
-            document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 7)
+
+
         })
         .on("mouseout", function(d,i){
-            document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "";
-            document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
+            tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
+                .transition()
+                .duration(350)
+                .attr("r", 5)
+
+            //
+            //
+            document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = ""
+            //
+            // document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
+            // document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.zIndex = "";
+
         })
     }
 
@@ -256,24 +279,28 @@ TobiasScatter.prototype.initVis = function(){
     vis.x = d3.scaleLinear()
         .rangeRound([0, vis.width])
 
-        // .domain()
-
     vis.y = d3.scaleLinear()
         .rangeRound([vis.height,0])
         // .domain();
 
     vis.xAxis = d3.axisBottom()
-        .scale(vis.x);
-
+        .scale(vis.x)
     vis.yAxis = d3.axisLeft()
-        .scale(vis.y);
+        .scale(vis.y)
 
     vis.svg.append("g")
-        .attr("class", "x-axis axis")
+        .attr("class", "x-axis axis tobias-axis")
         .attr("transform", "translate(0," + vis.height + ")");
 
     vis.svg.append("g")
-        .attr("class", "y-axis axis");
+        .attr("class", "y-axis axis tobias-axis");
+
+    vis.firstLoad = true;
+
+    // Option A
+    vis.varY = "GDP per employee, 2017"
+    vis.varX = "household income, 2016"
+    vis.varZ = "East_West, 1990"
 
 
     this.wrangleData()
@@ -283,17 +310,6 @@ TobiasScatter.prototype.initVis = function(){
 TobiasScatter.prototype.wrangleData = function() {
     var vis = this;
 
-    vis.varY = "GDP per employee, 2017"
-    vis.varX = "household income, 2016"
-    vis.varZ = "East_West, 1990"
-
-    // Option B
-    vis.varY = "GDP per employee, 2017"
-    vis.varX = "household income, 2016"
-
-    // // Option C
-    // vis.varY = "GDP per employee, 2017"
-    // vis.varX = "household income, 2016"
 
 
     // convert points into numbers
@@ -319,39 +335,68 @@ TobiasScatter.prototype.updateVis = function(){
     vis.x.domain(vis.minMaxX);
     vis.y.domain(vis.minMaxY);
 
-    // console.log(vis.data)
 
-    // update all the bubbles
+    // Update the x-domain via button
+
+    // update the y-domain via new variable
+
+
+    if(vis.firstLoad == true) {
+
+        // update all the bubbles
+        vis.svg.selectAll("circle")
+            .data(vis.data)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d, i) {
+                return vis.x(d[vis.varX])
+            })
+            .attr("cy", function (d, i) {
+                return vis.y(d[vis.varY])
+            })
+            .attr("class", "scatter-circle")
+            .attr("r", 5)
+            .attr("id", function (d, i) {
+                return ("scatter_" + d.ID)
+            })
+            .attr("fill", function (d, i) {
+                if (d[vis.varZ] == 3) {
+                    return "orange"
+                } else if (d[vis.varZ] == 2) {
+                    return "blue"
+                } else {
+                    return "grey"
+                }
+            })
+            .on("mouseover", function (d, i) {
+                document.getElementById(('Tobias-connected-map' + d.ID)).style.fill = "white";
+            })
+            .on("mouseout", function (d, i) {
+                document.getElementById(('Tobias-connected-map' + d.ID)).style.fill = "";
+            })
+
+    }
+
     vis.svg.selectAll("circle")
         .data(vis.data)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d,i){return vis.x(d[vis.varX])})
-        .attr("cy", function(d,i){return vis.y(d[vis.varY])})
-        .attr("class", "scatter-circle")
-        .attr("r", 5)
-        .attr("id", function(d,i){return ("scatter_" + d.ID)})
-        .attr("fill", function(d,i){
-            if(d[vis.varZ] == 3){
-                return "blue"
-            }
-            else if(d[vis.varZ] == 2){
-                return "red"
-            }
-            else {return "green"}
+        .transition()
+        .duration(1250)
+        .attr("cx", function (d, i) {
+            return vis.x(d[vis.varX])
         })
-        .on("mouseover", function(d,i){
-            document.getElementById(('map_'+ d.ID)).style.fill = "black";
+        .attr("cy", function (d, i) {
+            return vis.y(d[vis.varY])
         })
-        .on("mouseout", function(d,i){
-            document.getElementById(('map_'+ d.ID)).style.fill = "";
-        })
+
+
 
 
 
     // Call axis function with the new domain
     vis.svg.select(".y-axis").call(vis.yAxis);
     vis.svg.select(".x-axis").call(vis.xAxis);
+
+    vis.firstload = false;
 }
 
 // create object for line chart
@@ -391,10 +436,12 @@ TobiasLine.prototype.initVis = function() {
     // Add the X Axis
     vis.xAxis = vis.svg.append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.height + ")")
+        .attr("class", "tobias-axis")
 
     // Add the Y Axis
     vis.yAxis = vis.svg.append("g")
         .attr("transform", "translate(" + vis.margin.left + ", 0)")
+        .attr("class", "tobias-axis")
 
 
 
@@ -459,7 +506,7 @@ TobiasLine.prototype.wrangleData = function(){
     vis.mins = []
     vis.maxs = []
 
-    console.log(vis.displayData)
+    // console.log(vis.displayData)
 
     vis.displayData.forEach(function(d,i){
         vis.temporary_data = []
@@ -602,7 +649,7 @@ TobiasLine.prototype.updateVis = function(){
             .attr('class', 'tobias-line')
             .attr('class', 'linecombined')
             .attr('class', 'tobias-line2')
-            .style('stroke', "black")
+            .style('stroke', "white")
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
             .attr('clip-path', 'url(#Tobias-line-clip)')
             .attr('d', function (d) {
@@ -616,7 +663,7 @@ TobiasLine.prototype.updateVis = function(){
             .style("text-anchor", "middle")
             .attr("y", 20)
             .text(vis.titleVars[0])
-            .attr("fill", "black")
+            .attr("fill", "white")
     }
 
     vis.svg.select(".tobias-line2")
@@ -637,9 +684,9 @@ TobiasLine.prototype.updateVis = function(){
             .attr('height', vis.height)
             .attr('width', (vis.width))
             .attr('class', 'curtain')
+            .attr("id", "tobias-curtain")
             .attr('transform', 'rotate(180)')
             // .attr("transform", "translate(" + -vis.margin.left + ", 0)")
-            .style('fill', '#ffffff');
     }
 
     // call X axis
@@ -675,8 +722,6 @@ TobiasLine.prototype.updateVis = function(){
 function updateMap(){
 
     // update the map
-    // #TODO: fix on hover in css for both scatter plot and map
-    // #TODO: add legend for map and line charts
 
     // console.log("click")
     $("#Tobias-map-subhead").text(tobias_map.reserveTitles[tobias_map.currentMapState]);
@@ -692,8 +737,27 @@ function updateMap(){
 
 }
 
-function updateLineChart () {
+function updateConnectedMap(){
+    $("#Tobias-connected-map-subhead").text(tobias_connected_map.reserveTitles[tobias_connected_map.currentMapState]);
+    // $("#Tobias-map-subhead").style.fill = "red";
 
+
+    tobias_connected_map.varY = tobias_connected_map.reserveVars[tobias_connected_map.currentMapState]
+
+    if(tobias_connected_map.currentMapState <(tobias_connected_map.reserveVars.length-1))
+    {tobias_connected_map.currentMapState +=1}
+    else{tobias_connected_map.currentMapState=0}
+    tobias_connected_map.wrangleData()
+
+    // and now inject the chosen variables into the scatter plot
+    tobias_connected_scatter.varY = tobias_connected_map.varY
+    tobias_connected_scatter.wrangleData()
+}
+
+
+
+
+function updateLineChart () {
 
     // // update the line chart, choose next variable
     // console.log(tobias_line.lineVar)
@@ -708,6 +772,7 @@ function updateLineChart () {
     tobias_line.svg.select('rect.curtain').interrupt()
     tobias_line.svg.select('rect.curtain')
         .attr('width', (tobias_line.width))
+        .attr("fill", "#1D1D1D")
 
     // update data in chart
     tobias_line.wrangleData()
@@ -716,5 +781,15 @@ function updateLineChart () {
     if(tobias_line.currentState <(tobias_line.potentialLineVars.length-1))
     {tobias_line.currentState +=1}
     else{tobias_line.currentState=1}
+
+}
+
+function updateConnectedScatter(){
+    var value = document.getElementById("scatter-update-select").value
+    console.log(value)
+    tobias_connected_scatter.varX = value;
+    tobias_connected_scatter.wrangleData()
+
+
 
 }

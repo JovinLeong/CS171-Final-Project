@@ -1,0 +1,39 @@
+.tobias-axis path, .tobias-axis .tick, .tobias-axis line{
+    /*color: white;*/
+    stroke: #fff;
+}
+/*fill: white;*/
+
+.tobias-axis {
+    stroke: #fff
+}
+#tobias-curtain{
+    fill: #1D1D1D; !important
+    color: #1D1D1D;
+    background-color: #1D1D1D;
+}
+
+
+.tobias-map-element path:hover {
+    fill: white;
+}
+
+circle.scatter-circle:hover  {
+    fill: white;
+}
+
+path.tobias-map-element:hover {
+    fill: white;
+}
+
+circle .scatter-circle:hover  {
+    fill: white;
+}
+
+/*circle:hover{*/
+/*    fill: white;*/
+/*}*/
+
+/*path:hover{*/
+/*    fill: white;*/
+/*}*/
