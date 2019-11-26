@@ -576,13 +576,10 @@ TobiasLine.prototype.updateVis = function(){
         vis.WestGermany
             .enter()
             .append('path')
-            .attr('class', 'line')
+            .attr('class', 'line tobias-line lineWest tobias-line0')
             .attr("fill", "none")
-            .attr('class', 'tobias-line')
-            .attr('class', 'lineWest')
-            .attr('class', 'tobias-line0')
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
-            .style('stroke', "green")
+            .style('stroke', "grey")
             .attr('clip-path', 'url(#Tobias-line-clip)')
             .attr('d', function (d) {
                 return vis.line(d);
@@ -613,12 +610,9 @@ TobiasLine.prototype.updateVis = function(){
             .enter()
             .append('path')
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
-            .attr('class', 'line')
+            .attr('class', 'line tobias-line tobias-line1 lineOst')
             .attr("fill", "none")
-            .attr('class', 'tobias-line')
-            .attr('class', 'lineOst')
-            .attr('class', 'tobias-line1')
-            .style('stroke', "blue")
+            .style('stroke', "orange")
             .attr('clip-path', 'url(#Tobias-line-clip)')
             .attr('d', function (d) {
                 return vis.line(d);
@@ -644,12 +638,9 @@ TobiasLine.prototype.updateVis = function(){
         vis.Germany
             .enter()
             .append('path')
-            .attr('class', 'line')
+            .attr('class', 'line tobias-line linecombined tobias-line2')
             .attr("fill", "none")
-            .attr('class', 'tobias-line')
-            .attr('class', 'linecombined')
-            .attr('class', 'tobias-line2')
-            .style('stroke', "white")
+            .style('stroke', "blue")
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
             .attr('clip-path', 'url(#Tobias-line-clip)')
             .attr('d', function (d) {
@@ -719,21 +710,53 @@ TobiasLine.prototype.updateVis = function(){
 }
 
 
+// update the map
 function updateMap(){
+    // variables for the dynamic text
+    // var i = 0;
+    // var speed = 1500;
+    var dynamic_text = [`Looking at household income, the German map can still be traced, over 30 years after the wall.
+        in spite of numerous attempts to close the wealth gap, the East is still significantly worse off than the West
+         as can be seen on the map on the left hand side`,
+        `... but this is no exception. Differences between East and West are similarly stark when looking at average
+        pension payouts`,
+        `... the number of vocational trainings received per 1.000 employees...`,
+        `or the average population age`,
+        ` swipe down to continue to the next visualisation...`]
+
+    var i = 0;
+    var txt = dynamic_text[tobias_map.currentMapState]
+    var speed = 40;
+    document.getElementById("Tobias-dynamic-text1").innerHTML = "";
+
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("Tobias-dynamic-text1").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+
+    typeWriter();
 
     // update the map
-
-    // console.log("click")
     $("#Tobias-map-subhead").text(tobias_map.reserveTitles[tobias_map.currentMapState]);
-    // $("#Tobias-map-subhead").style.fill = "red";
-
-
     tobias_map.varY = tobias_map.reserveVars[tobias_map.currentMapState]
+
+    // adjust text with type writer effect:
+    // document.getElementById("Tobias-dynamic-text1").innerHTML = dynamic_text[tobias_map.currentMapState]
+    // var txt = dynamic_text[tobias_map.currentMapState];
+    // var length = txt.length
+    // document.getElementById("Tobias-dynamic-text1").innerHTML = " ";
+    typeWriter()
 
     if(tobias_map.currentMapState <(tobias_map.reserveVars.length-1))
     {tobias_map.currentMapState +=1}
     else{tobias_map.currentMapState=0}
     tobias_map.wrangleData()
+
+
+
 
 }
 
@@ -765,6 +788,30 @@ function updateLineChart () {
     tobias_line.lineVar = tobias_line.potentialLineVars[tobias_line.currentState]
     $("#Tobias-line-subhead").text(tobias_line.titleVars[tobias_line.currentState]);
 
+    var dynamic_text = [`What makes the case of the German border so fascinating is not only the way it came
+    down after 30 years, but also how much has stayed the same, and how many indicators, while moving in 
+    tandem, have now really made the East and the West move closer together...`,
+    `be it ....`, `or ....`, `or this indicator....`];
+    // update dynamic text:
+    var i = 0;
+    var txt = dynamic_text[tobias_line.currentState];
+    console.log(txt)
+    var speed = 40;
+    document.getElementById("Tobias-dynamic-text2").innerHTML = "";
+
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("Tobias-dynamic-text2").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+
+        typeWriter();
+
+
+
 
     // reset the curtain
     // tobias_line.t.select('rect.curtain').transition();
@@ -789,7 +836,13 @@ function updateConnectedScatter(){
     console.log(value)
     tobias_connected_scatter.varX = value;
     tobias_connected_scatter.wrangleData()
-
-
-
 }
+
+// function typeWriter(i, txt, speed, target, length) {
+//     if (i < length) {
+//         document.getElementById(target).innerHTML += txt.charAt(i);
+//         i++;
+//         setTimeout(typeWriter(i, txt, speed, target, length), speed);
+//     }
+// }
+
