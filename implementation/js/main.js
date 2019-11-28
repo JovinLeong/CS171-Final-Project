@@ -287,6 +287,6 @@ $(document).on('ready', function () {
 });
 
 function brushed() {
-	var selectionRangeTest = d3.brushSelection(d3.select(".brush").node());
-	console.log(selectionRangeTest)
+	var selectionRange = d3.brushSelection(d3.select(".brush").node());
+	border_reasons.selectionChange(selectionRange);
 }

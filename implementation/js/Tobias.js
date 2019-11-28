@@ -6,8 +6,8 @@ queue()
     .defer(d3.csv, "data/variables_clean.csv")
     .defer(d3.csv, "data/east_west2.csv")
     .await(function(error, mapTopJson, germanData, time_data) {
-        console.log(time_data)
-        console.log(germanData)
+        // console.log(time_data)
+        // console.log(germanData)
 
         tobias_map = new TobiasMap("Tobias-map",mapTopJson, germanData)
 
