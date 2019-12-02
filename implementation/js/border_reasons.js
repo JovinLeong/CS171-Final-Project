@@ -31,7 +31,7 @@ borderReason.prototype.initVis = function() {
         vis.margin = {top: 20, right: 20, bottom: 30, left: 50};
         vis.width = 670 - vis.margin.left - vis.margin.right;
         vis.height = 300 - vis.margin.top - vis.margin.bottom;
-        vis.radius = Math.min(width, height)/4;
+        vis.radius = Math.min(vis.width, vis.height)/4;
 
     // Add an SVG element with the desired dimensions and margin.
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -105,11 +105,23 @@ borderReason.prototype.updateVis = function() {
     vis.x.domain(d3.extent(nestedData, function(d) { return  d; }));
     vis.y.domain(nestedTitles.map(function(d) { return  d; }));
 
-    vis.arc = g.selectAll(".arc")
+    vis.arc = vis.svg.selectAll(".arc")
         .data(vis.donutChart(nestedData))
         .enter()
         .append("g")
         .attr("class", "arc");
+
+    vis.arc.append("path")
+        .attr("d", vis.path)
+        .attr("fill", function(d) {
+            return vis.donutColor(d)
+        });
+
+    // vis.arc.append("text")
+    //     .attr("transform", function (d) {
+    //         return "translae(" +
+    //     })
+    //
 
 
 
@@ -173,7 +185,7 @@ borderReason.prototype.selectionChange = function(brushRegion){
         return (border_years.x(new Date(value.Established)) >= brushRegion[0]) && (border_years.x(new Date(value.Removed)) <= brushRegion[1])
     });
 
-    vis.intervalStart = border_years.x()
+    vis.intervalStart = border_years.x();
 
     // Update the visualization
     vis.wrangleData();
