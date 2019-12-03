@@ -52,7 +52,7 @@ borderReason.prototype.initVis = function() {
     vis.donutChart = d3.pie()
         .sort(null)
         .value(function (d) {
-            return vis.x(d)
+            return (d)
         });
 
     vis.donutPath = d3.arc()
@@ -114,7 +114,9 @@ borderReason.prototype.updateVis = function() {
     vis.arc.append("path")
         .attr("d", vis.path)
         .attr("fill", function(d) {
-            return vis.donutColor(d)
+            console.log('test arc append')
+            // return vis.donutColor(d)
+            return "#fff"
         });
 
     // vis.arc.append("text")
@@ -123,42 +125,6 @@ borderReason.prototype.updateVis = function() {
     //     })
     //
 
-
-
-
-    // console.log("new data", nestedData);
-    // Update y-axis and labels
-    // vis.svg.select(".y-axis").call(vis.yAxis).transition()
-    //     .duration(400);
-
-    // vis.labels = vis.svg.selectAll("text.label")
-    //     .data(nestedData);
-    //
-    // vis.labels
-    //     .enter()
-    //     .append("text")
-    //     .attr("class", "label")
-    //     .merge(vis.labels)
-    //     .text(function(d){
-    //         return "" + d.value
-    //     })
-    //     .attr("x", function(d){
-    //         return vis.x(d.value) + 13
-    //     })
-    //     .transition()
-    //     .duration(400)
-    //     .attr("y", function(d){
-    //         return (vis.y.bandwidth()/2 + vis.y(d.key)) + 4
-    //     })
-    //
-    //     .attr("text-anchor", "left")
-    //     .attr("font-size", 11)
-    //     .attr("fill", "black");
-    //
-    // vis.labels
-    //     .exit()
-    //     .remove();
-    // Generate barchart
     vis.barChart = vis.svg.selectAll("rect")
         .data(nestedData);
 
