@@ -53,6 +53,8 @@ borderReason.prototype.wrangleData = function () {
     vis.terrorCount = 0;
     vis.otherCount = 0;
 
+    // console.log('test filter', vis.filteredData)
+
     // format the data
     vis.filteredData.forEach (function(d) {
         d.Established = +d.Established;
@@ -113,7 +115,7 @@ borderReason.prototype.updateVis = function() {
         .attr("y", function(d, i){ return i*30})
         .attr("height", 10)
         .attr("width", function(d){
-            console.log("what is the sum function", d)
+            // console.log("what is the sum function", d)
             return vis.x(d);
         })
         .style("fill", "#ffffff")
@@ -126,13 +128,18 @@ borderReason.prototype.selectionChange = function(brushRegion){
     var vis = this;
     // Filter data based on selection range with areachart's x scale
     vis.filteredData = vis.data.filter(function (value) {
-        vis.minRange = d3.min([brushRegion[0], brushRegion[1]]);
-        vis.maxRange = d3.max([brushRegion[0], brushRegion[1]]);
+        vis.minRange = border_years.x.invert(d3.min([brushRegion[0], brushRegion[1]]));
+        vis.maxRange = border_years.x.invert(d3.max([brushRegion[0], brushRegion[1]]));
 
-        return (border_years.x(new Date(value.Established)) >= vis.minRange) && (border_years.x(new Date(value.Removed)) <= vis.maxRange)
+        console.log('rem', value.Established)
+        // console.log('min',vis.minRange)
+        // console.log('est',new Date(value.Established))
+        // console.log('rem',new Date(value.Removed))
+        // console.log('max',vis.maxRange)
+
+        // console.log(((new Date(value.Established).getFullYear()) <= vis.maxRange) && ((new Date(value.Established).getFullYear()) <= vis.minRange) && ((new Date(value.Removed).getFullYear()) >= vis.minRange))
+        return (value.Established <= vis.maxRange) && (value.Removed >= vis.minRange)
     });
-
-    vis.intervalStart = border_years.x();
 
     // Update the visualization
     vis.wrangleData();

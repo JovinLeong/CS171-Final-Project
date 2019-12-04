@@ -1,6 +1,6 @@
 // This is just copied over from the template
 var donut = donutChart()
-    .width(900)
+    .width(800)
     .height(400)
     .cornerRadius(3) // sets how rounded the corners are on each slice
     .padAngle(0.015) // effectively dictates the gap between slices
@@ -23,7 +23,7 @@ d3.tsv('data/reasons.tsv', function(error, data) {
 function donutChart() {
     var width,
         height,
-        margin = {top: 50, right: 50, bottom: 50, left: 50},
+        margin = {top: 50, right: 0, bottom: 50, left: 100},
         colour = d3.scaleOrdinal(d3.schemeCategory20c), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
