@@ -14,6 +14,19 @@ var donut = donutChart()
     .variable('Probability')
     .category('Species');
 
+// // I just added another donut on the front page just to test it out - it shows up when inspected but it's not visible somehow????
+// d3.select("#donut").append("svg")
+//     .datum(vis.sortedValues)
+//     .call(donut);
+
+d3.tsv('data/reasons.tsv', function(error, data) {
+    if (error) throw error;
+    d3.select('#donut')
+        .datum(data) // bind data to the div
+        .call(donut); // draw chart in div
+});
+
+
 
 
 // add border years visualizations
@@ -133,11 +146,6 @@ borderReason.prototype.updateVis = function() {
         .enter().append("g")
         .attr("class", "arc");
 
-    // I just added another donut on the front page just to test it out - it shows up when inspected but it's not visible somehow????
-    d3.select("#donut").append("svg")
-        .datum(vis.sortedValues)
-        .call(donut);
-
     // Basically the console log appears and the arc is created but it doesn't really work
     vis.arc.append("path")
         .attr("d", vis.path)
@@ -146,6 +154,7 @@ borderReason.prototype.updateVis = function() {
             // return vis.donutColor(d)
             return "#fff"
         });
+
 
     // This works; just need to add titling later
     vis.barChart = vis.svg.selectAll("rect")
@@ -254,6 +263,7 @@ function donutChart() {
                 .data(pie)
                 .enter().append('text')
                 .attr('dy', '.35em')
+                .attr('fill', '#fff')
                 .html(function(d) {
                     // add "key: value" for given category. Number inside tspan is bolded in stylesheet.
                     return d.data[category] + ': <tspan>' + percentFormat(d.data[variable]) + '</tspan>';
@@ -310,7 +320,8 @@ function donutChart() {
                         .attr('class', 'toolCircle')
                         .attr('dy', -15) // hard-coded. can adjust this to adjust text vertical alignment in tooltip
                         .html(toolTipHTML(data)) // add text to the circle.
-                        .style('font-size', '.9em')
+                        .style('font-size', '18px')
+                        .attr('fill', '#fff')
                         .style('text-anchor', 'middle'); // centres text in tooltip
 
                     svg.append('circle')
