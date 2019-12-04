@@ -150,7 +150,7 @@ borderYears.prototype.createVis = function() {
         .transition()
         .duration(800)
         .attr("x", vis.margin.right)
-        .attr("y", vis.margin.top/4)
+        .attr("y", vis.margin.top)
         .attr("dy", ".1em")
         .attr("fill", "#ffffff")
         .style("text-anchor", "left")
