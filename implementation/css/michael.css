@@ -97,3 +97,8 @@
     font-size: 9px;
 }
 /* Michael's CSS stuff ends */
+
+/* Sidebar css to make it skinnier */
+.skinny {
+    min-width: 100px; max-width: 100px
+}
