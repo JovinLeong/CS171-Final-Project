@@ -576,6 +576,9 @@ TobiasLine.prototype.updateVis = function(){
             // console.log(d.data)
             return vis.y(d.data); });
 
+
+
+
     // draw the line for West Germany
 
 
@@ -611,6 +614,45 @@ TobiasLine.prototype.updateVis = function(){
 
     vis.WestGermany.exit().remove()
 
+    if(vis.firstLoad == true) {
+        // draw the line for overall Germany
+        vis.Germany = vis.svg.selectAll('.linecombined')
+            .data([vis.displayData[2].combined]);
+        vis.Germany
+            .enter()
+            .append('path')
+            .attr('class', 'line tobias-line linecombined tobias-line2')
+            .style('fill', "#008080")
+            .style('opacity', "0.5")
+            .style('stroke', 'white')
+            .style('stroke-width', '1px')
+            .style('stroke-opacity', '1')
+            .attr("transform", "translate(" + vis.margin.left + ", 0)")
+            .attr('clip-path', 'url(#Tobias-line-clip)')
+            .attr('d', function (d) {
+                return vis.line(d);
+            })
+
+        // add title:
+        vis.svg.append("text")
+            .attr("x", vis.width /2)
+            .attr("id", "Tobias-line-subhead")
+            .style("text-anchor", "middle")
+            .attr("y", 20)
+            .text(vis.titleVars[0])
+            .attr("fill", "white")
+    }
+
+    vis.svg.select(".tobias-line2")
+        .data([vis.displayData[2].combined])
+        .attr('d', function(d) {
+            return vis.line(d);
+        })
+
+
+
+    vis.Germany.exit().remove()
+
 
 
     // draw the line for east Germany
@@ -633,9 +675,9 @@ TobiasLine.prototype.updateVis = function(){
                 return vis.line(d);
             })
             .merge(vis.EastGermany)
-            // .attr('d', function (d) {
-            //     return vis.line(d);
-            // })
+        // .attr('d', function (d) {
+        //     return vis.line(d);
+        // })
     }
     vis.svg.select(".tobias-line1")
         .data([vis.displayData[1].combined])
@@ -646,44 +688,6 @@ TobiasLine.prototype.updateVis = function(){
 
     vis.EastGermany.exit().remove()
 
-    if(vis.firstLoad == true) {
-        // draw the line for overall Germany
-        vis.Germany = vis.svg.selectAll('.linecombined')
-            .data([vis.displayData[2].combined]);
-        vis.Germany
-            .enter()
-            .append('path')
-            .attr('class', 'line tobias-line linecombined tobias-line2')
-            .style('fill', "#008080")
-            .style('opacity', "0.5")
-            .style('stroke', 'white')
-            .style('stroke-width', '1px')
-            .style('stroke-opacity', '1')
-            .attr("transform", "translate(" + vis.margin.left + ", 0)")
-            .attr('clip-path', 'url(#Tobias-line-clip)')
-            .attr('d', function (d) {
-                return vis.line(d);
-            })
-
-        // add title:
-        vis.svg.append("text")
-           .attr("x", vis.width /2)
-           .attr("id", "Tobias-line-subhead")
-            .style("text-anchor", "middle")
-            .attr("y", 20)
-            .text(vis.titleVars[0])
-            .attr("fill", "white")
-    }
-
-    vis.svg.select(".tobias-line2")
-        .data([vis.displayData[2].combined])
-        .attr('d', function(d) {
-            return vis.line(d);
-        })
-
-
-
-    vis.Germany.exit().remove()
 
     // if(vis.firstLoad == true) {
     //     /* Add 'curtain' rectangle to hide entire graph */
