@@ -47,6 +47,16 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/CS171-Final-Project/implementation/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -66,6 +76,9 @@
       <workItem from="1574361363509" duration="22851000" />
       <workItem from="1574651288761" duration="31955000" />
       <workItem from="1574883219811" duration="613000" />
+      <workItem from="1574969816788" duration="598000" />
+      <workItem from="1575141040547" duration="895000" />
+      <workItem from="1575322201241" duration="1198000" />
     </task>
     <servers />
   </component>
