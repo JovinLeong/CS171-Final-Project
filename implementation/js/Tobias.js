@@ -20,6 +20,14 @@ queue()
 
         tobias_connected_scatter = new TobiasScatter("Tobias-connected-scatter", germanData)
 
+
+        $('body').on('scroll', function() {
+            updateMap()
+            console.log("scrolled")
+        });
+
+
+
     })
 
 
@@ -38,12 +46,13 @@ TobiasMap.prototype.initVis = function(){
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 500 - vis.margin.left - vis.margin.right;
-    vis.height = 600 - vis.margin.top - vis.margin.bottom;
+    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        .attr("id", vis.parentElement+"0")
         .attr("transform",
             "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
@@ -51,7 +60,7 @@ TobiasMap.prototype.initVis = function(){
     vis.projection = d3.geoMercator()
         .scale(2000)
         .center([10.3736325636218, 51.053178814923065])
-        .translate([200, 250]);
+        .translate([150, 250]);
 
     vis.path = d3.geoPath()
         .projection(vis.projection);
@@ -265,8 +274,8 @@ TobiasScatter.prototype.initVis = function(){
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 500 - vis.margin.left - vis.margin.right;
-    vis.height = 600 - vis.margin.top - vis.margin.bottom;
+    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -412,8 +421,8 @@ TobiasLine.prototype.initVis = function() {
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 500 - vis.margin.left - vis.margin.right;
-    vis.height = 600 - vis.margin.top - vis.margin.bottom;
+    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -731,7 +740,8 @@ function updateMap(){
         pension payouts`,
         `... the number of vocational trainings received per 1.000 employees...`,
         `or the average population age`,
-        ` swipe down to continue to the next visualisation...`]
+        `Almost no matter which indicator one is looking at, 30 years after the fall of the wall, the border can still be drawn.    
+         Swipe down to continue to the next visualisation...`]
 
     var i = 0;
     var txt = dynamic_text[tobias_map.currentMapState]
@@ -764,9 +774,13 @@ function updateMap(){
     else{tobias_map.currentMapState=0}
     tobias_map.wrangleData()
 
-
-
-
+    console.log(tobias_map.currentMapState)
+    if(tobias_map.currentMapState == 0 ){
+        document.getElementById("Tobias-first-button").innerText = "start again"
+    }
+    else{
+        document.getElementById("Tobias-first-button").innerText = "learn more"
+    }
 }
 
 function updateConnectedMap(){
