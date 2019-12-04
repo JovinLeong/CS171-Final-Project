@@ -558,12 +558,12 @@ TobiasLine.prototype.updateVis = function(){
         .nice()
 
     // define the line, helper function
-    vis.line = d3.line()
-        .curve(d3.curveMonotoneX)
+    vis.line = d3.area()
         .x(function(d) {
             // console.log(d.date)
             return vis.x(d.date); })
-        .y(function(d) {
+        .y0(vis.height)
+        .y1(function(d) {
             // console.log(d.data)
             return vis.y(d.data); });
 
@@ -577,9 +577,12 @@ TobiasLine.prototype.updateVis = function(){
             .enter()
             .append('path')
             .attr('class', 'line tobias-line lineWest tobias-line0')
-            .attr("fill", "none")
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
-            .style('stroke', "grey")
+            .style("fill", "blue")
+            .style('stroke', 'white')
+            .style('stroke-width', '1px')
+            .style('stroke-opacity', '1')
+            .style("opacity", '0.5')
             .attr('clip-path', 'url(#Tobias-line-clip)')
             .attr('d', function (d) {
                 return vis.line(d);
@@ -611,16 +614,19 @@ TobiasLine.prototype.updateVis = function(){
             .append('path')
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
             .attr('class', 'line tobias-line tobias-line1 lineOst')
-            .attr("fill", "none")
-            .style('stroke', "orange")
-            .attr('clip-path', 'url(#Tobias-line-clip)')
+            .style("fill", "red")
+            .style('stroke', 'white')
+            .style('stroke-width', '1px')
+            .style('stroke-opacity', '1')
+            .style("opacity", '0.4')
+            // .attr('clip-path', 'url(#Tobias-line-clip)')
             .attr('d', function (d) {
                 return vis.line(d);
             })
             .merge(vis.EastGermany)
-            .attr('d', function (d) {
-                return vis.line(d);
-            })
+            // .attr('d', function (d) {
+            //     return vis.line(d);
+            // })
     }
     vis.svg.select(".tobias-line1")
         .data([vis.displayData[1].combined])
@@ -639,8 +645,11 @@ TobiasLine.prototype.updateVis = function(){
             .enter()
             .append('path')
             .attr('class', 'line tobias-line linecombined tobias-line2')
-            .attr("fill", "none")
-            .style('stroke', "blue")
+            .style('fill', "#008080")
+            .style('opacity', "0.5")
+            .style('stroke', 'white')
+            .style('stroke-width', '1px')
+            .style('stroke-opacity', '1')
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
             .attr('clip-path', 'url(#Tobias-line-clip)')
             .attr('d', function (d) {
@@ -667,18 +676,18 @@ TobiasLine.prototype.updateVis = function(){
 
     vis.Germany.exit().remove()
 
-    if(vis.firstLoad == true) {
-        /* Add 'curtain' rectangle to hide entire graph */
-        vis.curtain = vis.svg.append('rect')
-            .attr('x', -1 * (vis.width + vis.margin.left))
-            .attr('y', -1 * vis.height)
-            .attr('height', vis.height)
-            .attr('width', (vis.width))
-            .attr('class', 'curtain')
-            .attr("id", "tobias-curtain")
-            .attr('transform', 'rotate(180)')
-            // .attr("transform", "translate(" + -vis.margin.left + ", 0)")
-    }
+    // if(vis.firstLoad == true) {
+    //     /* Add 'curtain' rectangle to hide entire graph */
+    //     vis.curtain = vis.svg.append('rect')
+    //         .attr('x', -1 * (vis.width + vis.margin.left))
+    //         .attr('y', -1 * vis.height)
+    //         .attr('height', vis.height)
+    //         .attr('width', (vis.width))
+    //         .attr('class', 'curtain')
+    //         .attr("id", "tobias-curtain")
+    //         .attr('transform', 'rotate(180)')
+    //         // .attr("transform", "translate(" + -vis.margin.left + ", 0)")
+    // }
 
     // call X axis
     vis.xAxis
