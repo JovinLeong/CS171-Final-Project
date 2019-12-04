@@ -5,117 +5,154 @@ d3.queue()
         border_reasons = new borderReason("border_reasons",borderData)
     });
 
+// d3.csv("data/aggregate_data.csv", function (borderData) {
+//     createGraph();
+// })
+//
+// function createGraph() {
+//
+// }
+
 
 // add border years visualizations
 borderReason = function(_parentElement, _data){
     this.parentElement = _parentElement;
     this.data = _data;
-
-    this.createVis()
+    this.displayData = _data;
+    this.initVis()
 };
 
-borderReason.prototype.createVis = function() {
+borderReason.prototype.initVis = function() {
     var vis = this;
 
+    vis.filteredData = vis.data;
 
     // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 20, bottom: 30, left: 50},
-        vis.width = 650 - vis.margin.left - vis.margin.right,
+        vis.margin = {top: 20, right: 20, bottom: 30, left: 50};
+        vis.width = 670 - vis.margin.left - vis.margin.right;
         vis.height = 300 - vis.margin.top - vis.margin.bottom;
-
-    // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
-    vis.x = d3.scaleLinear().range([0, vis.width]);
-    vis.y = d3.scaleLinear().range([vis.height, 0]);
-
-    // format the data
-    vis.data.forEach (function(d) {
-        d.Established = +d.Established;
-        d.Removed = +d.Removed;
-        d.Illegal_Immigration = +d.Illegal_Immigration;
-        d.Interstate_dispute = +d.Interstate_dispute;
-        d.Smuggling_and_contraband = +d.Smuggling_and_contraband;
-        d.Terrorism_and_Insurgency = +d.Terrorism_and_Insurgency;
-        d.Other = +d.Other;
-
-    });
-
-    // Creating a date range to aggregate data per year
-    vis.dateRange = d3.range(1945,2015,1);
-    vis.incidenceData = [];
-    vis.borderIncidence = [];
-
-    vis.dateRange.forEach(function (d) {
-        // borderData
-
-        var instanceCount = 0;
-        vis.data.forEach(function (e) {
-            if ((d >= e.Established) && (d <= e.Removed)) {
-                instanceCount += 1
-            }
-        });
-        vis.borderIncidence.push(instanceCount);
-        vis.incidenceData.push({year: +d, walls: +instanceCount});
-    });
-
-    // Compute the minimum and maximum date, and the maximum walls.
-    vis.x.domain([vis.dateRange[0], vis.dateRange[vis.dateRange.length - 1]]);
-    vis.y.domain([0, d3.max(vis.borderIncidence)]).nice();
+        vis.radius = Math.min(vis.width, vis.height)/4;
 
     // Add an SVG element with the desired dimensions and margin.
-    vis.pieChart = d3.select("#" + vis.parentElement).append("svg")
+    vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform",
             "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-    vis.pieChart.append("text")
-        .text("Test")
-        .style("fill", "#fff")
+    // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
+    vis.x = d3.scaleLinear()
+        .range([0, vis.width]);
+    vis.y = d3.scaleLinear()
+        .range([vis.height, 0]);
 
-    // // Add the clip path.
-    // vis.svg.append("clipPath")
-    //     .attr("id", "clip")
-    //     .append("rect")
-    //     .attr("width", vis.width)
-    //     .attr("height", vis.height);
-    //
-    // // Add the X Axis
-    // vis.svg.append("g")
-    //     .attr('class', 'axisLines')
-    //     .attr("transform", "translate(0," + vis.height + ")")
-    //     .call(d3.axisBottom(vis.x)
-    //         .ticks(20)
-    //         .tickFormat(d3.format("d")));
-    //
-    //
-    // // Add the Y Axis
-    // vis.svg.append("g")
-    //     .attr('class', 'axisLines')
-    //     .call(d3.axisLeft(vis.y));
-    //
-    // vis.svg.selectAll('.line')
-    //     .data([vis.incidenceData])
-    //     .enter()
-    //     .append('path')
-    //     .attr('class', 'line')
-    //     .style('stroke', "#008080")
-    //     .attr('clip-path', 'url(#clip)')
-    //     .attr('d', function(d) {
-    //         return vis.line(d);
+    vis.donutColor = d3.scaleOrdinal(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
+
+    vis.donutChart = d3.pie()
+        .sort(null)
+        .value(function (d) {
+            return (d)
+        });
+
+    vis.donutPath = d3.arc()
+        .outerRadius(vis.radius - 10)
+        .innerRadius(vis.radius - 70);
+
+    vis.donutLabel = d3.arc()
+        .outerRadius(vis.radius - 40)
+        .innerRadius(vis.radius - 40);
+
+
+
+    vis.wrangleData();
+};
+
+borderReason.prototype.wrangleData = function () {
+    var vis = this;
+
+    vis.immigrationCount = 0;
+    vis.disputeCount = 0;
+    vis.smuggleCount = 0;
+    vis.terrorCount = 0;
+    vis.otherCount = 0;
+
+    // format the data
+    vis.filteredData.forEach (function(d) {
+        d.Established = +d.Established;
+        d.Removed = +d.Removed;
+        d.Illegal_Immigration = +d.Illegal_Immigration;
+        vis.immigrationCount += d.Illegal_Immigration;
+        d.Interstate_dispute = +d.Interstate_dispute;
+        vis.disputeCount += d.Interstate_dispute;
+        d.Smuggling_and_contraband = +d.Smuggling_and_contraband;
+        vis.smuggleCount += d.Smuggling_and_contraband;
+        d.Terrorism_and_Insurgency = +d.Terrorism_and_Insurgency;
+        vis.terrorCount += d.Terrorism_and_Insurgency;
+        d.Other = +d.Other;
+        vis.otherCount += d.Other
+    });
+    nestedTitles = ['Illegal immigration', 'Interstate dispute', 'Smuggling and Contraband', 'Terrorism and insurgency', 'Other']
+    nestedData = [vis.immigrationCount, vis.disputeCount, vis.smuggleCount, vis.terrorCount, vis.otherCount];
+
+    vis.updateVis()
+
+};
+
+borderReason.prototype.updateVis = function() {
+    var vis = this;
+    // Update domain
+    vis.x.domain(d3.extent(nestedData, function(d) { return  d; }));
+    vis.y.domain(nestedTitles.map(function(d) { return  d; }));
+
+    vis.arc = vis.svg.selectAll(".arc")
+        .data(vis.donutChart(nestedData))
+        .enter()
+        .append("g")
+        .attr("class", "arc");
+
+    vis.arc.append("path")
+        .attr("d", vis.path)
+        .attr("fill", function(d) {
+            console.log('test arc append')
+            // return vis.donutColor(d)
+            return "#fff"
+        });
+
+    // vis.arc.append("text")
+    //     .attr("transform", function (d) {
+    //         return "translae(" +
     //     })
     //
-    //
-    //
-    // vis.absoluteSum =
-    //
-    // vis.pieChart = d3.select("#" + vis.parentElement).append("svg")
-    //     .attr("width", vis.width + vis.margin.left + vis.margin.right)
-    //     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-    //     .append("g")
-    //     .attr("transform",
-    //         "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+    vis.barChart = vis.svg.selectAll("rect")
+        .data(nestedData);
 
+    vis.barChart.enter().append("rect")
+        .merge(vis.barChart)
+        .attr("x", 10)
+        .transition()
+        .duration(450)
+        .attr("y", function(d, i){ return i*30})
+        .attr("height", 10)
+        .attr("width", function(d){
+            return vis.x(d);
+        })
+        .style("fill", "#ffffff")
+        .attr("class", "bar-element");
 
+    vis.barChart.exit().remove();
+};
+
+borderReason.prototype.selectionChange = function(brushRegion){
+    var vis = this;
+    // Filter data based on selection range with areachart's x scale
+    vis.filteredData = vis.data.filter(function (value) {
+        return (border_years.x(new Date(value.Established)) >= brushRegion[0]) && (border_years.x(new Date(value.Removed)) <= brushRegion[1])
+    });
+
+    vis.intervalStart = border_years.x();
+
+    // Update the visualization
+    vis.wrangleData();
 };

@@ -26,7 +26,7 @@ borderYears.prototype.createVis = function() {
 
     // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 30, left: 50},
-        vis.width = 650 - vis.margin.left - vis.margin.right,
+        vis.width = 650 - vis.margin.left - vis.margin.right;
         vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
@@ -149,21 +149,23 @@ borderYears.prototype.createVis = function() {
         .attr("class", "axis-title y-title")
         .transition()
         .duration(800)
-        .attr("x", 0)
-        .attr("y", margin.top/2)
+        .attr("x", vis.margin.right)
+        .attr("y", vis.margin.top/4)
         .attr("dy", ".1em")
+        .attr("fill", "#ffffff")
         .style("text-anchor", "left")
-        .text("placeholder");
+        .text("Net change in number of border barriers since 1945");
 
     vis.svg.append("text")
         .attr("class", "axis-title x-title")
         .transition()
         .duration(800)
-        .attr("x", width)
-        .attr("y", height - margin.bottom)
+        .attr("x", vis.width - vis.margin.left)
+        .attr("y", vis.height - vis.margin.top)
         .attr("dy", ".1em")
+        .attr("fill", "#ffffff")
         .style("text-anchor", "left")
-        .text("placeholder");
+        .text("Years");
 
 
 
