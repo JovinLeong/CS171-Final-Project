@@ -1,40 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="73ef7e08-6ac3-42fb-a57c-686a45d16ac4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementation/js/Tobias.js" beforeDir="false" afterPath="$PROJECT_DIR$/implementation/js/Tobias.js" afterDir="false" />
-    </list>
+    <list default="true" id="1c106838-6948-4b96-adb7-0612456d095e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="CS171-Final-Project" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1TZtCRQUv8jTdlCPtruPZWr63cR" />
+  <component name="ProjectId" id="1UDaptMgx7DxnlRlvftEy2UN3xJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HKS lectures/Fall 2019/CS 171 - Visualisation/midterm_template" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Michael Huang\Documents\GitHub\CS171-Final-Project\implementation\img" />
-    </key>
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -48,39 +29,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/CS171-Final-Project/implementation/index.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JavaScript Debug.index.html" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="73ef7e08-6ac3-42fb-a57c-686a45d16ac4" name="Default Changelist" comment="" />
-      <created>1573679317719</created>
+      <changelist id="1c106838-6948-4b96-adb7-0612456d095e" name="Default Changelist" comment="" />
+      <created>1574893806011</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1573679317719</updated>
-      <workItem from="1573679319052" duration="219000" />
-      <workItem from="1573679613007" duration="450000" />
-      <workItem from="1574019730375" duration="32000" />
-      <workItem from="1574019763216" duration="745000" />
-      <workItem from="1574042983228" duration="3991000" />
-      <workItem from="1574221406403" duration="12425000" />
-      <workItem from="1574361363509" duration="22851000" />
-      <workItem from="1574651288761" duration="31955000" />
-      <workItem from="1574883219811" duration="613000" />
-      <workItem from="1574969816788" duration="598000" />
-      <workItem from="1575141040547" duration="895000" />
-      <workItem from="1575322201241" duration="1198000" />
-      <workItem from="1575435648056" duration="6431000" />
+      <updated>1574893806011</updated>
+      <workItem from="1574893808789" duration="11301000" />
+      <workItem from="1574916045940" duration="566000" />
+      <workItem from="1575312736578" duration="23306000" />
+      <workItem from="1575476579869" duration="6083000" />
     </task>
     <servers />
   </component>

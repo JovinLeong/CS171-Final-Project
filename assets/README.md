@@ -1,3 +1,3 @@
-# Placeholder
+# CS171-Final-Project
 
-## Store any image or relevant data assets we need, we might need, or we aren't sure about.
+## _Borderline_: A look into border barriers and the people they keep apart

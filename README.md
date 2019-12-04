@@ -1,3 +1,4 @@
-# CS171-Final-Project
+# Borderline
+### Visualizing borders and people they keep apart
 
-## _Borderline_: A look into border barriers and the people they keep apart
+#### https://jovinleong.github.io/CS171-Final-Project/
