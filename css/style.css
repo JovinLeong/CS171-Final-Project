@@ -4,6 +4,14 @@
 }
 /*fill: white;*/
 
+#wrapper_div_border_years{
+    display: inline; !important;
+}
+
+#border_years{
+    margin-top: 30px;
+}
+
 .tobias-axis {
     stroke: #fff
 }

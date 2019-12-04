@@ -25,8 +25,8 @@ borderYears.prototype.createVis = function() {
     var vis = this;
 
     // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 20, bottom: 30, left: 50},
-        vis.width = 650 - vis.margin.left - vis.margin.right;
+        vis.margin = {top: 20, right: 20, bottom: 50, left: 50},
+        vis.width = 350 - vis.margin.left - vis.margin.right;
         vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
@@ -93,7 +93,7 @@ borderYears.prototype.createVis = function() {
         .attr('class', 'axisLines')
         .attr("transform", "translate(0," + vis.height + ")")
         .call(d3.axisBottom(vis.x)
-            .ticks(20)
+            .ticks(5)
             .tickFormat(d3.format("d")));
 
 
@@ -149,19 +149,20 @@ borderYears.prototype.createVis = function() {
         .attr("class", "axis-title y-title")
         .transition()
         .duration(800)
-        .attr("x", vis.margin.right)
-        .attr("y", vis.margin.top)
+        .attr("x", 0)
+        .attr("y", -35)
         .attr("dy", ".1em")
         .attr("fill", "#ffffff")
-        .style("text-anchor", "left")
-        .text("Net change in number of border barriers since 1945");
+        .style("text-anchor", "end")
+        .text("Net change in number of border barriers since 1945")
+        .attr('transform', 'rotate(-90)');
 
     vis.svg.append("text")
         .attr("class", "axis-title x-title")
         .transition()
         .duration(800)
-        .attr("x", vis.width - vis.margin.left)
-        .attr("y", vis.height - vis.margin.top)
+        .attr("x", ((vis.width-vis.margin.right)/2))
+        .attr("y", (vis.height+vis.margin.bottom-10))
         .attr("dy", ".1em")
         .attr("fill", "#ffffff")
         .style("text-anchor", "left")

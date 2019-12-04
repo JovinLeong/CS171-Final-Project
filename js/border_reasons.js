@@ -2,7 +2,7 @@
 d3.queue()
     .defer(d3.csv, "data/aggregate_data.csv")
     .await(function(error, borderData) {
-        border_reasons = new borderReason("border_reasons",borderData)
+        border_reasons = new borderReason("border_reasons2",borderData)
     });
 
 // This is just copied over from the template
