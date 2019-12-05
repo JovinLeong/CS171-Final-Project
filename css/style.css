@@ -4,6 +4,10 @@
 }
 /*fill: white;*/
 
+ul li::before {
+    color: white; /* Change the color */
+}
+
 #wrapper_div_border_years{
     display: inline; !important;
 }
