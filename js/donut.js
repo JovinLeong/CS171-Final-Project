@@ -23,7 +23,7 @@ d3.tsv('data/reasons.tsv', function(error, data) {
 function donutChart() {
     var width,
         height,
-        margin = {top: 50, right: 0, bottom: 50, left: 100},
+        margin = {top: 50, right: 0, bottom: 50, left: 10},
         colour = d3.scaleOrdinal(d3.schemeCategory20c), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
@@ -94,7 +94,7 @@ function donutChart() {
                 .attr('fill', '#fff')
                 .html(function(d) {
                     // add "key: value" for given category. Number inside tspan is bolded in stylesheet.
-                    return ' <tspan> ' + d.data[category] + ' </tspan> <tspan>' + percentFormat(d.data[variable]) + '</tspan>';
+                    return d.data[category] ;
                 })
                 .attr('transform', function(d) {
 
@@ -173,16 +173,38 @@ function donutChart() {
                 var tip = '',
                     i   = 0;
 
+                console.log('data.data check', data.data)
+
                 for (var key in data.data) {
 
-                    // if value is a number, format it as a percentage
-                    var value = (!isNaN(parseFloat(data.data[key]))) ? percentFormat(data.data[key]) : data.data[key];
+                    console.log('key check', key)
 
-                    // leave off 'dy' attr for first tspan so the 'dy' attr on text element works. The 'dy' attr on
-                    // tspan effectively imitates a line break.
-                    if (i === 0) tip += '<tspan x="0">' + key + ': ' + value + '</tspan>';
-                    else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
-                    i++;
+                    if (key === 'Probability') {
+                        // if value is a Probability, format it as a percentage
+                        var value = (!isNaN(parseFloat(data.data[key]))) ? percentFormat(data.data[key]) : data.data[key];
+                        key = 'Percentage'
+                        // leave off 'dy' attr for first tspan so the 'dy' attr on text element works. The 'dy' attr on
+                        // tspan effectively imitates a line break.
+                        if (i === 0) tip += '<tspan x="0">' + key + ': ' + value + '</tspan>';
+                        else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
+                        i++;
+                    }
+
+                    if (key === 'Species') {
+                        var value = (!isNaN(parseFloat(data.data[key]))) ? (data.data[key]) : data.data[key];
+                        key = ''
+
+                        if (i === 0) tip += '<tspan x="0" style="font-size: 18px; font-weight: bold" >' + key + value + '</tspan>';
+                        else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
+                        i++;
+                    }
+
+                    if (key === 'Quantity') {
+                        var value = (!isNaN(parseFloat(data.data[key]))) ? (data.data[key]) : data.data[key];
+                        if (i === 0) tip += '<tspan x="0">' + key + ': ' + value + '</tspan>';
+                        else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
+                        i++;
+                    }
                 }
 
                 return tip;

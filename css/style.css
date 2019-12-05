@@ -24,6 +24,10 @@
 #donut {
 }
 
+.glow-1 {
+    text-shadow: yellow;
+}
+
 polyline{
     opacity: 0.8;
     stroke: white;

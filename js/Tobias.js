@@ -576,6 +576,11 @@ TobiasLine.prototype.updateVis = function(){
             // console.log(d.data)
             return vis.y(d.data); });
 
+    // Similar helper function for brush
+    vis.brushRadar = d3.brushX()
+        .extent([[0,0], [vis.width, vis.height]])
+        .on("brush", brushed_radar);
+
 
 
 
@@ -687,6 +692,14 @@ TobiasLine.prototype.updateVis = function(){
         })
 
     vis.EastGermany.exit().remove()
+
+    // Draw brush
+    vis.svg.append("g")
+        .attr("class", "x brushRadar")
+        .call(vis.brushRadar)
+        .select("rect")
+        .attr("y", -6)
+        .attr("height", vis.height + 7);
 
 
     // if(vis.firstLoad == true) {

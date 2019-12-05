@@ -100,8 +100,30 @@ borderReason.prototype.updateVis = function() {
     vis.sortedValues = Object.values(vis.dataDictSorted);
     vis.sortedKeys = Object.keys(vis.dataDictSorted);
 
-    vis.x.domain(d3.extent(vis.sortedValues, function(d) { return  d; }));
+    vis.x.domain([0, d3.max(vis.sortedValues)]);
     vis.y.domain(vis.sortedKeys.map(function(d) { return  d; }));
+    vis.labels = vis.svg.selectAll('text.label')
+        .data(vis.sortedKeys);
+
+    vis.labels
+        .enter()
+        .append('text')
+        .attr('class', 'label')
+        .merge(vis.labels)
+        .text(function(d) {
+            // console.log("label test",d);
+           return "" + d
+        })
+        .transition()
+        .duration(400)
+        .attr('y', function (d, i) {
+            return i * 30 + 8
+        })
+        .attr('x', 0)
+        // .attr('x',)
+        .attr('font-size', 12)
+        .attr('text-anchor', 'end')
+        .attr('fill', '#fff');
 
 
     // This works; just need to add titling later
@@ -130,12 +152,6 @@ borderReason.prototype.selectionChange = function(brushRegion){
     vis.filteredData = vis.data.filter(function (value) {
         vis.minRange = border_years.x.invert(d3.min([brushRegion[0], brushRegion[1]]));
         vis.maxRange = border_years.x.invert(d3.max([brushRegion[0], brushRegion[1]]));
-
-        console.log('rem', value.Established)
-        // console.log('min',vis.minRange)
-        // console.log('est',new Date(value.Established))
-        // console.log('rem',new Date(value.Removed))
-        // console.log('max',vis.maxRange)
 
         // console.log(((new Date(value.Established).getFullYear()) <= vis.maxRange) && ((new Date(value.Established).getFullYear()) <= vis.minRange) && ((new Date(value.Removed).getFullYear()) >= vis.minRange))
         return (value.Established <= vis.maxRange) && (value.Removed >= vis.minRange)
