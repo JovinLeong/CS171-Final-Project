@@ -53,6 +53,8 @@ borderReason.prototype.wrangleData = function () {
     vis.terrorCount = 0;
     vis.otherCount = 0;
 
+    // console.log('test filter', vis.filteredData)
+
     // format the data
     vis.filteredData.forEach (function(d) {
         d.Established = +d.Established;
@@ -98,8 +100,38 @@ borderReason.prototype.updateVis = function() {
     vis.sortedValues = Object.values(vis.dataDictSorted);
     vis.sortedKeys = Object.keys(vis.dataDictSorted);
 
-    vis.x.domain(d3.extent(vis.sortedValues, function(d) { return  d; }));
+    vis.x.domain([0, d3.max(vis.sortedValues)]);
     vis.y.domain(vis.sortedKeys.map(function(d) { return  d; }));
+    vis.labels = vis.svg.selectAll('text.label')
+        .data(vis.sortedKeys);
+
+    vis.tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html(function (d) {
+            return "<br>Quantity: " + d;
+        });
+
+    vis.svg.call(vis.tip);
+
+    vis.labels
+        .enter()
+        .append('text')
+        .attr('class', 'label')
+        .merge(vis.labels)
+        .text(function(d) {
+            // console.log("label test",d);
+           return "" + d
+        })
+        .transition()
+        .duration(400)
+        .attr('y', function (d, i) {
+            return i * 30 + 8
+        })
+        .attr('x', 0)
+        // .attr('x',)
+        .attr('font-size', 12)
+        .attr('text-anchor', 'end')
+        .attr('fill', '#fff');
 
 
     // This works; just need to add titling later
@@ -108,16 +140,16 @@ borderReason.prototype.updateVis = function() {
     vis.barChart.enter().append("rect")
         .merge(vis.barChart)
         .attr("x", 10)
-        .transition()
-        .duration(300)
         .attr("y", function(d, i){ return i*30})
         .attr("height", 10)
         .attr("width", function(d){
-            console.log("what is the sum function", d)
+            // console.log("what is the sum function", d)
             return vis.x(d);
         })
         .style("fill", "#ffffff")
-        .attr("class", "bar-element");
+        .attr("class", "bar-element")
+        .on('mouseover', vis.tip.show)
+        .on('mouseout', vis.tip.hide);
 
     vis.barChart.exit().remove();
 };
@@ -126,13 +158,12 @@ borderReason.prototype.selectionChange = function(brushRegion){
     var vis = this;
     // Filter data based on selection range with areachart's x scale
     vis.filteredData = vis.data.filter(function (value) {
-        vis.minRange = d3.min([brushRegion[0], brushRegion[1]]);
-        vis.maxRange = d3.max([brushRegion[0], brushRegion[1]]);
+        vis.minRange = border_years.x.invert(d3.min([brushRegion[0], brushRegion[1]]));
+        vis.maxRange = border_years.x.invert(d3.max([brushRegion[0], brushRegion[1]]));
 
-        return (border_years.x(new Date(value.Established)) >= vis.minRange) && (border_years.x(new Date(value.Removed)) <= vis.maxRange)
+        // console.log(((new Date(value.Established).getFullYear()) <= vis.maxRange) && ((new Date(value.Established).getFullYear()) <= vis.minRange) && ((new Date(value.Removed).getFullYear()) >= vis.minRange))
+        return (value.Established <= vis.maxRange) && (value.Removed >= vis.minRange)
     });
-
-    vis.intervalStart = border_years.x();
 
     // Update the visualization
     vis.wrangleData();
