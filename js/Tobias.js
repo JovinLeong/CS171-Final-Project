@@ -683,6 +683,12 @@ TobiasLine.prototype.updateVis = function(){
         // .attr('d', function (d) {
         //     return vis.line(d);
         // })
+
+        // Draw brush
+        vis.svg.append("g")
+            .attr("transform", "translate(" + vis.margin.left + ", 0)")
+            .attr("class", "x brushRadar")
+
     }
     vis.svg.select(".tobias-line1")
         .data([vis.displayData[1].combined])
@@ -691,15 +697,9 @@ TobiasLine.prototype.updateVis = function(){
             return vis.line(d);
         })
 
-    vis.EastGermany.exit().remove()
+    vis.EastGermany.exit().remove();
 
-    // Draw brush
-    vis.svg.append("g")
-        .attr("class", "x brushRadar")
-        .call(vis.brushRadar)
-        .select("rect")
-        .attr("y", -6)
-        .attr("height", vis.height + 7);
+
 
 
     // if(vis.firstLoad == true) {
@@ -739,6 +739,14 @@ TobiasLine.prototype.updateVis = function(){
 
     vis.t.select('rect.curtain')
         .attr('width', 0);
+
+
+    // update the brush
+    vis.svg.select(".brushRadar")
+        .call(vis.brushRadar)
+        .select("rect")
+        .attr("y", -6)
+        .attr("height", vis.height + 7);
 
 
     vis.firstLoad = false;

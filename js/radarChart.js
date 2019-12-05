@@ -2,7 +2,7 @@
 d3.queue()
     .defer(d3.csv, "data/aggregate_data.csv")
     .await(function(error, borderData) {
-        radar_chart = new radarChart("border_reasons2",borderData)
+        // radar_chart = new radarChart("border_reasons2",borderData)
     });
 
 // add border years visualizations
