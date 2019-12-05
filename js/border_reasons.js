@@ -100,11 +100,8 @@ borderReason.prototype.updateVis = function() {
     vis.sortedValues = Object.values(vis.dataDictSorted);
     vis.sortedKeys = Object.keys(vis.dataDictSorted);
 
-    console.log('sorted vals', d3.extent(vis.sortedValues, function(d) { return  d; }))
-
     vis.x.domain([0, d3.max(vis.sortedValues)]);
     vis.y.domain(vis.sortedKeys.map(function(d) { return  d; }));
-
     vis.labels = vis.svg.selectAll('text.label')
         .data(vis.sortedKeys);
 
