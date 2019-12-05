@@ -105,6 +105,14 @@ borderReason.prototype.updateVis = function() {
     vis.labels = vis.svg.selectAll('text.label')
         .data(vis.sortedKeys);
 
+    vis.tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html(function (d) {
+            return "<br>Quantity: " + d;
+        });
+
+    vis.svg.call(vis.tip);
+
     vis.labels
         .enter()
         .append('text')
@@ -132,8 +140,6 @@ borderReason.prototype.updateVis = function() {
     vis.barChart.enter().append("rect")
         .merge(vis.barChart)
         .attr("x", 10)
-        .transition()
-        .duration(300)
         .attr("y", function(d, i){ return i*30})
         .attr("height", 10)
         .attr("width", function(d){
@@ -141,7 +147,9 @@ borderReason.prototype.updateVis = function() {
             return vis.x(d);
         })
         .style("fill", "#ffffff")
-        .attr("class", "bar-element");
+        .attr("class", "bar-element")
+        .on('mouseover', vis.tip.show)
+        .on('mouseout', vis.tip.hide);
 
     vis.barChart.exit().remove();
 };
