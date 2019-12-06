@@ -19,8 +19,8 @@ borderReason.prototype.initVis = function() {
     vis.filteredData = vis.data;
 
     // set the dimensions and margins of the graph
-        vis.margin = {top: 20, right: 20, bottom: 30, left: 50};
-        vis.width = 670 - vis.margin.left - vis.margin.right;
+        vis.margin = {top: 20, right: 30, bottom: 30, left: 145};
+        vis.width = 350 - vis.margin.left - vis.margin.right;
         vis.height = 300 - vis.margin.top - vis.margin.bottom;
         vis.radius = Math.min(vis.width, vis.height)/4;
 
@@ -37,7 +37,7 @@ borderReason.prototype.initVis = function() {
 
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     vis.x = d3.scaleLinear()
-        .range([0, vis.width/2]);
+        .range([0, vis.width]);
     vis.y = d3.scaleLinear()
         .range([vis.height, 0]);
 
@@ -73,8 +73,8 @@ borderReason.prototype.wrangleData = function () {
 
     vis.dataDict = {'Illegal immigration': vis.immigrationCount,
                     'Interstate dispute': vis.disputeCount,
-                    'Smuggling and Contraband': vis.smuggleCount,
-                    'Terrorism and insurgency': vis.terrorCount,
+                    'Smuggling & Contraband': vis.smuggleCount,
+                    'Terrorism & insurgency': vis.terrorCount,
                     'Other': vis.otherCount};
 
     vis.sortable = [];

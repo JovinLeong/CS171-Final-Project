@@ -303,8 +303,8 @@ TobiasScatter.prototype.initVis = function(){
     vis.firstLoad = true;
 
     // Option A
-    vis.varY = "GDP per employee, 2017"
-    vis.varX = "household income, 2016"
+    vis.varY = "averae population age, 2017"
+    vis.varX = "averae population age, 2017"
     vis.varZ = "East_West, 1990"
 
 
@@ -964,12 +964,13 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         // set up initial data and potential data options
         // Option A
         // vis.varX = "East_West, 1990"
-        vis.varX = "unemployment rate (%), 2018"
-        vis.title_text = "household income, 2016"
+        vis.varX = "averae population age, 2017"
+        vis.title_text = "Average population age, 2017"
 
-        // // List of alternative variables
+
+            // // List of alternative variables
         vis.reserveVars = [
-            "household income, 2016",
+            // "household income, 2016",
             "averae population age, 2017",
             "unemployment rate (%), 2018",
             "GDP per employee, 2017",
@@ -990,7 +991,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         ]
 
         vis.reserveTitles = [
-            "Household income, 2016",
+            // "Household income, 2016",
             "Average population age, 2017",
             "unemployment rate (%), 2018",
             "GDP per employee, 2017",
@@ -1004,7 +1005,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
             "household income, 2016",
             "Average pension payouts, 2015",
             "Vocational training per 1.000  employees, 2015",
-            "averae population age, 2017",
+            "average population age, 2017",
             "household income, 2016",
         ]
 
