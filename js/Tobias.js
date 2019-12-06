@@ -16,15 +16,10 @@ queue()
         tobias_line = new TobiasLine ("Tobias-line", time_data)
 
 
-        tobias_connected_map = new TobiasMap("Tobias-connected-map",mapTopJson, germanData)
+        tobias_connected_map = new TobiasConnectedMap("Tobias-connected-map",mapTopJson, germanData)
 
         tobias_connected_scatter = new TobiasScatter("Tobias-connected-scatter", germanData)
 
-
-        $('body').on('scroll', function() {
-            updateMap()
-            console.log("scrolled")
-        });
 
 
 
@@ -161,6 +156,7 @@ TobiasMap.prototype.updateVis = function() {
 
 
     vis.colorScale.domain(vis.minMaxY)
+    console.log(vis.minMaxY)
 
     // console.log(vis.currentMapState)
     // console.log(vis.varY)
@@ -858,9 +854,6 @@ function updateLineChart () {
 
         typeWriter();
 
-
-
-
     // reset the curtain
     // tobias_line.t.select('rect.curtain').transition();
     // tobias_line.t.duration(0)
@@ -893,4 +886,243 @@ function updateConnectedScatter(){
 //         setTimeout(typeWriter(i, txt, speed, target, length), speed);
 //     }
 // }
+
+
+function updateConnectedScatterandMap () {
+    var value = document.getElementById("map-update-select").value
+    tobias_connected_scatter.varY = value;
+    tobias_connected_scatter.wrangleData()
+
+    //#Todo: Tobias to also make the map adjust :-) incl. headline
+
+    tobias_connected_map.varX = value;
+    indicator = 0
+    tobias_connected_map.reserveVars.forEach(function(d,i){
+        if(d == value){
+            indicator = i;
+        }
+    })
+    tobias_connected_map.title_text = tobias_connected_map.reserveTitles[indicator]
+    $("#Tobias-connected-map-subhead").text(tobias_connected_map.reserveTitles[indicator]);
+
+    tobias_connected_map.wrangleData()
+
+
+
+
+}
+
+
+
+TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
+    this.parentElement = _parentElement;
+    this.data = _data;
+    this.map = _map;
+    this.eventHandler = _eventHandler;
+    this.initVis()
+}
+
+    TobiasConnectedMap.prototype.initVis = function(){
+        var vis = this;
+
+        // --> CREATE SVG DRAWING AREA
+        vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
+        vis.width = 350 - vis.margin.left - vis.margin.right;
+        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+
+        vis.svg = d3.select("#" + vis.parentElement).append("svg")
+            .attr("width", vis.width + vis.margin.left + vis.margin.right)
+            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+            .attr("id", vis.parentElement+"0")
+            .attr("transform",
+                "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+        // define projection
+        vis.projection = d3.geoMercator()
+            .scale(2000)
+            .center([10.3736325636218, 51.053178814923065])
+            .translate([150, 250]);
+
+        vis.path = d3.geoPath()
+            .projection(vis.projection);
+
+        // colors for map:
+        vis.colors = ['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c'];
+
+        // scale
+        vis.colorScale = d3.scaleQuantize()
+        // .domain(extent["UN_population"])
+            .range(vis.colors);
+
+        // Convert TopoJSON to GeoJSON (target object = 'collection')
+        vis.Germany = topojson.feature(vis.map, vis.map.objects.Kreise15map).features
+        vis.currentMapState = 0;
+
+
+        vis.firstLoad = true;
+
+        // set up initial data and potential data options
+        // Option A
+        // vis.varX = "East_West, 1990"
+        vis.varX = "unemployment rate (%), 2018"
+        vis.title_text = "household income, 2016"
+
+        // // List of alternative variables
+        vis.reserveVars = [
+            "household income, 2016",
+            "averae population age, 2017",
+            "unemployment rate (%), 2018",
+            "GDP per employee, 2017",
+
+            "forecase demand for new housing, 2030",
+            "slots in pension homes (per 100), 2017",
+            "tax revenues, 2015",
+            "total tax earnings per capita, 2017",
+            "long term unemployment rate, 2018",
+            "rate of long time unemployment, 2018",
+            "pre tax earnings, 2017",
+            "household income, 2016",
+            // "retirees recieving social security recipients (indicator of poverty in old age), 2017",
+            "avg contribution based pension payout, 2015",
+            "people in vocational training per 1.000 employed, 2015",
+            "averae population age, 2017",
+            "household income, 2016",
+        ]
+
+        vis.reserveTitles = [
+            "Household income, 2016",
+            "Average population age, 2017",
+            "unemployment rate (%), 2018",
+            "GDP per employee, 2017",
+            "forecase demand for new housing, 2030",
+            "slots in pension homes (per 100), 2017",
+            "tax revenues, 2015",
+            "total tax earnings per capita, 2017",
+            "long term unemployment rate, 2018",
+            "rate of long time unemployment, 2018",
+            "pre tax earnings, 2017",
+            "household income, 2016",
+            "Average pension payouts, 2015",
+            "Vocational training per 1.000  employees, 2015",
+            "averae population age, 2017",
+            "household income, 2016",
+        ]
+
+        this.wrangleData()
+
+    }
+
+
+    TobiasConnectedMap.prototype.wrangleData = function() {
+        var vis = this;
+        // console.log(vis.varY)
+
+        // convert points into numbers
+        vis.data.forEach(function(d,i){
+            // console.log(d[vis.varY])
+            // vis.data[i][vis.varY] = +d[vis.varY]
+            vis.data[i][vis.varX] = +d[vis.varX]
+            // vis.data[i][vis.varZ] = +d[vis.varZ]
+        })
+
+        // calculate extents
+        vis.minMaxX = d3.extent(vis.data.map(function(d){ return d[vis.varX] }));
+        // vis.minMaxY= d3.extent(vis.data.map(function(d){ return d[vis.varY]; }));
+
+
+        // inject data into json map object
+        vis.Germany.forEach(function(d,i){
+
+            vis.data.forEach(function(data, index){
+                // console.log(data)
+                if (data.ID == d.properties.Kennziffer)
+                {
+                    // vis.Germany[i].properties[vis.varY] = data[vis.varY];
+                    vis.Germany[i].properties[vis.varX] = data[vis.varX]
+                }
+            })
+
+        })
+        this.updateVis()
+    }
+
+
+
+    TobiasConnectedMap.prototype.updateVis = function() {
+        var vis = this;
+
+        // update the domain
+
+        console.log(vis.minMaxX)
+
+        vis.colorScale.domain(vis.minMaxX)
+
+        // console.log(vis.currentMapState)
+        // console.log(vis.varY)
+
+        // console.log(vis.colorScale.domain())
+        // console.log(vis.Germany)
+        // console.log(vis.varY)
+        // console.log(vis.currentState)
+        // render a map of Germany using the path generator
+        if (vis.firstLoad == true){
+            vis.title = vis.svg.append("text")
+                .attr("x", vis.width /2)
+                .attr("id", vis.parentElement +"-subhead")
+                .style("text-anchor", "middle")
+                .attr("y", 20)
+                .text(vis.title_text)
+                .attr("fill", "white")
+
+
+            vis.map = vis.svg.selectAll("path")
+                .data(vis.Germany)
+                .enter().append("path")
+                .attr("d", vis.path)
+                .attr("class", "tobias-map-element")
+                .attr("id", function(d,i){return vis.parentElement+ (d.properties.Kennziffer)})
+                .attr("fill", function(d,i){
+                    return vis.colorScale(d.properties[vis.varX])
+                })
+                .on("mouseover", function(d,i){
+                    this.parentElement.appendChild(this);
+
+                    tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
+                        .transition()
+                        .duration(350)
+                        // .attr("fill", "white")
+                        .attr("r", 12)
+
+                    document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "white"
+                    //     .transition()
+                    //     .duration(400)
+                    // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
+
+
+                })
+                .on("mouseout", function(d,i){
+                    tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
+                        .transition()
+                        .duration(350)
+                        .attr("r", 5)
+
+                    //
+                    //
+                    document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = ""
+                    //
+                    // document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
+                    // document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.zIndex = "";
+
+                })
+        }
+
+
+            vis.svg.selectAll("path")
+                .data(vis.Germany)
+                .attr("fill", function(d,i){
+                    return vis.colorScale(+d.properties[vis.varX])
+                })
+        vis.firstLoad = false;
+
+    }
 

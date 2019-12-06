@@ -18,6 +18,11 @@ ul li::before {
     display: inline; !important;
 }
 
+#wrapper_div_connected_map{
+    display: inline; !important;
+
+}
+
 #border_years{
     margin-top: 30px;
 }
