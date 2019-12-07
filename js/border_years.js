@@ -17,8 +17,8 @@ borderYears.prototype.createVis = function() {
 
     // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 50, left: 50},
-        vis.width = 550 - vis.margin.left - vis.margin.right;
-        vis.height = 550 - vis.margin.top - vis.margin.bottom;
+        vis.width = 500 - vis.margin.left - vis.margin.right;
+        vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     vis.x = d3.scaleLinear().range([0, vis.width]);
