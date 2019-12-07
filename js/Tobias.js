@@ -1,5 +1,8 @@
 typeWriterActivated = false;
 
+
+
+
 // load the data in, including the map
 d3.queue()
     .defer(d3.json, "data/Kreise15map.json")
@@ -138,6 +141,7 @@ TobiasMap.prototype.wrangleData = function() {
 TobiasMap.prototype.updateVis = function() {
     var vis = this;
 
+    console.log(vis.Germany)
     // update the domain
 
 
@@ -191,9 +195,22 @@ TobiasMap.prototype.updateVis = function() {
             //     .duration(400)
             // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
 
+            document.getElementById('tooltip').innerHTML = ("Name: " + d.properties.Name
+                + "<br/>"
+                + "Population: "
+                + ((isNaN(Math.round(d.properties.Einwohner_2017)
+                )) ? "no data" : (Math.round(d.properties.Einwohner_2017)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')))
+                // + "<br/>" +
+                // ((typeof(d.properties.economy) == "string") ? d.properties.economy.substring(3) : "no data")
+                // + "<br/>" +
+                // ((typeof(d.properties.income_grp) == "string") ? d.properties.income_grp.substring(3) : "no data")
+                )
 
         })
-        .on("mouseout", function(d,i){
+
+                .on("mouseout", function(d,i){
             tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
                 .transition()
                 .duration(350)
@@ -205,6 +222,7 @@ TobiasMap.prototype.updateVis = function() {
             //
             // document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
             // document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.zIndex = "";
+
 
         })
     }
