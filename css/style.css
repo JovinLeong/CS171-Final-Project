@@ -126,3 +126,7 @@ circle .scatter-circle:hover  {
     min-height: 150px;
     max-height: 150px;
 }
+
+#map-update-select, #scatter-update-select{
+    text-align: center;
+}
