@@ -201,6 +201,7 @@ function donutChart() {
 
                     if (key === 'Quantity') {
                         var value = (!isNaN(parseFloat(data.data[key]))) ? (data.data[key]) : data.data[key];
+                        key = 'Border barriers'
                         if (i === 0) tip += '<tspan x="0">' + key + ': ' + value + '</tspan>';
                         else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
                         i++;
