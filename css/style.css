@@ -15,6 +15,7 @@ ul li::before {
 }
 
 #wrapper_div_border_years{
+
     display: inline; !important;
 }
 
@@ -82,6 +83,10 @@ circle .scatter-circle:hover  {
 
 }
 
+#Tobias-dynamic-text1{
+    max-width: 250px;
+}
+
 /*********************/
 /*  TOOLTIP OVERLAY  */
 /*********************/
@@ -125,4 +130,13 @@ circle .scatter-circle:hover  {
 .Tobias-connected-page-header{
     min-height: 150px;
     max-height: 150px;
+}
+
+#map-update-select, #scatter-update-select{
+    text-align: center;
+}
+
+#Tobias-dynamic-text2{
+    min-height: 450px;
+    max-height: 450px;
 }

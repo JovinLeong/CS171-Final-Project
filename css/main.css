@@ -155,7 +155,7 @@ p {
   width: 100%; }
 
 .btn-germany {
-  font-size:1.5rem; }
+  font-size:1.25rem; }
 
 .btn-select {
   width:100%; }
@@ -4361,6 +4361,16 @@ textarea {
   @media (min-width: 768px) {
     .display-5 {
       font-size: 3rem; } }
+
+.display-6 {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.1;
+  font-weight: bold; }
+@media (min-width: 768px) {
+  .display-6 {
+    font-size: 2rem; } }
+
 
 .display-title {
   margin-bottom: 1rem; }

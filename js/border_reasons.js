@@ -20,8 +20,8 @@ borderReason.prototype.initVis = function() {
 
     // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 30, bottom: 30, left: 145};
-        vis.width = 350 - vis.margin.left - vis.margin.right;
-        vis.height = 300 - vis.margin.top - vis.margin.bottom;
+        vis.width = 550 - vis.margin.left - vis.margin.right;
+        vis.height = 550 - vis.margin.top - vis.margin.bottom;
         vis.radius = Math.min(vis.width, vis.height)/4;
 
 
