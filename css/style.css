@@ -15,6 +15,7 @@ ul li::before {
 }
 
 #wrapper_div_border_years{
+
     display: inline; !important;
 }
 
