@@ -27,7 +27,7 @@ TobiasMap.prototype.initVis = function(){
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.width = 500 - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -173,9 +173,9 @@ TobiasMap.prototype.updateVis = function() {
                 return "grey"
             }
             else if(d.properties[vis.varX] == 2){
-                return "blue"
+                return "#1f77b4"
             }
-            else{return "orange"}
+            else{return "#ff7f0e"}
         })
         .on("mouseover", function(d,i){
             this.parentElement.appendChild(this);
@@ -218,9 +218,9 @@ TobiasMap.prototype.updateVis = function() {
                 return "grey"
             }
             else if(d.properties[vis.varX] == 2){
-                return "blue"
+                return "#1f77b4"
             }
-            else{return "orange"}
+            else{return "#ff7f0e"}
         })
 
     }
@@ -256,7 +256,7 @@ TobiasScatter.prototype.initVis = function(){
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.width = 500 - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -352,13 +352,14 @@ TobiasScatter.prototype.updateVis = function(){
             })
             .attr("fill", function (d, i) {
                 if (d[vis.varZ] == 3) {
-                    return "orange"
+                    return "#ff7f0e"
                 } else if (d[vis.varZ] == 2) {
-                    return "blue"
+                    return "#1f77b4"
                 } else {
                     return "grey"
                 }
             })
+            .style("opacity", .8)
             .on("mouseover", function (d, i) {
                 document.getElementById(('Tobias-connected-map' + d.ID)).style.fill = "white";
             })
@@ -403,7 +404,7 @@ TobiasLine.prototype.initVis = function() {
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.width = 500 - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -579,7 +580,7 @@ TobiasLine.prototype.updateVis = function(){
             .append('path')
             .attr('class', 'line tobias-line lineWest tobias-line0')
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
-            .style("fill", "blue")
+            .style("fill", "#1f77b4")
             .style('stroke', 'white')
             .style('stroke-width', '1px')
             .style('stroke-opacity', '1')
@@ -936,7 +937,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
 
         // --> CREATE SVG DRAWING AREA
         vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-        vis.width = 350 - vis.margin.left - vis.margin.right;
+        vis.width = 500 - vis.margin.left - vis.margin.right;
         vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -1135,4 +1136,3 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         vis.firstLoad = false;
 
     }
-
