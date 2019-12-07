@@ -116,7 +116,7 @@
         <footer class="section-footer scrolldown">
           <a class="down">
             <span class="icon"></span>
-            <span class="txt">Scroll</span>
+            <span class="txt">Scroll down</span>
           </a>
         </footer>
 
@@ -215,13 +215,13 @@
 
             <!-- navigation -->
             <div class="items-button bottom fit items-button-prev">
-              <a class="btn btn-transp-arrow btn-primary icon-left" href="">
+              <a class="btn btn-transp-arrow btn-black icon-left" href="">
                 <span class="icon arrow-left"></span>
                 <span class="text">Prev</span>
               </a>
             </div>
             <div class="items-button bottom fit items-button-next">
-              <a class="btn btn-transp-arrow btn-primary" href="">
+              <a class="btn btn-transp-arrow btn-black" href="">
                 <span class="icon arrow-right"></span>
                 <span class="text">Next</span>
               </a>
@@ -373,7 +373,7 @@
                   armed guards and only fell when Germany reunified.
                 </p>
               </div>
-                <div><button id="Tobias-first-button" class="btn-white" onclick="updateMap()"> learn more </button></div>
+                <div><button id="Tobias-first-button" class="btn btn-primary btn-germany" onclick="updateMap()"> learn more </button></div>
               </div>
             </div>
           </div>
@@ -407,7 +407,7 @@
 
             <div class="row">
               <!--            <button onclick="updateConnectedMap()"> see next </button>-->
-              <select id="map-update-select" onchange="updateConnectedScatterandMap()">
+              <select class= "btn btn-primary btn-germany btn-select" id="map-update-select" onchange="updateConnectedScatterandMap()">
 <!--                <option value= "household income, 2016"> Household income, 2016 </option>-->
                 <option value="averae population age, 2017"> Average population age, 2017</option>
                 <option value="unemployment rate (%), 2018"> Unemployment rate (%), 2018</option>
@@ -441,7 +441,7 @@
                 <h5 class="display-4 display-title anim-2 Tobias-connected-page-header"> yourself</h5>
 
                 <div>
-                  <select id="scatter-update-select" onchange="updateConnectedScatter()">
+                  <select class= "btn btn-primary btn-germany btn-select" id="scatter-update-select" onchange="updateConnectedScatter()">
                     <option value="averae population age, 2017">Average population age, 2017</option>
                     <option value="unemployment rate (%), 2018">Unemployment rate (%), 2018</option>
                     <option value="GDP per employee, 2017">GDP per employee, 2017</option>
@@ -570,7 +570,7 @@
                 </p>
                 </div>
                     <div>
-                    <button onclick="updateLineChart()"> see next </button>
+                    <button class="btn btn-primary btn-germany" onclick="updateLineChart()"> see next </button>
                     </div>
               </div>
             </div>
