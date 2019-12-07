@@ -93,10 +93,10 @@ TobiasMap.prototype.initVis = function(){
     ]
 
     vis.reserveTitles = [
-        "Household income, 2016",
-        "Average pension payouts, 2015",
-        "Vocational training per 1.000  employees, 2015",
-        "Average population age, 2017",
+        "Household Income (€), 2016",
+        "Average pension payouts (€), 2015",
+        "Vocational Training per 1,000 Employees, 2015",
+        "Average Population Age, 2017",
         "(former) East and West Germany, county level, 2018"
     ]
 
@@ -1074,20 +1074,20 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         vis.reserveTitles = [
             // "Household income, 2016",
             "Average population age, 2017",
-            "unemployment rate (%), 2018",
-            "GDP per employee, 2017",
-            "forecase demand for new housing, 2030",
-            "slots in pension homes (per 100), 2017",
-            "tax revenues, 2015",
-            "total tax earnings per capita, 2017",
-            "long term unemployment rate, 2018",
-            "rate of long time unemployment, 2018",
-            "pre tax earnings, 2017",
-            "household income, 2016",
-            "Average pension payouts, 2015",
+            "Unemployment rate (%), 2018",
+            "GDP per employee (€), 2017",
+            "Forecast demand for new housing, 2030",
+            "Slots in pension homes (per 100), 2017",
+            "Tax revenues (€), 2015",
+            "Total tax earnings per capita (€), 2017",
+            "Long term unemployment rate, 2018",
+            "Rate of long time unemployment, 2018",
+            "Pre tax earnings (€), 2017",
+            "Household income (€), 2016",
+            "Average pension payouts (€), 2015",
             "Vocational training per 1.000  employees, 2015",
-            "average population age, 2017",
-            "household income, 2016",
+            "Average population age, 2017",
+            "Household income (€), 2016",
         ]
 
         this.wrangleData()
