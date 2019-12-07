@@ -714,7 +714,10 @@ TobiasLine.prototype.updateVis = function(){
     // call X axis
     vis.xAxis
         .call(d3.axisBottom(vis.x)
-            .tickFormat(d3.format("d")));
+            .tickFormat(d3.format("d"))
+            .ticks(5)
+        )
+    ;
 
     // call y Axis
         vis.yAxis
