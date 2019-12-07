@@ -1,4 +1,14 @@
 // import data
+queue()
+    .defer(d3.json, "data/Kreise15map.json")
+    .defer(d3.csv, "data/variables_clean.csv")
+    .defer(d3.csv, "data/east_west2.csv")
+    .await(function(error, mapTopJson, germanData, time_data) {
+
+        radar_chart = new radarChart("radarChart", time_data);
+
+    })
+
 d3.queue()
     .defer(d3.csv, "data/aggregate_data.csv")
     .await(function(error, borderData) {
@@ -32,7 +42,6 @@ radarChart.prototype.initVis = function() {
         .append("g")
         .attr("transform",
             "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
 
 
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
@@ -153,8 +162,10 @@ radarChart.prototype.selectionChange = function(brushRegion){
         vis.minRange = border_years.x.invert(d3.min([brushRegion[0], brushRegion[1]]));
         vis.maxRange = border_years.x.invert(d3.max([brushRegion[0], brushRegion[1]]));
 
+        console.log(brushRegion)
+
         // console.log(((new Date(value.Established).getFullYear()) <= vis.maxRange) && ((new Date(value.Established).getFullYear()) <= vis.minRange) && ((new Date(value.Removed).getFullYear()) >= vis.minRange))
-        return (value.Established <= vis.maxRange) && (value.Removed >= vis.minRange)
+        // return (value.Established <= vis.maxRange) && (value.Removed >= vis.minRange)
     });
 
     // Update the visualization

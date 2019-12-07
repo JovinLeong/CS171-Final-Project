@@ -3,9 +3,7 @@ d3.queue()
     .defer(d3.csv, "data/aggregate_data.csv")
     .await(function(error, borderData) {
         border_years = new borderYears("border_years",borderData);
-        // border_reasons = new borderReasons("border_years", borderData);
     });
-
 
 // add border years visualizations
 borderYears = function(_parentElement, _data){
@@ -13,13 +11,6 @@ borderYears = function(_parentElement, _data){
     this.data = _data;
     this.createVis()
 };
-//
-// borderReasons = function(_parentElement, _data){
-//     this.parentElement = _parentElement;
-//     this.data = _data;
-//     this.createVis()
-// };
-
 
 borderYears.prototype.createVis = function() {
     var vis = this;
@@ -154,7 +145,7 @@ borderYears.prototype.createVis = function() {
         .attr("dy", ".1em")
         .attr("fill", "#ffffff")
         .style("text-anchor", "end")
-        .text("Net change in number of border barriers since 1945")
+        .text("Net change in no. of border barriers")
         .attr('transform', 'rotate(-90)');
 
     vis.svg.append("text")
@@ -166,7 +157,7 @@ borderYears.prototype.createVis = function() {
         .attr("dy", ".1em")
         .attr("fill", "#ffffff")
         .style("text-anchor", "left")
-        .text("Years");
+        .text("Year");
 
 
 

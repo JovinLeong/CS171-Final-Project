@@ -1,7 +1,7 @@
-
+typeWriterActivated = false;
 
 // load the data in, including the map
-queue()
+d3.queue()
     .defer(d3.json, "data/Kreise15map.json")
     .defer(d3.csv, "data/variables_clean.csv")
     .defer(d3.csv, "data/east_west2.csv")
@@ -19,8 +19,6 @@ queue()
         tobias_connected_map = new TobiasConnectedMap("Tobias-connected-map",mapTopJson, germanData)
 
         tobias_connected_scatter = new TobiasScatter("Tobias-connected-scatter", germanData)
-
-
 
 
     })
@@ -156,7 +154,7 @@ TobiasMap.prototype.updateVis = function() {
 
 
     vis.colorScale.domain(vis.minMaxY)
-    console.log(vis.minMaxY)
+    // console.log(vis.minMaxY)
 
     // console.log(vis.currentMapState)
     // console.log(vis.varY)
@@ -543,6 +541,8 @@ TobiasLine.prototype.wrangleData = function(){
         // console.log(vis.displayData)
     })
 
+    console.log(vis.displayData)
+
     // caluclate minimum and maximum
     vis.min = d3.min(vis.mins)
     vis.max = d3.max(vis.maxs)
@@ -684,6 +684,9 @@ TobiasLine.prototype.updateVis = function(){
         vis.svg.append("g")
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
             .attr("class", "x brushRadar")
+            .select("rect")
+            .attr("y", -6)
+            .attr("height", vis.height + 7);
 
     }
     vis.svg.select(".tobias-line1")
@@ -752,31 +755,42 @@ TobiasLine.prototype.updateVis = function(){
 }
 
 
+
+
 // update the map
 function updateMap(){
-    // variables for the dynamic text
-    // var i = 0;
-    // var speed = 1500;
-    var dynamic_text = [`Looking at household income, the German map can still be traced, over 30 years after the wall.
+
+    if (typeWriterActivated == false) {
+
+        $('#Tobias-first-button').fadeToggle(1000)
+
+        // variables for the dynamic text
+        // var i = 0;
+        // var speed = 1500;
+        var dynamic_text = [`Looking at household income, the German map can still be traced, over 30 years after the wall.
         in spite of numerous attempts to close the wealth gap, the East is still significantly worse off than the West
          as can be seen on the map on the left hand side`,
-        `... but this is no exception. Differences between East and West are similarly stark when looking at average
+            `... but this is no exception. Differences between East and West are similarly stark when looking at average
         pension payouts`,
-        `... the number of vocational trainings received per 1.000 employees...`,
-        `or the average population age`,
-        `Almost no matter which indicator one is looking at, 30 years after the fall of the wall, the border can still be drawn.    
+            `... the number of vocational trainings received per 1.000 employees...`,
+            `or the average population age`,
+            `Almost no matter which indicator one is looking at, 30 years after the fall of the wall, the border can still be drawn.    
          Swipe down to continue to the next visualisation...`]
 
-    var i = 0;
+        var i = 0;
     var txt = dynamic_text[tobias_map.currentMapState]
-    var speed = 40;
+    var speed = 10  ;
     document.getElementById("Tobias-dynamic-text1").innerHTML = "";
 
     function typeWriter() {
+        typeWriterActivated = true;
         if (i < txt.length) {
             document.getElementById("Tobias-dynamic-text1").innerHTML += txt.charAt(i);
             i++;
             setTimeout(typeWriter, speed);
+        } else {
+            typeWriterActivated = false;
+            $('#Tobias-first-button').fadeToggle(1000)
         }
     }
 
@@ -791,20 +805,22 @@ function updateMap(){
     // var txt = dynamic_text[tobias_map.currentMapState];
     // var length = txt.length
     // document.getElementById("Tobias-dynamic-text1").innerHTML = " ";
-    typeWriter()
 
-    if(tobias_map.currentMapState <(tobias_map.reserveVars.length-1))
-    {tobias_map.currentMapState +=1}
-    else{tobias_map.currentMapState=0}
-    tobias_map.wrangleData()
+        if (tobias_map.currentMapState < (tobias_map.reserveVars.length - 1)) {
+            tobias_map.currentMapState += 1
+        } else {
+            tobias_map.currentMapState = 0
+        }
+        tobias_map.wrangleData()
 
-    console.log(tobias_map.currentMapState)
-    if(tobias_map.currentMapState == 0 ){
+        // console.log(tobias_map.currentMapState)
+        if (tobias_map.currentMapState == 0) {
         document.getElementById("Tobias-first-button").innerText = "start again"
-    }
-    else{
+        } else {
         document.getElementById("Tobias-first-button").innerText = "learn more"
+        }
     }
+else{}
 }
 
 function updateConnectedMap(){
@@ -842,7 +858,7 @@ function updateLineChart () {
     // update dynamic text:
     var i = 0;
     var txt = dynamic_text[tobias_line.currentState];
-    console.log(txt)
+    // console.log(txt)
     var speed = 40;
     document.getElementById("Tobias-dynamic-text2").innerHTML = "";
 
@@ -877,7 +893,7 @@ function updateLineChart () {
 
 function updateConnectedScatter(){
     var value = document.getElementById("scatter-update-select").value
-    console.log(value)
+    // console.log(value)
     tobias_connected_scatter.varX = value;
     tobias_connected_scatter.wrangleData()
 }
@@ -1057,7 +1073,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
 
         // update the domain
 
-        console.log(vis.minMaxX)
+        // console.log(vis.minMaxX)
 
         vis.colorScale.domain(vis.minMaxX)
 

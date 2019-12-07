@@ -119,7 +119,6 @@ borderReason.prototype.updateVis = function() {
         .attr('class', 'label')
         .merge(vis.labels)
         .text(function(d) {
-            // console.log("label test",d);
            return "" + d
         })
         .transition()
@@ -143,7 +142,6 @@ borderReason.prototype.updateVis = function() {
         .attr("y", function(d, i){ return i*30})
         .attr("height", 10)
         .attr("width", function(d){
-            // console.log("what is the sum function", d)
             return vis.x(d);
         })
         .style("fill", "#ffffff")
@@ -160,8 +158,6 @@ borderReason.prototype.selectionChange = function(brushRegion){
     vis.filteredData = vis.data.filter(function (value) {
         vis.minRange = border_years.x.invert(d3.min([brushRegion[0], brushRegion[1]]));
         vis.maxRange = border_years.x.invert(d3.max([brushRegion[0], brushRegion[1]]));
-
-        // console.log(((new Date(value.Established).getFullYear()) <= vis.maxRange) && ((new Date(value.Established).getFullYear()) <= vis.minRange) && ((new Date(value.Removed).getFullYear()) >= vis.minRange))
         return (value.Established <= vis.maxRange) && (value.Removed >= vis.minRange)
     });
 
