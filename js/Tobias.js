@@ -6,24 +6,12 @@ d3.queue()
     .defer(d3.csv, "data/variables_clean.csv")
     .defer(d3.csv, "data/east_west2.csv")
     .await(function(error, mapTopJson, germanData, time_data) {
-        // console.log(time_data)
-        // console.log(germanData)
-
         tobias_map = new TobiasMap("Tobias-map",mapTopJson, germanData)
-
         tobias_scatter = new TobiasScatter ("Tobias-scatter", germanData)
-
         tobias_line = new TobiasLine ("Tobias-line", time_data)
-
-
         tobias_connected_map = new TobiasConnectedMap("Tobias-connected-map",mapTopJson, germanData)
-
         tobias_connected_scatter = new TobiasScatter("Tobias-connected-scatter", germanData)
-
-
     })
-
-
 
 /// object for map
 TobiasMap = function(_parentElement, _map, _data, _eventHandler){
@@ -847,8 +835,10 @@ function updateLineChart () {
 
     // // update the line chart, choose next variable
     // console.log(tobias_line.lineVar)
-    // console.log(tobias_line.potentialLineVars[tobias_line.currentState])
+
+    // console.log('line var', tobias_line.currentState)
     tobias_line.lineVar = tobias_line.potentialLineVars[tobias_line.currentState]
+    console.log(tobias_line.potentialLineVars[tobias_line.currentState])
     $("#Tobias-line-subhead").text(tobias_line.titleVars[tobias_line.currentState]);
 
     var dynamic_text = [`What makes the case of the German border so fascinating is not only the way it came
