@@ -14,8 +14,7 @@ d3.queue()
         tobias_line = new TobiasLine ("Tobias-line", time_data)
         tobias_connected_map = new TobiasConnectedMap("Tobias-connected-map",mapTopJson, germanData)
         tobias_connected_scatter = new TobiasScatter("Tobias-connected-scatter", germanData)
-        console.log("time_dat")
-        console.log(time_data)
+
     })
 
 /// object for map
