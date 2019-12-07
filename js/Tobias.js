@@ -1,7 +1,7 @@
 
 
 // load the data in, including the map
-queue()
+d3.queue()
     .defer(d3.json, "data/Kreise15map.json")
     .defer(d3.csv, "data/variables_clean.csv")
     .defer(d3.csv, "data/east_west2.csv")
@@ -156,7 +156,7 @@ TobiasMap.prototype.updateVis = function() {
 
 
     vis.colorScale.domain(vis.minMaxY)
-    console.log(vis.minMaxY)
+    // console.log(vis.minMaxY)
 
     // console.log(vis.currentMapState)
     // console.log(vis.varY)
@@ -684,6 +684,9 @@ TobiasLine.prototype.updateVis = function(){
         vis.svg.append("g")
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
             .attr("class", "x brushRadar")
+            .select("rect")
+            .attr("y", -6)
+            .attr("height", vis.height + 7);
 
     }
     vis.svg.select(".tobias-line1")
@@ -795,7 +798,7 @@ function updateMap(){
     else{tobias_map.currentMapState=0}
     tobias_map.wrangleData()
 
-    console.log(tobias_map.currentMapState)
+    // console.log(tobias_map.currentMapState)
     if(tobias_map.currentMapState == 0 ){
         document.getElementById("Tobias-first-button").innerText = "start again"
     }
@@ -839,7 +842,7 @@ function updateLineChart () {
     // update dynamic text:
     var i = 0;
     var txt = dynamic_text[tobias_line.currentState];
-    console.log(txt)
+    // console.log(txt)
     var speed = 40;
     document.getElementById("Tobias-dynamic-text2").innerHTML = "";
 
@@ -874,7 +877,7 @@ function updateLineChart () {
 
 function updateConnectedScatter(){
     var value = document.getElementById("scatter-update-select").value
-    console.log(value)
+    // console.log(value)
     tobias_connected_scatter.varX = value;
     tobias_connected_scatter.wrangleData()
 }
@@ -1054,7 +1057,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
 
         // update the domain
 
-        console.log(vis.minMaxX)
+        // console.log(vis.minMaxX)
 
         vis.colorScale.domain(vis.minMaxX)
 
