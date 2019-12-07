@@ -1,5 +1,8 @@
 typeWriterActivated = false;
 
+
+
+
 // load the data in, including the map
 d3.queue()
     .defer(d3.json, "data/Kreise15map.json")
@@ -27,7 +30,7 @@ TobiasMap.prototype.initVis = function(){
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.width = 500 - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -138,6 +141,7 @@ TobiasMap.prototype.wrangleData = function() {
 TobiasMap.prototype.updateVis = function() {
     var vis = this;
 
+    console.log(vis.Germany)
     // update the domain
 
 
@@ -173,9 +177,9 @@ TobiasMap.prototype.updateVis = function() {
                 return "grey"
             }
             else if(d.properties[vis.varX] == 2){
-                return "blue"
+                return "#1f77b4"
             }
-            else{return "orange"}
+            else{return "#ff7f0e"}
         })
         .on("mouseover", function(d,i){
             this.parentElement.appendChild(this);
@@ -191,9 +195,24 @@ TobiasMap.prototype.updateVis = function() {
             //     .duration(400)
             // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
 
+            document.getElementById('tooltip').innerHTML = ("Name: " + d.properties.Name
+                + "<br/>"
+                + "Population: "
+                + ((isNaN(Math.round(d.properties.Einwohner_2017)
+                )) ? "no data" : (Math.round(d.properties.Einwohner_2017)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ','))))
+
+                // + "<br/>" + vis.varY + ": " + (Math.round(d.properties[vis.varY])))
+
+                // ((typeof(d.properties.economy) == "string") ? d.properties.economy.substring(3) : "no data")
+                // + "<br/>" +
+                // ((typeof(d.properties.income_grp) == "string") ? d.properties.income_grp.substring(3) : "no data")
+
 
         })
-        .on("mouseout", function(d,i){
+
+                .on("mouseout", function(d,i){
             tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
                 .transition()
                 .duration(350)
@@ -205,6 +224,7 @@ TobiasMap.prototype.updateVis = function() {
             //
             // document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
             // document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.zIndex = "";
+
 
         })
     }
@@ -218,9 +238,9 @@ TobiasMap.prototype.updateVis = function() {
                 return "grey"
             }
             else if(d.properties[vis.varX] == 2){
-                return "blue"
+                return "#1f77b4"
             }
-            else{return "orange"}
+            else{return "#ff7f0e"}
         })
 
     }
@@ -229,6 +249,30 @@ TobiasMap.prototype.updateVis = function() {
             .data(vis.Germany)
             .attr("fill", function(d,i){
             return vis.colorScale(d.properties[vis.varY])
+        })
+            .on("mouseover", function(d,i) {
+                this.parentElement.appendChild(this);
+
+                tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
+                    .transition()
+                    .duration(350)
+                    // .attr("fill", "white")
+                    .attr("r", 12)
+
+                document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "white"
+                //     .transition()
+                //     .duration(400)
+                // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
+
+
+            document.getElementById('tooltip').innerHTML = ("Name: " + d.properties.Name
+                + "<br/>"
+                + "Population: "
+                + ((isNaN(Math.round(d.properties.Einwohner_2017)
+                )) ? "no data" : (Math.round(d.properties.Einwohner_2017)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')))
+                + "<br/>" + vis.varY + ": " + (Math.round(d.properties[vis.varY])))
         })
     }
 
@@ -256,7 +300,7 @@ TobiasScatter.prototype.initVis = function(){
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.width = 500 - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -352,13 +396,14 @@ TobiasScatter.prototype.updateVis = function(){
             })
             .attr("fill", function (d, i) {
                 if (d[vis.varZ] == 3) {
-                    return "orange"
+                    return "#ff7f0e"
                 } else if (d[vis.varZ] == 2) {
-                    return "blue"
+                    return "#1f77b4"
                 } else {
                     return "grey"
                 }
             })
+            .style("opacity", .8)
             .on("mouseover", function (d, i) {
                 document.getElementById(('Tobias-connected-map' + d.ID)).style.fill = "white";
             })
@@ -403,7 +448,7 @@ TobiasLine.prototype.initVis = function() {
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 350 - vis.margin.left - vis.margin.right;
+    vis.width = 500 - vis.margin.left - vis.margin.right;
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -579,7 +624,7 @@ TobiasLine.prototype.updateVis = function(){
             .append('path')
             .attr('class', 'line tobias-line lineWest tobias-line0')
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
-            .style("fill", "blue")
+            .style("fill", "#1f77b4")
             .style('stroke', 'white')
             .style('stroke-width', '1px')
             .style('stroke-opacity', '1')
@@ -936,7 +981,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
 
         // --> CREATE SVG DRAWING AREA
         vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-        vis.width = 350 - vis.margin.left - vis.margin.right;
+        vis.width = 500 - vis.margin.left - vis.margin.right;
         vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -1135,4 +1180,3 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         vis.firstLoad = false;
 
     }
-

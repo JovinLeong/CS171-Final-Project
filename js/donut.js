@@ -24,7 +24,7 @@ function donutChart() {
     var width,
         height,
         margin = {top: 50, right: 0, bottom: 50, left: 10},
-        colour = d3.scaleOrdinal(d3.schemeCategory20c), // colour scheme
+        colour = d3.scaleOrdinal(d3.schemeCategory10), // colour scheme
         variable, // value in data that will dictate proportions on chart
         category, // compare data by
         padAngle, // effectively dictates the gap between slices
@@ -226,6 +226,7 @@ function donutChart() {
 
                     if (key === 'Quantity') {
                         var value = (!isNaN(parseFloat(data.data[key]))) ? (data.data[key]) : data.data[key];
+                        key = 'Border barriers'
                         if (i === 0) tip += '<tspan x="0">' + key + ': ' + value + '</tspan>';
                         else tip += '<tspan x="0" dy="1.2em">' + key + ': ' + value + '</tspan>';
                         i++;
