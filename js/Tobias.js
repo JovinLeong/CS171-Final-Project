@@ -99,7 +99,33 @@ TobiasMap.prototype.initVis = function(){
         "(former) East and West Germany, county level, 2018"
     ]
 
-   this.wrangleData()
+   this.wrangleData();
+
+    // including interactive content rectangle
+    vis.svg.append("rect")
+        .attr('id', 'map1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#map1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#map1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'map1text')
+        .attr("x", vis.width/2 - 25)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("Mouseover for info.");
 
 }
 
