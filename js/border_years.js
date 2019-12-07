@@ -169,6 +169,32 @@ borderYears.prototype.createVis = function() {
         .attr("height", vis.height + 7);
 
 
+    vis.svg.append("rect")
+        .attr('id', 'line1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#line1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#line1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'line1text')
+        .attr("x", vis.width/2)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("Brush over the chart.");
+
+
     // vis.absoluteSum =
 
 

@@ -96,8 +96,8 @@ function donutChart() {
                 .attr("y", 0)
                 .attr("font-size", "30px")
                 .attr("text-anchor", "middle")
-                .attr("fill", "red")
-                .text("Interactive Content");
+                .attr("fill", "white")
+                .text("Hover over for more details.");
             // ===========================================================================================
 
             // ===========================================================================================
