@@ -98,7 +98,7 @@ borderYears.prototype.createVis = function() {
         .enter()
         .append('path')
         .attr('class', 'line')
-        .style('stroke', "#008080")
+        .style('stroke', "#2ca02c")
         .attr('clip-path', 'url(#clip)')
         .attr('d', function(d) {
             return vis.line(d);

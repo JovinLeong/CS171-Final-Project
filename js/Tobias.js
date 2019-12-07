@@ -173,9 +173,9 @@ TobiasMap.prototype.updateVis = function() {
                 return "grey"
             }
             else if(d.properties[vis.varX] == 2){
-                return "blue"
+                return "#1f77b4"
             }
-            else{return "orange"}
+            else{return "#ff7f0e"}
         })
         .on("mouseover", function(d,i){
             this.parentElement.appendChild(this);
@@ -218,9 +218,9 @@ TobiasMap.prototype.updateVis = function() {
                 return "grey"
             }
             else if(d.properties[vis.varX] == 2){
-                return "blue"
+                return "#1f77b4"
             }
-            else{return "orange"}
+            else{return "#ff7f0e"}
         })
 
     }
@@ -352,9 +352,9 @@ TobiasScatter.prototype.updateVis = function(){
             })
             .attr("fill", function (d, i) {
                 if (d[vis.varZ] == 3) {
-                    return "orange"
+                    return "#ff7f0e"
                 } else if (d[vis.varZ] == 2) {
-                    return "blue"
+                    return "#1f77b4"
                 } else {
                     return "grey"
                 }
@@ -579,7 +579,7 @@ TobiasLine.prototype.updateVis = function(){
             .append('path')
             .attr('class', 'line tobias-line lineWest tobias-line0')
             .attr("transform", "translate(" + vis.margin.left + ", 0)")
-            .style("fill", "blue")
+            .style("fill", "#1f77b4")
             .style('stroke', 'white')
             .style('stroke-width', '1px')
             .style('stroke-opacity', '1')
@@ -1135,4 +1135,3 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         vis.firstLoad = false;
 
     }
-
