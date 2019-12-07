@@ -3,7 +3,7 @@ typeWriterActivated = false;
 // load the data in, including the map
 d3.queue()
     .defer(d3.json, "data/Kreise15map.json")
-    .defer(d3.csv, "data/variables_clean.csv")
+    .defer(d3.csv, "data/variables_CLEAN.csv")
     .defer(d3.csv, "data/East_west2.csv")
     .await(function(error, mapTopJson, germanData, time_data) {
         tobias_map = new TobiasMap("Tobias-map",mapTopJson, germanData)
