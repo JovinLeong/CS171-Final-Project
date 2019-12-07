@@ -167,7 +167,7 @@ TobiasMap.prototype.wrangleData = function() {
 TobiasMap.prototype.updateVis = function() {
     var vis = this;
 
-    console.log(vis.Germany)
+    // console.log(vis.Germany)
     // update the domain
 
 

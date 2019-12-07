@@ -4,7 +4,8 @@
     <list default="true" id="73ef7e08-6ac3-42fb-a57c-686a45d16ac4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/donut.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/donut.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Tobias.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Tobias.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/js/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/radarChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/radarChart.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

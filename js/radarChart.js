@@ -11,18 +11,171 @@ var config = {
 }
 
 //Call function to draw the Radar chart
-d3.json("./js/data.json", function(error, data) {
-    if (error) throw error;
-    console.log('data check', data)
-    RadarChart.draw("#radarChart", data, config);
-});
+// d3.json("./js/data.json", function(error, data) {
+//     if (error) throw error;
+//     console.log('formatting',data)
+//     RadarChart.draw("#radarChart", data, config);
+// });
 
-var svg = d3.select('body')
-    .selectAll('svg')
-    .append('svg')
-    .attr("width", width)
-    .attr("height", height);
+// import data
+d3.queue()
+    .defer(d3.csv, "data/east_west_radar.csv")
+    .await(function(error, radarData) {
+        // console.log("radar data", radarData)
+        radar_chart = new radarChart("#radarChart", radarData)
+    });
 
+radarChart = function(_parentElement, _data) {
+    this.parentElement = _parentElement;
+    this.data = _data;
+    this.displayData = _data;
+    this.initVis()
+};
+
+
+radarChart.prototype.initVis = function() {
+    var vis = this;
+    // console.log('does this work', Object.keys(vis.data[0]));
+
+    vis.dataKeys = Object.keys(vis.data[0]).slice(0, 23)
+    vis.data.forEach(function (d) {
+
+        vis.dataKeys.forEach(function (data) {
+            d[data] = +d[data]
+        })
+    })
+
+    // console.log('did the cleaning work', vis.data)
+
+    vis.filteredData = vis.data;
+
+    // set the dimensions and margins of the graph
+    vis.margin = {top: 20, right: 30, bottom: 30, left: 145};
+    vis.width = 400 - vis.margin.left - vis.margin.right;
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
+
+// Config for the Radar chart
+    vis.config = {
+        w: vis.width,
+        h: vis.height,
+        maxValue: 100, //Update
+        levels: 5, //Update
+        ExtraWidthX: 300 //Update
+    };
+
+
+    // // Add an SVG element with the desired dimensions and margin.
+    // vis.svg = d3.select("#" + vis.parentElement).append("svg")
+    //     .attr("width", vis.width + vis.margin.left + vis.margin.right)
+    //     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+    //     .append("g")
+    //     .attr("transform",
+    //         "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+    //
+    //
+    //
+    // // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
+    // vis.x = d3.scaleLinear()
+    //     .range([0, vis.width]);
+    // vis.y = d3.scaleLinear()
+    //     .range([vis.height, 0]);
+
+    vis.wrangleData();
+};
+
+radarChart.prototype.wrangleData = function() {
+    var vis = this;
+
+    // CHECK THE YEAR RANGE FILTER
+
+
+
+    vis.radarKeys = [
+        "Poverty in old age",
+        "Unemployment rate",
+        "GDP per capita",
+        "School dropout rate",
+        "GDP per capita",
+        "Unemployment rate"
+    ];
+
+    vis.eastData = [];
+    vis.westData = [];
+
+    vis.filteredData.forEach(function (d) {
+        if (d.Raumeinheit === 'Ost') {
+            vis.eastData.push(d)
+            vis.dataKeys.forEach(function (e) {
+                console.log(d[e])
+            })
+        } else {
+            vis.westData.push(d)
+        }
+    });
+
+    // Initialize empty list to match radar data format
+    vis.eastSorted = [];
+
+    // Push in 2 empty objects so that the plot only occupies one side
+    vis.eastSorted.push({"area": "GDP per capita", "value": 0});
+    vis.eastSorted.push({"area": "Unemployment rate", "value": 0});
+
+    vis.eastData.forEach(function (d, index) {
+        var values = []
+        vis.dataKeys.forEach(function (e) {
+            values.push(d[e])
+        });
+
+        var vertice = {"area": vis.radarKeys[index], "value": aveHelper(values)};
+        vis.eastSorted.push(vertice)
+    });
+
+    vis.eastSorted = [vis.eastSorted];
+    console.log('es', vis.eastSorted[0])
+    vis.updateVis()
+};
+
+radarChart.prototype.updateVis = function () {
+    var vis = this;
+
+    RadarChart.draw("#radarChart", vis.eastSorted, config);
+
+
+}
+
+
+borderReason.prototype.updateVis = function() {
+
+
+
+    // This works; just need to add titling later
+    vis.barChart = vis.svg.selectAll("rect")
+        .data(vis.sortedValues);
+    vis.barChart.enter().append("rect")
+        .merge(vis.barChart)
+        .attr("x", 10)
+        .attr("y", function(d, i){ return i*30})
+        .attr("height", 10)
+        .attr("width", function(d){
+            return vis.x(d);
+        })
+        .style("fill", "#ffffff")
+        .attr("class", "bar-element")
+        .on('mouseover', vis.tip.show)
+        .on('mouseout', vis.tip.hide);
+
+    vis.barChart.exit().remove();
+};
+
+
+
+
+// var svg = d3.select('body')
+//     .selectAll('svg')
+//     .append('svg')
+//     .attr("width", width)
+//     .attr("height", height);
+//
 
 
 // var width = 300,
@@ -857,3 +1010,25 @@ var svg = d3.select('body')
 // //     }//wrap
 // //
 // // }//RadarChart
+
+
+function aveHelper(array) {
+    var sums = 0;
+    var nans = 0;
+    array.forEach(function (item) {
+        if (Number.isNaN(item)) {
+            nans += 1
+        }
+        if (isFinite(item)) {
+            sums += +item
+        } else {
+            nans += 1
+        }
+    });
+
+    if (nans === 0) {
+        nans += 1
+    }
+    var ave = sums/nans;
+    return ave;
+}

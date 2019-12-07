@@ -1,10 +1,10 @@
 [
   [
-    {"area": "Central ", "value": 80},
-    {"area": "Kirkdale", "value": 40},
-    {"area": "Kensington ", "value": 40},
-    {"area": "Everton ", "value": 90},
-    {"area": "Picton ", "value": 60},
-    {"area": "Riverside ", "value": 80}
+    {"area": "Pov ", "value": 80},
+    {"area": "uN", "value": 0},
+    {"area": "GDP", "value": 0},
+    {"area": "Old", "value": 90},
+    {"area": "GDP", "value": 60},
+    {"area": "uN", "value": 80}
   ]
 ]
