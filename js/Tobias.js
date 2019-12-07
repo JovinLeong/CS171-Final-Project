@@ -367,6 +367,37 @@ TobiasScatter.prototype.initVis = function(){
 
     this.wrangleData()
 
+    vis.svg.append("rect")
+        .attr('id', 'mapscatter1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#line1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#line1text" ).fadeOut( "slow", function () {
+
+            });
+            $( "#mapscatter1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#mapscatter1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'mapscatter1text')
+        .attr("x", vis.width/2 - 10)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("explore the connected charts.");
+
     };
 
 TobiasScatter.prototype.wrangleData = function() {
@@ -898,6 +929,7 @@ function updateConnectedMap(){
     // and now inject the chosen variables into the scatter plot
     tobias_connected_scatter.varY = tobias_connected_map.varY
     tobias_connected_scatter.wrangleData()
+
 }
 
 
@@ -1091,6 +1123,37 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         ]
 
         this.wrangleData()
+
+        this.svg.append("rect")
+            .attr('id', 'line1rect')
+            .attr("x", -1000)
+            .attr("y", -1000)
+            .attr("width", 4000)
+            .attr("height", 4000)
+            .style("fill", d3.rgb(29,29,29))
+            .style('opacity', 0.75)
+            .on("mouseover", function () {
+                $( "#line1rect" ).fadeOut( "slow", function () {
+
+                });
+                $( "#line1text" ).fadeOut( "slow", function () {
+
+                });
+                $( "#mapscatter1rect" ).fadeOut( "slow", function () {
+
+                });
+                $( "#mapscatter1text" ).fadeOut( "slow", function () {
+
+                });
+            });
+        this.svg.append("text")
+            .attr('id', 'line1text')
+            .attr("x", vis.width/2 + 68)
+            .attr("y", vis.height/2)
+            .attr("font-size", "30px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .text("Use the dropdown menus to");
 
     }
 
