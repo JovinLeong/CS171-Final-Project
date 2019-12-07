@@ -13,7 +13,8 @@ var config = {
 //Call function to draw the Radar chart
 d3.json("./js/data.json", function(error, data) {
     if (error) throw error;
-    RadarChart.draw("#chart", data, config);
+    console.log('data check', data)
+    RadarChart.draw("#radarChart", data, config);
 });
 
 var svg = d3.select('body')

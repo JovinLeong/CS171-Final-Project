@@ -173,11 +173,11 @@ function donutChart() {
                 var tip = '',
                     i   = 0;
 
-                console.log('data.data check', data.data)
+                // console.log('data.data check', data.data)
 
                 for (var key in data.data) {
 
-                    console.log('key check', key)
+                    // console.log('key check', key)
 
                     if (key === 'Probability') {
                         // if value is a Probability, format it as a percentage
