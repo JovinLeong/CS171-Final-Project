@@ -376,10 +376,9 @@ TobiasScatter.prototype.initVis = function(){
         .style("fill", d3.rgb(29,29,29))
         .style('opacity', 0.75)
         .on("mouseover", function () {
-            $( "#connectedmap1rect" ).fadeOut( "slow", function () {
-
+            $( "#connectedmap2rect" ).fadeOut( "slow", function () {
             });
-            $( "#connectedmap1text" ).fadeOut( "slow", function () {
+            $( "#connectedmap2text" ).fadeOut( "slow", function () {
 
             });
             $( "#mapscatter1rect" ).fadeOut( "slow", function () {
@@ -1150,7 +1149,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         this.wrangleData()
 
         this.svg.append("rect")
-            .attr('id', 'connectedmap1rect')
+            .attr('id', 'connectedmap2rect')
             .attr("x", -1000)
             .attr("y", -1000)
             .attr("width", 4000)
@@ -1158,10 +1157,10 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
             .style("fill", d3.rgb(29,29,29))
             .style('opacity', 0.75)
             .on("mouseover", function () {
-                $( "#connectedmap1rect" ).fadeOut( "slow", function () {
+                $( "#connectedmap2rect" ).fadeOut( "slow", function () {
 
                 });
-                $( "#connectedmap1text" ).fadeOut( "slow", function () {
+                $( "#connectedmap2text" ).fadeOut( "slow", function () {
 
                 });
                 $( "#mapscatter1rect" ).fadeOut( "slow", function () {
@@ -1172,7 +1171,7 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
                 });
             });
         this.svg.append("text")
-            .attr('id', 'line1text')
+            .attr('id', 'connectedmap2text')
             .attr("x", vis.width/2 + 68)
             .attr("y", vis.height/2)
             .attr("font-size", "30px")
