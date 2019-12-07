@@ -4,11 +4,15 @@
     <list default="true" id="13aec443-32b3-4853-8b00-cf452a099cca" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/data/east_west_radar.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/items/michael.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/items/michael.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/Tobias.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Tobias.js" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/js/border_years.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/border_years.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/donut.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/donut.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/radarChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/radarChart.js" afterDir="false" />
+=======
+>>>>>>> d9b0a75ab6c00e540a6abb05fe27f1e48a6d6cf6
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +80,8 @@
       <workItem from="1575681930007" duration="5558000" />
       <workItem from="1575695695766" duration="1416000" />
       <workItem from="1575732782683" duration="2761000" />
-      <workItem from="1575736762442" duration="2533000" />
+      <workItem from="1575736762442" duration="3556000" />
+      <workItem from="1575741097172" duration="4997000" />
     </task>
     <servers />
   </component>
