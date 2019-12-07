@@ -73,6 +73,31 @@ function donutChart() {
             svg.append('g').attr('class', 'slices');
             svg.append('g').attr('class', 'labelName');
             svg.append('g').attr('class', 'lines');
+
+            svg.append("rect")
+                .attr('id', 'donut1rect')
+                .attr("x", -1000)
+                .attr("y", -1000)
+                .attr("width", 4000)
+                .attr("height", 4000)
+                .style("fill", d3.rgb(29,29,29))
+                .style('opacity', 0.75)
+                .on("mouseover", function () {
+                    $( "#donut1rect" ).fadeOut( "slow", function () {
+
+                    });
+                    $( "#donut1text" ).fadeOut( "slow", function () {
+
+                    });
+                });
+            svg.append("text")
+                .attr('id', 'donut1text')
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("font-size", "30px")
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .text("Hover over for more details.");
             // ===========================================================================================
 
             // ===========================================================================================

@@ -83,6 +83,13 @@ circle .scatter-circle:hover  {
 
 }
 
+#map-wrapper{
+    display: inline;
+}
+#tooltip{
+    text-align: center;
+}
+
 #Tobias-dynamic-text1{
     max-width: 250px;
 }

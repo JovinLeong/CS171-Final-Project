@@ -1,5 +1,8 @@
 typeWriterActivated = false;
 
+
+
+
 // load the data in, including the map
 d3.queue()
     .defer(d3.json, "data/Kreise15map.json")
@@ -96,7 +99,33 @@ TobiasMap.prototype.initVis = function(){
         "(former) East and West Germany, county level, 2018"
     ]
 
-   this.wrangleData()
+   this.wrangleData();
+
+    // including interactive content rectangle
+    vis.svg.append("rect")
+        .attr('id', 'map1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#map1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#map1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'map1text')
+        .attr("x", vis.width/2 - 25)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("Mouseover for info.");
 
 }
 
@@ -138,6 +167,7 @@ TobiasMap.prototype.wrangleData = function() {
 TobiasMap.prototype.updateVis = function() {
     var vis = this;
 
+    console.log(vis.Germany)
     // update the domain
 
 
@@ -191,9 +221,24 @@ TobiasMap.prototype.updateVis = function() {
             //     .duration(400)
             // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
 
+            document.getElementById('tooltip').innerHTML = ("Name: " + d.properties.Name
+                + "<br/>"
+                + "Population: "
+                + ((isNaN(Math.round(d.properties.Einwohner_2017)
+                )) ? "no data" : (Math.round(d.properties.Einwohner_2017)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ','))))
+
+                // + "<br/>" + vis.varY + ": " + (Math.round(d.properties[vis.varY])))
+
+                // ((typeof(d.properties.economy) == "string") ? d.properties.economy.substring(3) : "no data")
+                // + "<br/>" +
+                // ((typeof(d.properties.income_grp) == "string") ? d.properties.income_grp.substring(3) : "no data")
+
 
         })
-        .on("mouseout", function(d,i){
+
+                .on("mouseout", function(d,i){
             tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
                 .transition()
                 .duration(350)
@@ -205,6 +250,7 @@ TobiasMap.prototype.updateVis = function() {
             //
             // document.getElementById(('scatter_'+ d.properties.Kennziffer)).setAttribute("r", 5)
             // document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.zIndex = "";
+
 
         })
     }
@@ -229,6 +275,30 @@ TobiasMap.prototype.updateVis = function() {
             .data(vis.Germany)
             .attr("fill", function(d,i){
             return vis.colorScale(d.properties[vis.varY])
+        })
+            .on("mouseover", function(d,i) {
+                this.parentElement.appendChild(this);
+
+                tobias_connected_scatter.svg.select('#scatter_'+d.properties.Kennziffer)
+                    .transition()
+                    .duration(350)
+                    // .attr("fill", "white")
+                    .attr("r", 12)
+
+                document.getElementById(('scatter_'+ d.properties.Kennziffer)).style.fill = "white"
+                //     .transition()
+                //     .duration(400)
+                // console.log(document.getElementById(('scatter_'+ d.properties.Kennziffer)))
+
+
+            document.getElementById('tooltip').innerHTML = ("Name: " + d.properties.Name
+                + "<br/>"
+                + "Population: "
+                + ((isNaN(Math.round(d.properties.Einwohner_2017)
+                )) ? "no data" : (Math.round(d.properties.Einwohner_2017)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')))
+                + "<br/>" + vis.varY + ": " + (Math.round(d.properties[vis.varY])))
         })
     }
 
