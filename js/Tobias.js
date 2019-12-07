@@ -14,6 +14,7 @@ d3.queue()
         tobias_line = new TobiasLine ("Tobias-line", time_data)
         tobias_connected_map = new TobiasConnectedMap("Tobias-connected-map",mapTopJson, germanData)
         tobias_connected_scatter = new TobiasScatter("Tobias-connected-scatter", germanData)
+
     })
 
 /// object for map
@@ -92,10 +93,10 @@ TobiasMap.prototype.initVis = function(){
     ]
 
     vis.reserveTitles = [
-        "Household income, 2016",
-        "Average pension payouts, 2015",
-        "Vocational training per 1.000  employees, 2015",
-        "Average population age, 2017",
+        "Household Income (€), 2016",
+        "Average pension payouts (€), 2015",
+        "Vocational Training per 1,000 Employees, 2015",
+        "Average Population Age, 2017",
         "(former) East and West Germany, county level, 2018"
     ]
 
@@ -366,6 +367,36 @@ TobiasScatter.prototype.initVis = function(){
 
     this.wrangleData()
 
+    vis.svg.append("rect")
+        .attr('id', 'mapscatter1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#connectedmap2rect" ).fadeOut( "slow", function () {
+            });
+            $( "#connectedmap2text" ).fadeOut( "slow", function () {
+
+            });
+            $( "#mapscatter1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#mapscatter1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'mapscatter1text')
+        .attr("x", vis.width/2 - 10)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("explore the connected charts.");
+
     };
 
 TobiasScatter.prototype.wrangleData = function() {
@@ -538,6 +569,31 @@ TobiasLine.prototype.initVis = function() {
     vis.firstLoad = true;
 
     this.wrangleData()
+
+    vis.svg.append("rect")
+        .attr('id', 'linechart1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#linechart1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#linechart1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'linechart1text')
+        .attr("x", vis.width/2)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("Brush over the chart.");
 }
 
 TobiasLine.prototype.wrangleData = function(){
@@ -897,6 +953,7 @@ function updateConnectedMap(){
     // and now inject the chosen variables into the scatter plot
     tobias_connected_scatter.varY = tobias_connected_map.varY
     tobias_connected_scatter.wrangleData()
+
 }
 
 
@@ -1073,23 +1130,54 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         vis.reserveTitles = [
             // "Household income, 2016",
             "Average population age, 2017",
-            "unemployment rate (%), 2018",
-            "GDP per employee, 2017",
-            "forecase demand for new housing, 2030",
-            "slots in pension homes (per 100), 2017",
-            "tax revenues, 2015",
-            "total tax earnings per capita, 2017",
-            "long term unemployment rate, 2018",
-            "rate of long time unemployment, 2018",
-            "pre tax earnings, 2017",
-            "household income, 2016",
-            "Average pension payouts, 2015",
+            "Unemployment rate (%), 2018",
+            "GDP per employee (€), 2017",
+            "Forecast demand for new housing, 2030",
+            "Slots in pension homes (per 100), 2017",
+            "Tax revenues (€), 2015",
+            "Total tax earnings per capita (€), 2017",
+            "Long term unemployment rate, 2018",
+            "Rate of long time unemployment, 2018",
+            "Pre tax earnings (€), 2017",
+            "Household income (€), 2016",
+            "Average pension payouts (€), 2015",
             "Vocational training per 1.000  employees, 2015",
-            "average population age, 2017",
-            "household income, 2016",
+            "Average population age, 2017",
+            "Household income (€), 2016",
         ]
 
         this.wrangleData()
+
+        this.svg.append("rect")
+            .attr('id', 'connectedmap2rect')
+            .attr("x", -1000)
+            .attr("y", -1000)
+            .attr("width", 4000)
+            .attr("height", 4000)
+            .style("fill", d3.rgb(29,29,29))
+            .style('opacity', 0.75)
+            .on("mouseover", function () {
+                $( "#connectedmap2rect" ).fadeOut( "slow", function () {
+
+                });
+                $( "#connectedmap2text" ).fadeOut( "slow", function () {
+
+                });
+                $( "#mapscatter1rect" ).fadeOut( "slow", function () {
+
+                });
+                $( "#mapscatter1text" ).fadeOut( "slow", function () {
+
+                });
+            });
+        this.svg.append("text")
+            .attr('id', 'connectedmap2text')
+            .attr("x", vis.width/2 + 68)
+            .attr("y", vis.height/2)
+            .attr("font-size", "30px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .text("Use the dropdown menus to");
 
     }
 

@@ -196,7 +196,7 @@
             </div>
 <!--            &lt;!&ndash; pagination &ndash;&gt;-->
 <!--            <div class="items-pagination bar"></div>-->
-
+            <br>
             <!-- navigation -->
             <div class="items-button bottom fit items-button-prev">
               <a class="btn btn-transp-arrow btn-black icon-left" href="">
@@ -238,7 +238,6 @@
                 <div class="col-12 col-sm-6 center-vh">
                   <div class="row" id="donut">
                       <h4>Distribution of reasons cited for border barriers in 2019</h4>
-                      <p>Hover over the segments to obtained the quantities and proportions</p>
                   </div>
                 </div>
 
@@ -285,7 +284,7 @@
             </div>
 <!--            <div class="row" id="border_reasons">-->
 <!--            </div>-->
-
+            <h4>Reasons for border barriers</h4>
             <div id="border_reasons2">
 
             </div>
@@ -297,19 +296,18 @@
             <div class="section-content anim">
               <!-- title and description -->
               <div>
-                <h5 class="display-4 display-title anim-2">History</h5>
-                <p>Globally, the incidence of physical border barriers has been rising since WWII with illegal
+                <h5 class="display-4 display-title anim-2">Rise through the decades</h5>
+                <p>Globally, the incidence of physical border barriers has been rising since WWII with increased fears of illegal
                   immigration, smuggling, and territorial disputes that stem from lingering colonial aftershocks
-                  cited as the primary reasons for these structures.
-                  The visualizations below help to illustrate the this change since WWII;
-                  try interacting with the graph to get a sense of the number of border barriers
-                  erected over time and what were the primary reasons cited for these borders.
-                </p>
+                  cited as the primary reasons for these structures.</p>
+                <p>Explore the visualizations to get a sense of the number of border barriers
+                  erected over time and what were the primary reasons cited for these borders.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
       <!-- End of section wrapper -->
     </div>
     <!-- END HISTORY -->
@@ -385,14 +383,13 @@
       <!-- Begin of section wrapper -->
       <div class="section-wrapper twoside center-vh dir-col">
 
+        <div class="section-wrapper center-vh dir-col anim">
+          <h5 class="display-4 display-title anim-2">Explore for Yourself</h5> </div>
+
         <div class="item row justify-content-between">
 
           <!-- img-frame-legend-alpha demo -->
           <div class="col-12 col-sm-6 center-vh" id="wrapper_div_connected_map">
-
-            <div>
-            <h5 class="display-4 display-title anim-2 Tobias-connected-page-header">Explore for  </h5>
-            </div>
 
             <div class="row">
               <!--            <button onclick="updateConnectedMap()"> see next </button>-->
@@ -400,19 +397,18 @@
 <!--                <option value= "household income, 2016"> Household income, 2016 </option>-->
                 <option value="averae population age, 2017"> Average population age, 2017</option>
                 <option value="unemployment rate (%), 2018"> Unemployment rate (%), 2018</option>
-                <option value="GDP per employee, 2017"> GDP per employee, 2017</option>
+                <option value="GDP per employee, 2017"> GDP per employee (€), 2017</option>
                 <option value="forecase demand for new housing, 2030"> Forecast demand for new housing, 2030</option>
                 <option value="slots in pension homes (per 100), 2017"> Slots in pension homes (per 100), 2017</option>
-                <option value="tax revenues, 2015"> Tax revenues, 2015</option>
-                <option value="total tax earnings per capita, 2017"> Total tax earnings per capita, 2017</option>
+                <option value="tax revenues, 2015"> Tax revenues (€), 2015</option>
+                <option value="total tax earnings per capita, 2017"> Total tax earnings per capita (€), 2017</option>
                 <option value="long term unemployment rate, 2018"> Long term unemployment rate, 2018</option>
                 <option value="rate of long time unemployment, 2018"> Rate of long term uneymploment, 2018</option>
-                <option value="pre tax earnings, 2017"> Pre tax earnings, 2017</option>
-                <option value="household income, 2016"> Household income, 2016</option>
-                <option value="avg contribution based pension payout, 2015"> Avg. contribution based pension payout, 2015</option>
+                <option value="pre tax earnings, 2017"> Pre tax earnings (€), 2017</option>
+                <option value="household income, 2016"> Household income (€), 2016</option>
+                <option value="avg contribution based pension payout, 2015"> Average contribution based pension payout (€), 2015</option>
                 <option value="people in vocational training per 1.000 employed, 2015"> People in vocational training per 1.000 employed, 2015</option>
                 <option value="averae population age, 2017"> Average population age, 2017</option>
-                <option value="household income, 2016"> household income, 2016</option>
               </select>
             </div>
 
@@ -426,17 +422,14 @@
           <div class="col-12 col-sm-6 col-md-5">
             <div class="section-content anim">
               <!-- title and description -->
-              <div>
-                <h5 class="display-4 display-title anim-2 Tobias-connected-page-header"> yourself</h5>
 
-                <div>
                   <select class= "btn btn-primary btn-germany btn-select" id="scatter-update-select" onchange="updateConnectedScatter()">
                     <option value="averae population age, 2017">Average population age, 2017</option>
                     <option value="unemployment rate (%), 2018">Unemployment rate (%), 2018</option>
-                    <option value="GDP per employee, 2017">GDP per employee, 2017</option>
+                    <option value="GDP per employee, 2017">GDP per employee (€), 2017</option>
                     <option value="forecase demand for new housing, 2030">Forecast demand for new housing, 2030</option>
                     <option value="slots in pension homes (per 100), 2017">Slots in pension homes, 2017</option>
-                    <option value="tax revenues, 2015">Tax revenues, 2015</option>
+                    <option value="tax revenues, 2015">Tax revenues (€), 2015</option>
                     <option value="long term unemployment rate, 2018">Long term unemployment rate, 2018</option>
                     <option value="rate of long time unemployment, 2018">Rate of long time unemployment ,2018</option>
                     <option value="pre tax earnings, 2017">Pre tax earnings, 2017</option>
@@ -645,7 +638,7 @@
       <!-- Begin of section wrapper -->
       <div class="section-wrapper center-vh dir-col anim">
         <!-- title -->
-        <div class="section-title text-center">
+        <div class="section-wrapper center-vh dir-col anim">
           <h2 class="display-6 display-title anim-2">Explore some of the most contentious border barriers</h2>
         </div>
 
@@ -919,7 +912,7 @@
       <!-- Begin of section wrapper -->
       <div class="section-wrapper twoside">
         <!-- title -->
-        <div class="section-title text-center">
+        <div class="section-wrapper center-vh dir-col anim">
           <h5 class="display-4 display-title anim-2">Where this leaves us</h5>
         </div>
         <p>
@@ -1056,21 +1049,25 @@
               <div class="section-title text-center">
                   <h5 class="display-4 display-title anim-2">References</h5>
               </div>
-              <ul>
 
-                  <li>Élisabeth Vallet & Charles-Philippe David (2012) Introduction: The (Re)Building of the Wall in International Relations, Journal of Borderlands Studies, 27:2, 111-119, DOI: 10.1080/08865655.2012.687211</li>
-                  <li>Daniel Meier. (2018) Introduction to the Special Issue: Bordering the Middle East. Geopolitics 23:3, pages 495-504.</li>
-                  <li>Matthias Leese. (2018) Standardizing security: the business case politics of borders. Mobilities 13:2, pages 261-275.</li>
-                  <li>Dhananjay Tripathi. (2015) Interrogating Linkages Between Borders, Regions, and Border Studies. Journal of Borderlands Studies 30:2, pages 189-201.</li>
-                  <li>Daniel Meier. (2013) The South Border: Drawing the Line in Shifting (Political) Sands. Mediterranean Politics 18:3, pages 358-375.</li>
-                  <li>Anne-Laure Amilhat Szary. (2012) Walls and Border Art: The Politics of Art Display. Journal of Borderlands Studies 27:2, pages 213-228.</li>
-                  <li>Praveen Swami. (2001) BORDER BARRIER, A first-hand look at the fence designed to counter infiltration through the border with Pakistan. Volume 18 - Issue 19, Sep. 15 - 28, 2001. India's National Magazine from the publishers of THE HINDU</li>
-                  <li>Hassner, Ron & Wittenberg, Jason. (2015). Barriers to Entry: Who Builds Fortified Boundaries and Why? 1. International Security. 40. 10.1162/ISEC_a_00206.</li>
-                  <li>The Economist, (2015). Infographics retrieved from https://infographics.economist.com/2015/fences/</li>
-                  <li>Hall, Michael (2019). A static, reusable donut chart for D3.js v4, https://bl.ocks.org/mbhall88/b2504f8f3e384de4ff2b9dfa60f325e2</li>
-                  <li>Bremer, Nadieh (2019). Radar Chart Redesign http://bl.ocks.org/nbremer/21746a9668ffdf6d8242</li>
+            <ul>
+                  <li>-Élisabeth Vallet & Charles-Philippe David (2012) Introduction: The (Re)Building of the Wall in International Relations, Journal of Borderlands Studies, 27:2, 111-119, DOI: 10.1080/08865655.2012.687211</li>
+                  <li>-Daniel Meier. (2018) Introduction to the Special Issue: Bordering the Middle East. Geopolitics 23:3, pages 495-504.</li>
+                  <li>-Matthias Leese. (2018) Standardizing security: the business case politics of borders. Mobilities 13:2, pages 261-275.</li>
+                  <li>-Dhananjay Tripathi. (2015) Interrogating Linkages Between Borders, Regions, and Border Studies. Journal of Borderlands Studies 30:2, pages 189-201.</li>
+                  <li>-Daniel Meier. (2013) The South Border: Drawing the Line in Shifting (Political) Sands. Mediterranean Politics 18:3, pages 358-375.</li>
+                  <li>-Anne-Laure Amilhat Szary. (2012) Walls and Border Art: The Politics of Art Display. Journal of Borderlands Studies 27:2, pages 213-228.</li>
+                  <li>-Praveen Swami. (2001) BORDER BARRIER, A first-hand look at the fence designed to counter infiltration through the border with Pakistan. Volume 18 - Issue 19, Sep. 15 - 28, 2001. India's National Magazine from the publishers of THE HINDU</li>
+                  <li>-Hassner, Ron & Wittenberg, Jason. (2015). Barriers to Entry: Who Builds Fortified Boundaries and Why? 1. International Security. 40. 10.1162/ISEC_a_00206.</li>
+                  <li>-The Economist, (2015). Infographics retrieved from https://infographics.economist.com/2015/fences/</li>
+                  <li>-Hall, Michael (2019). A static, reusable donut chart for D3.js v4, https://bl.ocks.org/mbhall88/b2504f8f3e384de4ff2b9dfa60f325e2</li>
+                  <li>-ThemeForest by mivfx (2019) from https://themeforest.net/user/mivfx</li>
+                  <li>-Bremer, Nadieh (2019). Radar Chart Redesign http://bl.ocks.org/nbremer/21746a9668ffdf6d8242</li>
+                  <li>-Holtz, Yan (2019). Most basic line chart in d3.js from https://www.d3-graph-gallery.com/graph/line_basic.html</li>
 
               </ul>
+
+
           </div>
           <!-- End of section wrapper -->
       </div>
