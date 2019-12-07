@@ -34,7 +34,6 @@ radarChart.prototype.initVis = function() {
     vis.height = 300 - vis.margin.top - vis.margin.bottom;
     vis.radius = Math.min(vis.width, vis.height)/4;
 
-
     // Add an SVG element with the desired dimensions and margin.
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -43,12 +42,43 @@ radarChart.prototype.initVis = function() {
         .attr("transform",
             "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     vis.x = d3.scaleLinear()
         .range([0, vis.width/2]);
     vis.y = d3.scaleLinear()
         .range([vis.height, 0]);
+
+    // calcualte the domain in wrangle data
+    vis.potentialLineVars = [
+        "Arbeitslosenquote",
+        "Bruttowertschöpfung",
+        "Bruttoinlandsprodukt je Einwohner",
+        "Altersarmut",
+        "Schulabbrecherquote",
+        "Langzeitarbeitslosenquote",
+        "Bruttoverdienst",
+        "Haushaltseinkommen",
+        // "Ausbildungsplätze",
+        "Empfänger von Grundsicherung im Alter (Altersarmut)"];
+
+
+    vis.titleVars = [
+        "Unemployment rate",
+        "Gross value added",
+        "GDP per capita",
+        "Poverty in old age",
+        "School dropout rate",
+        "Long-term unemployment rate",
+        "Gross earnings",
+        "Average household income",
+        "Share of retired population on benefits"
+    ];
+
+    vis.lineVar = vis.potentialLineVars[0]
+    vis.currentState = 1;
+    vis.firstLoad = true;
+
+
 
     vis.wrangleData();
 };
@@ -56,103 +86,129 @@ radarChart.prototype.initVis = function() {
 radarChart.prototype.wrangleData = function () {
     var vis = this;
 
-    vis.immigrationCount = 0;
-    vis.disputeCount = 0;
-    vis.smuggleCount = 0;
-    vis.terrorCount = 0;
-    vis.otherCount = 0;
+    console.log('is there even data', vis.data)
 
-    // console.log('test filter', vis.filteredData)
+    vis.displayData = [];
+    vis.data.forEach(function(d,i){
 
-    // format the data
-    vis.filteredData.forEach (function(d) {
-        d.Established = +d.Established;
-        d.Removed = +d.Removed;
-        d.Illegal_Immigration = +d.Illegal_Immigration;
-        vis.immigrationCount += d.Illegal_Immigration;
-        d.Interstate_dispute = +d.Interstate_dispute;
-        vis.disputeCount += d.Interstate_dispute;
-        d.Smuggling_and_contraband = +d.Smuggling_and_contraband;
-        vis.smuggleCount += d.Smuggling_and_contraband;
-        d.Terrorism_and_Insurgency = +d.Terrorism_and_Insurgency;
-        vis.terrorCount += d.Terrorism_and_Insurgency;
-        d.Other = +d.Other;
-        vis.otherCount += d.Other
+        if (d.Aggregat === vis.lineVar) {
+            if(d.Raumeinheit === "West")
+            {
+                vis.displayData[0] = vis.data[i]
+            }
+            else if(d.Raumeinheit == "Ost"){
+                vis.displayData[1] = vis.data[i]
+            }
+            else {
+                vis.displayData[2] = vis.data[i]
+            }
+        }
+    });
+    vis.mins = [];
+    vis.maxs = [];
+
+    console.log('early data', vis.displayData[0])
+
+
+
+    vis.displayData.forEach(function(d,i){
+        vis.temporary_data = [];
+        vis.temporary_range = [];
+        vis.temporary_combined = [];
+
+        Object.entries(d).forEach(function(def,index){
+
+            if(def[1] == "no data"){
+                delete vis.displayData[i][def[0]]
+            }
+            if(def[0] != "Kennziffer" && def[0] != "Raumeinheit" && def[0] != "Aggregat" && def[1] != "no data" && isNaN(def[1]) != true){
+                vis.displayData[i][def[0]] = +def[1];
+                vis.temporary_data.push(+def[1]);
+                vis.temporary_range.push(+def[0]);
+                vis.temporary_combined.push({"date": +def[0], "data": +def[1]})
+            }
+        })
+        vis.displayData[i]["combined"] = [];
+        vis.displayData[i]["data"] = [];
+        vis.displayData[i]["range"] = [];
+        vis.displayData[i]["data"] = vis.temporary_data;
+        vis.displayData[i]["range"] = vis.temporary_range;
+        vis.displayData[i]["combined"] = vis.temporary_combined;
+
+        vis.mins.push(d3.min(vis.displayData[i]["data"]));
+        vis.maxs.push(d3.max(vis.displayData[i]["data"]))
+
+
     });
 
-    vis.dataDict = {'Illegal immigration': vis.immigrationCount,
-        'Interstate dispute': vis.disputeCount,
-        'Smuggling and Contraband': vis.smuggleCount,
-        'Terrorism and insurgency': vis.terrorCount,
-        'Other': vis.otherCount};
+    vis.aggregateValue = []
 
-    vis.sortable = [];
-    for (vis.item in vis.dataDict) {
-        vis.sortable.push([vis.item, vis.dataDict[vis.item]]);
-    }
+        vis.displayData.forEach(function (d) {
+        var aggregate = 0
 
-    vis.sortable.sort(function (a,b) {
-        return b[1] - a[1];
+        d.data.forEach(function (d) {
+            aggregate += d
+        })
+
+        vis.aggregateValue.push(aggregate)
     });
 
-    vis.dataDictSorted = {};
-    vis.sortable.forEach(function (item) {
-        vis.dataDictSorted[item[0]]=item[1]
-    });
+    console.log('agg val',vis.aggregateValue)
+
+    // caluclate minimum and maximum
+    vis.min = d3.min(vis.mins);
+    vis.max = d3.max(vis.maxs);
+
 
     vis.updateVis()
 };
 
 radarChart.prototype.updateVis = function() {
     var vis = this;
-    // Update domain
-    vis.sortedValues = Object.values(vis.dataDictSorted);
-    vis.sortedKeys = Object.keys(vis.dataDictSorted);
 
-    vis.x.domain([0, d3.max(vis.sortedValues)]);
-    vis.y.domain(vis.sortedKeys.map(function(d) { return  d; }));
-    vis.labels = vis.svg.selectAll('text.label')
-        .data(vis.sortedKeys);
+    console.log("function check")
 
-    vis.labels
-        .enter()
-        .append('text')
-        .attr('class', 'label')
-        .merge(vis.labels)
-        .text(function(d) {
-            // console.log("label test",d);
-            return "" + d
-        })
-        .transition()
-        .duration(400)
-        .attr('y', function (d, i) {
-            return i * 30 + 8
-        })
-        .attr('x', 0)
-        // .attr('x',)
-        .attr('font-size', 12)
-        .attr('text-anchor', 'end')
-        .attr('fill', '#fff');
+    RadarChart(".radarChart", data, radarChartOptions);
 
-
-    // This works; just need to add titling later
-    vis.barChart = vis.svg.selectAll("rect")
-        .data(vis.sortedValues);
-    vis.barChart.enter().append("rect")
-        .merge(vis.barChart)
-        .attr("x", 10)
-        .transition()
-        .duration(300)
-        .attr("y", function(d, i){ return i*30})
-        .attr("height", 10)
-        .attr("width", function(d){
-            // console.log("what is the sum function", d)
-            return vis.x(d);
-        })
-        .style("fill", "#ffffff")
-        .attr("class", "bar-element");
-
-    vis.barChart.exit().remove();
+    // vis.labels
+    //     .enter()
+    //     .append('text')
+    //     .attr('class', 'label')
+    //     .merge(vis.labels)
+    //     .text(function(d) {
+    //         // console.log("label test",d);
+    //         return "" + d
+    //     })
+    //     .transition()
+    //     .duration(400)
+    //     .attr('y', function (d, i) {
+    //         return i * 30 + 8
+    //     })
+    //     .attr('x', 0)
+    //     // .attr('x',)
+    //     .attr('font-size', 12)
+    //     .attr('text-anchor', 'end')
+    //     .attr('fill', '#fff');
+    //
+    //
+    // // This works; just need to add titling later
+    // vis.barChart = vis.svg.selectAll("rect")
+    //     .data(vis.sortedValues);
+    // vis.barChart.enter().append("rect")
+    //     .merge(vis.barChart)
+    //     .attr("x", 10)
+    //     .transition()
+    //     .duration(300)
+    //     .attr("y", function(d, i){ return i*30})
+    //     .attr("height", 10)
+    //     .attr("width", function(d){
+    //         // console.log("what is the sum function", d)
+    //         return vis.x(d);
+    //     })
+    //     .style("fill", "#ffffff")
+    //     .attr("class", "bar-element");
+    //
+    // vis.barChart.exit().remove();
 };
 
 radarChart.prototype.selectionChange = function(brushRegion){
