@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73ef7e08-6ac3-42fb-a57c-686a45d16ac4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CS171-Final-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CS171-Final-Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/implementation.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/items/michael.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/items/michael.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/Tobias.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Tobias.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/radar.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/radar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/radarChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/radarChart.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +39,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -75,6 +81,9 @@
       <workItem from="1575732782683" duration="2761000" />
       <workItem from="1575736762442" duration="3556000" />
       <workItem from="1575741097172" duration="5219000" />
+      <workItem from="1575774109951" duration="51000" />
+      <workItem from="1575775286212" duration="94000" />
+      <workItem from="1575775381600" duration="3427000" />
     </task>
     <servers />
   </component>

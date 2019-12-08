@@ -5,7 +5,7 @@ var width = 300,
 var config = {
     w: width,
     h: height,
-    maxValue: 100,
+    maxValue: 40,
     levels: 5,
     ExtraWidthX: 300
 }
@@ -58,7 +58,7 @@ radarChart.prototype.initVis = function() {
     vis.config = {
         w: vis.width,
         h: vis.height,
-        maxValue: 100, //Update
+        maxValue: 40, //Update
         levels: 5, //Update
         ExtraWidthX: 300 //Update
     };
@@ -75,7 +75,7 @@ radarChart.prototype.wrangleData = function() {
         "Poverty in old age",
         "Unemployment rate",
         "GDP per capita",
-        "School dropout rate (per 1000)"
+        "School dropout rate (per 100 students)"
     ];
 
     vis.eastData = [];
@@ -114,8 +114,7 @@ radarChart.prototype.wrangleData = function() {
     vis.eastSorted.push(vis.verticesEast[1]);
 
     // Multiply by 10 to get rate per 1000; multiply by 100 to get percentage
-    vis.eastSorted[3].value= vis.eastSorted[3].value * 10
-    vis.eastSorted[0].value= vis.eastSorted[0].value * 100
+    // vis.eastSorted[3].value= vis.eastSorted[3].value * 10
     vis.eastSorted = [vis.eastSorted];
 
     // Initialize empty list to match radar data format
@@ -132,16 +131,19 @@ radarChart.prototype.wrangleData = function() {
 
     vis.westSorted.push(vis.verticesWest[0]);
     // Push in 2 empty objects so that the plot only occupies one side
-    vis.westSorted.push(vis.verticesWest[2]);
     vis.westSorted.push(vis.verticesWest[1]);
+    vis.westSorted.push(vis.verticesWest[2]);
     vis.westSorted.push(vis.verticesWest[3]);
     vis.westSorted.push({"area": "Unemployment rate", "value": 0});
     vis.westSorted.push({"area": "GDP per capita", "value": 0});
 
     // Multiply by 10 to get rate per 1000; multiply by 100 to get percentage
-    vis.westSorted[3].value= vis.westSorted[3].value * 10;
-    vis.westSorted[0].value= vis.westSorted[0].value * 100;
+    // vis.westSorted[3].value= vis.westSorted[3].value * 10;
+    // vis.westSorted[0].value= vis.westSorted[0].value * 100;
     vis.westSorted = [vis.westSorted];
+
+    console.log('west',(vis.verticesWest[2]));
+    console.log('est',vis.eastSorted)
 
     vis.updateVis()
 };
@@ -162,15 +164,14 @@ function aveHelper(array) {
         }
         if (isFinite(item)) {
             sums += +item
-        } else {
-            nans += 1
         }
     });
 
-    if (nans === 0) {
-        nans += 1
-    }
-    var ave = sums/nans;
+    console.log('nans',nans)
+    console.log('sums',sums)
+    console.log('outcome', (sums/(23-nans)))
+
+    var ave = sums/( 23- +nans);
     return ave;
 }
 
@@ -196,7 +197,6 @@ radarChart.prototype.selectionChange = function (brushRegion) {
     console.log('tester', tester);
 
     var new_test = vis.data[0].filter(function (element) {
-        conole.log('elelelement',element)
         return element
     })
 

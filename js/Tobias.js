@@ -969,10 +969,9 @@ function updateLineChart () {
     console.log(tobias_line.potentialLineVars[tobias_line.currentState])
     $("#Tobias-line-subhead").text(tobias_line.titleVars[tobias_line.currentState]);
 
-    var dynamic_text = [`What makes the case of the German border so fascinating is not only the way it came
-    down after 30 years, but also how much has stayed the same, and how many indicators, while moving in 
-    tandem, have now really made the East and the West move closer together...`,
-    `be it ....`, `or ....`, `or this indicator....`];
+    var dynamic_text = [`.`,
+    `What makes the case of the German border so fascinating is not only the way it came
+    down...','...but also how much has stayed the same.`,  `Although the disparity is on the decline...','...it remains significant 30 years from the fall of the wall.`];
     // update dynamic text:
     var i = 0;
     var txt = dynamic_text[tobias_line.currentState];
