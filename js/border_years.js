@@ -18,7 +18,7 @@ borderYears.prototype.createVis = function() {
     // set the dimensions and margins of the graph
         vis.margin = {top: 20, right: 20, bottom: 50, left: 50},
         vis.width = 500 - vis.margin.left - vis.margin.right;
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
     // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
     vis.x = d3.scaleLinear().range([0, vis.width]);
@@ -170,7 +170,7 @@ borderYears.prototype.createVis = function() {
 
 
     vis.svg.append("rect")
-        .attr('id', 'line1rect')
+        .attr('id', 'connectedmap1rect')
         .attr("x", -1000)
         .attr("y", -1000)
         .attr("width", 4000)
@@ -178,21 +178,21 @@ borderYears.prototype.createVis = function() {
         .style("fill", d3.rgb(29,29,29))
         .style('opacity', 0.75)
         .on("mouseover", function () {
-            $( "#line1rect" ).fadeOut( "slow", function () {
+            $( "#connectedmap1rect" ).fadeOut( "slow", function () {
 
             });
-            $( "#line1text" ).fadeOut( "slow", function () {
+            $( "#connectedmap1text" ).fadeOut( "slow", function () {
 
             });
         });
     vis.svg.append("text")
-        .attr('id', 'line1text')
+        .attr('id', 'connectedmap1text')
         .attr("x", vis.width/2)
         .attr("y", vis.height/2)
-        .attr("font-size", "30px")
+        .attr("font-size", "25px")
         .attr("text-anchor", "middle")
         .attr("fill", "white")
-        .text("Brush over the chart.");
+        .text("Drag your mouse over the chart");
 
 
     // vis.absoluteSum =

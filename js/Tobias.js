@@ -168,7 +168,7 @@ TobiasMap.prototype.wrangleData = function() {
 TobiasMap.prototype.updateVis = function() {
     var vis = this;
 
-    console.log(vis.Germany)
+    // console.log(vis.Germany)
     // update the domain
 
 
@@ -367,6 +367,36 @@ TobiasScatter.prototype.initVis = function(){
 
     this.wrangleData()
 
+    vis.svg.append("rect")
+        .attr('id', 'mapscatter1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#connectedmap2rect" ).fadeOut( "slow", function () {
+            });
+            $( "#connectedmap2text" ).fadeOut( "slow", function () {
+
+            });
+            $( "#mapscatter1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#mapscatter1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'mapscatter1text')
+        .attr("x", vis.width/2 - 10)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("explore the connected charts.");
+
     };
 
 TobiasScatter.prototype.wrangleData = function() {
@@ -539,6 +569,31 @@ TobiasLine.prototype.initVis = function() {
     vis.firstLoad = true;
 
     this.wrangleData()
+
+    vis.svg.append("rect")
+        .attr('id', 'linechart1rect')
+        .attr("x", -1000)
+        .attr("y", -1000)
+        .attr("width", 4000)
+        .attr("height", 4000)
+        .style("fill", d3.rgb(29,29,29))
+        .style('opacity', 0.75)
+        .on("mouseover", function () {
+            $( "#linechart1rect" ).fadeOut( "slow", function () {
+
+            });
+            $( "#linechart1text" ).fadeOut( "slow", function () {
+
+            });
+        });
+    vis.svg.append("text")
+        .attr('id', 'linechart1text')
+        .attr("x", vis.width/2)
+        .attr("y", vis.height/2)
+        .attr("font-size", "30px")
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .text("Brush over the chart.");
 }
 
 TobiasLine.prototype.wrangleData = function(){
@@ -898,6 +953,7 @@ function updateConnectedMap(){
     // and now inject the chosen variables into the scatter plot
     tobias_connected_scatter.varY = tobias_connected_map.varY
     tobias_connected_scatter.wrangleData()
+
 }
 
 
@@ -1091,6 +1147,37 @@ TobiasConnectedMap = function(_parentElement, _map, _data, _eventHandler){
         ]
 
         this.wrangleData()
+
+        this.svg.append("rect")
+            .attr('id', 'connectedmap2rect')
+            .attr("x", -1000)
+            .attr("y", -1000)
+            .attr("width", 4000)
+            .attr("height", 4000)
+            .style("fill", d3.rgb(29,29,29))
+            .style('opacity', 0.75)
+            .on("mouseover", function () {
+                $( "#connectedmap2rect" ).fadeOut( "slow", function () {
+
+                });
+                $( "#connectedmap2text" ).fadeOut( "slow", function () {
+
+                });
+                $( "#mapscatter1rect" ).fadeOut( "slow", function () {
+
+                });
+                $( "#mapscatter1text" ).fadeOut( "slow", function () {
+
+                });
+            });
+        this.svg.append("text")
+            .attr('id', 'connectedmap2text')
+            .attr("x", vis.width/2 + 68)
+            .attr("y", vis.height/2)
+            .attr("font-size", "30px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .text("Use the dropdown menus to");
 
     }
 

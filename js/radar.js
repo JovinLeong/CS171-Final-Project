@@ -1,5 +1,5 @@
 var RadarChart = {
-    draw: function(id, d, options){
+    draw: function(id, d, options, d2){
         var cfg = {
             radius: 5,
             w: 600,
@@ -15,7 +15,8 @@ var RadarChart = {
             TranslateY: 30,
             ExtraWidthX: 100,
             ExtraWidthY: 100,
-            color: d3.scaleOrdinal().range(["#6F257F", "#CA0D59"])
+            color: d3.scaleOrdinal().range(["#8B0000", "#DC143C"]),
+            color_w: d3.scaleOrdinal().range(["#00BFFF", "#1E90FF"])
         };
 
         if('undefined' !== typeof options){
@@ -31,7 +32,9 @@ var RadarChart = {
         var allAxis = (d[0].map(function(i, j){return i.area}));
         var total = allAxis.length;
         var radius = cfg.factor*Math.min(cfg.w/2, cfg.h/2);
-        var Format = d3.format('%');
+        var Format = function (d) {
+            Math.round( d * 10) / 10
+        };
         d3.select(id).select("svg").remove();
 
         var g = d3.select(id)
@@ -101,6 +104,7 @@ var RadarChart = {
             .style("font-family", "sans-serif")
             .style("font-size", "11px")
             .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
             .attr("dy", "1.5em")
             .attr("transform", function(d, i){return "translate(0, -10)"})
             .attr("x", function(d, i){return cfg.w/2*(1-cfg.factorLegend*Math.sin(i*cfg.radians/total))-60*Math.sin(i*cfg.radians/total);})
@@ -180,7 +184,108 @@ var RadarChart = {
                     tooltip
                         .attr('x', newX)
                         .attr('y', newY)
-                        .text(Format(d.value))
+                        .text(Math.round(d.value * 10)/10)
+                        .attr('fill', '#fff')
+                        .transition(200)
+                        .style('opacity', 1);
+
+                    z = "polygon."+d3.select(this).attr("class");
+                    g.selectAll("polygon")
+                        .transition(200)
+                        .style("fill-opacity", 0.1);
+                    g.selectAll(z)
+                        .transition(200)
+                        .style("fill-opacity", .7);
+                })
+                .on('mouseout', function(){
+                    tooltip
+                        .transition(200)
+                        .style('opacity', 0);
+                    g.selectAll("polygon")
+                        .transition(200)
+                        .style("fill-opacity", cfg.opacityArea);
+                })
+                .append("svg:title")
+                .text(function(j){return Math.max(j.value, 0)});
+
+            series++;
+        });
+
+        d2.forEach(function(y, x){
+            dataValues = [];
+            g.selectAll(".nodes")
+                .data(y, function(j, i){
+                    dataValues.push([
+                        cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
+                        cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
+                    ]);
+                });
+            dataValues.push(dataValues[0]);
+            g.selectAll(".area")
+                .data([dataValues])
+                .enter()
+                .append("polygon")
+                .attr("class", "radar-chart-serie"+series)
+                .style("stroke-width", "2px")
+                .style("stroke", cfg.color_w(series))
+                .attr("points",function(d) {
+                    var str="";
+                    for(var pti=0;pti<d.length;pti++){
+                        str=str+d[pti][0]+","+d[pti][1]+" ";
+                    }
+                    return str;
+                })
+                .style("fill", function(j, i){return cfg.color_w(series)})
+                .style("fill-opacity", cfg.opacityArea)
+                .on('mouseover', function (d){
+                    z = "polygon."+d3.select(this).attr("class");
+                    g.selectAll("polygon")
+                        .transition(200)
+                        .style("fill-opacity", 0.1);
+                    g.selectAll(z)
+                        .transition(200)
+                        .style("fill-opacity", .7);
+                })
+                .on('mouseout', function(){
+                    g.selectAll("polygon")
+                        .transition(200)
+                        .style("fill-opacity", cfg.opacityArea);
+                });
+            series++;
+        });
+        series=0;
+
+
+        d2.forEach(function(y, x){
+            g.selectAll(".nodes")
+                .data(y).enter()
+                .append("svg:circle")
+                .attr("class", "radar-chart-serie"+series)
+                .attr('r', cfg.radius)
+                .attr("alt", function(j){return Math.max(j.value, 0)})
+                .attr("cx", function(j, i){
+                    dataValues.push([
+                        cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total)),
+                        cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total))
+                    ]);
+                    return cfg.w/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.sin(i*cfg.radians/total));
+                })
+                .attr("cy", function(j, i){
+                    return cfg.h/2*(1-(Math.max(j.value, 0)/cfg.maxValue)*cfg.factor*Math.cos(i*cfg.radians/total));
+                })
+                .attr("data-id", function(j){return j.area})
+                .style("fill", "#fff")
+                .style("stroke-width", "2px")
+                .style("stroke", cfg.color_w(series)).style("fill-opacity", .9)
+                .on('mouseover', function (d){
+                    newX =  parseFloat(d3.select(this).attr('cx')) - 10;
+                    newY =  parseFloat(d3.select(this).attr('cy')) - 5;
+
+                    tooltip
+                        .attr('x', newX)
+                        .attr('y', newY)
+                        .text(Math.round(d.value * 10) /10)
+                        .attr('fill', '#fff')
                         .transition(200)
                         .style('opacity', 1);
 
