@@ -63,23 +63,6 @@ radarChart.prototype.initVis = function() {
         ExtraWidthX: 300 //Update
     };
 
-
-    // // Add an SVG element with the desired dimensions and margin.
-    // vis.svg = d3.select("#" + vis.parentElement).append("svg")
-    //     .attr("width", vis.width + vis.margin.left + vis.margin.right)
-    //     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-    //     .append("g")
-    //     .attr("transform",
-    //         "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-    //
-    //
-    //
-    // // Scales and axes. Note the inverted domain for the y-scale: bigger is up!
-    // vis.x = d3.scaleLinear()
-    //     .range([0, vis.width]);
-    // vis.y = d3.scaleLinear()
-    //     .range([vis.height, 0]);
-
     vis.wrangleData();
 };
 
@@ -87,8 +70,6 @@ radarChart.prototype.wrangleData = function() {
     var vis = this;
 
     // CHECK THE YEAR RANGE FILTER
-
-
 
     vis.radarKeys = [
         "Poverty in old age",
@@ -135,8 +116,7 @@ radarChart.prototype.wrangleData = function() {
     // Multiply by 10 to get rate per 1000; multiply by 100 to get percentage
     vis.eastSorted[3].value= vis.eastSorted[3].value * 10
     vis.eastSorted[0].value= vis.eastSorted[0].value * 100
-
-    vis.eastSorted = [vis.eastSorted]
+    vis.eastSorted = [vis.eastSorted];
 
     // Initialize empty list to match radar data format
     vis.westSorted = [];
@@ -158,12 +138,10 @@ radarChart.prototype.wrangleData = function() {
     vis.westSorted.push({"area": "Unemployment rate", "value": 0});
     vis.westSorted.push({"area": "GDP per capita", "value": 0});
 
-
     // Multiply by 10 to get rate per 1000; multiply by 100 to get percentage
-    vis.westSorted[3].value= vis.westSorted[3].value * 10
-    vis.westSorted[0].value= vis.westSorted[0].value * 100
-
-    vis.westSorted = [vis.westSorted]
+    vis.westSorted[3].value= vis.westSorted[3].value * 10;
+    vis.westSorted[0].value= vis.westSorted[0].value * 100;
+    vis.westSorted = [vis.westSorted];
 
     vis.updateVis()
 };
@@ -199,4 +177,62 @@ function aveHelper(array) {
 function removeElement(id) {
     var elem = document.getElementById(id);
     return elem.parentNode.removeChild(elem);
+}
+
+radarChart.prototype.selectionChange = function (brushRegion) {
+    var vis = this;
+
+    vis.minRange = Math.round(tobias_line.x.invert(d3.min([brushRegion[0], brushRegion[1]])));
+    vis.maxRange = Math.round(tobias_line.x.invert(d3.max([brushRegion[0], brushRegion[1]])));
+
+    // console.log('vd', vis.data);
+    vis.filterKeys = Object.keys(vis.data[0]).slice(0, 23);
+    // console.log(+Object.keys(vis.data[0]).slice(13, 14) < 2015);
+
+    var tester = vis.filterKeys.filter(function (value) {
+        return (+value <= vis.maxRange) && (+value >= vis.minRange)
+    });
+
+    console.log('tester', tester);
+
+    var new_test = vis.data[0].filter(function (element) {
+        conole.log('elelelement',element)
+        return element
+    })
+
+    console.log('new test', new_test)
+
+    // Filter data based on selection range
+    // vis.filteredData = vis.data.filter(function (value) {
+
+    //     new_value = {}
+    //     console.log(typeof value)
+    //     return value
+    // })
+
+        // console.log('mn',vis.minRange)
+        // console.log('mx',vis.maxRange)
+
+    vis.tempData = vis.data;
+
+    // vis.tempData.forEach(function (d) {
+    //     vis.filterKeys.forEach(function (e) {
+    //         // if ((+e <= vis.minRange )) {
+    //         //     delete d[e]
+    //         // }
+    //         if ((+e >= vis.maxRange )) {
+    //             delete d[e]
+    //         }
+    //         //
+    //         // if ((+e <= vis.minRange )) {
+    //         //     delete d[e]
+    //         // }
+    //     })
+    // });
+
+
+
+
+    console.log('check dis out', vis.tempData)
+    console.log("new filtered data", vis.filteredData)
 }

@@ -293,6 +293,6 @@ function brushed() {
 
 function brushed_radar() {
 	var selectionRange = d3.brushSelection(d3.select(".brushRadar").node());
-	console.log(selectionRange)
-	radarChart.selectionChange(selectionRange);
+	// console.log(selectionRange)
+	radar_chart.selectionChange(selectionRange);
 }
