@@ -7,7 +7,16 @@
 ul li::before {
     color: white; /* Change the color */
 }
-
+.axis {
+    font: 15px sans-serif;
+}
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #D4D8DA;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
 
 .bar-element:hover {
     fill: yellow;
