@@ -142,6 +142,10 @@ circle .scatter-circle:hover  {
     left: 0;
 }
 
+.legend-tobias{
+    fill: white;
+}
+
 
 .Tobias-connected-page-header{
     min-height: 150px;
@@ -155,5 +159,6 @@ circle .scatter-circle:hover  {
 #Tobias-dynamic-text2{
     min-height: 450px;
     max-height: 450px;
+    min-width: 400px;
 }
 

@@ -41,6 +41,8 @@ TobiasMap.prototype.initVis = function(){
         .attr("transform",
             "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+
+
     // define projection
     vis.projection = d3.geoMercator()
         .scale(2000)
@@ -535,6 +537,53 @@ TobiasLine.prototype.initVis = function() {
     vis.yAxis = vis.svg.append("g")
         .attr("transform", "translate(" + vis.margin.left + ", 0)")
         .attr("class", "tobias-axis")
+
+
+    vis.legend = vis.svg.append("g")
+
+    // west Germany
+    vis.legend.append("rect")
+        .attr("x",40)
+        .attr("y",60)
+        .attr("width",10)
+        .attr("height",10)
+        .attr("fill", "#1f77b4")
+
+    vis.legend.append("rect")
+        .attr("x",40)
+        .attr("y",75)
+        .attr("width",10)
+        .attr("height",10)
+        .attr("fill", "red")
+
+        // overall germany
+    vis.legend.append("rect")
+        .attr("x",40)
+        .attr("y",90)
+        .attr("width",10)
+        .attr("height",10)
+        .attr("fill", "#008080")
+
+    vis.legend.append("text")
+        .attr("class", "legend-tobias")
+
+        .attr("x",60)
+        .attr("y",70)
+        .text("West Germany")
+
+    vis.legend.append("text")
+        .attr("class", "legend-tobias")
+
+        .attr("x",60)
+        .attr("y",85)
+        .text("East Germany")
+
+    vis.legend.append("text")
+        .attr("class", "legend-tobias")
+        .attr("x",60)
+        .attr("y",100)
+        .text("Combined Germany")
+
 
 
 
