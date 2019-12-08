@@ -505,8 +505,8 @@ TobiasLine.prototype.initVis = function() {
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 500 - vis.margin.left - vis.margin.right;
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.width = 400 - vis.margin.left - vis.margin.right;
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -588,7 +588,7 @@ TobiasLine.prototype.initVis = function() {
         });
     vis.svg.append("text")
         .attr('id', 'linechart1text')
-        .attr("x", vis.width/2)
+        .attr("x", vis.width/2 + 10)
         .attr("y", vis.height/2)
         .attr("font-size", "30px")
         .attr("text-anchor", "middle")
