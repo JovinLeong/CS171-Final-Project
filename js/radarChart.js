@@ -1,5 +1,5 @@
-var width = 300,
-    height = 300;
+var width = 200,
+    height = 200;
 
 // Config for the Radar chart
 var config = {

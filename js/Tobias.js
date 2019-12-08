@@ -505,8 +505,8 @@ TobiasLine.prototype.initVis = function() {
 
     // --> CREATE SVG DRAWING AREA
     vis.margin = {top: 30, right: 90, bottom: 50, left: 30}
-    vis.width = 500 - vis.margin.left - vis.margin.right;
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+    vis.width = 400 - vis.margin.left - vis.margin.right;
+    vis.height = 400 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#" + vis.parentElement).append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
@@ -588,7 +588,7 @@ TobiasLine.prototype.initVis = function() {
         });
     vis.svg.append("text")
         .attr('id', 'linechart1text')
-        .attr("x", vis.width/2)
+        .attr("x", vis.width/2 + 10)
         .attr("y", vis.height/2)
         .attr("font-size", "30px")
         .attr("text-anchor", "middle")
@@ -886,11 +886,11 @@ function updateMap(){
         in spite of numerous attempts to close the wealth gap, the East is still significantly worse off than the West
          as can be seen on the map on the left hand side`,
             `... but this is no exception. Differences between East and West are similarly stark when looking at average
-        pension payouts`,
+        pension payouts...`,
             `... the number of vocational trainings received per 1.000 employees...`,
-            `or the average population age`,
+            `...or the average population age.`,
             `Almost no matter which indicator one is looking at, 30 years after the fall of the wall, the border can still be drawn.    
-         Swipe down to continue to the next visualisation...`]
+         Swipe down to explore how different dimensions of life between former East and West Germany remain defined by the now fallen wall...`]
 
         var i = 0;
     var txt = dynamic_text[tobias_map.currentMapState]
