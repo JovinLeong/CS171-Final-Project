@@ -160,15 +160,6 @@ borderYears.prototype.createVis = function() {
         .text("Year");
 
 
-
-    vis.svg.append("g")
-        .attr("class", "x brush")
-        .call(vis.brush)
-        .select("rect")
-        .attr("y", -6)
-        .attr("height", vis.height + 7);
-
-
     vis.svg.append("rect")
         .attr('id', 'connectedmap1rect')
         .attr("x", -1000)
@@ -193,6 +184,18 @@ borderYears.prototype.createVis = function() {
         .attr("text-anchor", "middle")
         .attr("fill", "white")
         .text("Drag your mouse over the chart");
+
+
+
+    vis.svg.append("g")
+        .attr("class", "x brush")
+        .call(vis.brush)
+        .select("rect")
+        .attr("y", -6)
+        .attr("height", vis.height + 7);
+
+
+
 
 
     // vis.absoluteSum =
