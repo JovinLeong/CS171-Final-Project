@@ -7,7 +7,7 @@ var RadarChart = {
             factor: 1,
             factorLegend: .85,
             levels: 3,
-            maxValue: 0,
+            maxValue: 40,
             radians: 2 * Math.PI,
             opacityArea: 0.5,
             ToRight: 5,
@@ -27,7 +27,7 @@ var RadarChart = {
             }
         }
 
-        cfg.maxValue = 100;
+        // cfg.maxValue = 40;
 
         var allAxis = (d[0].map(function(i, j){return i.area}));
         var total = allAxis.length;
