@@ -1,10 +1,5 @@
 'use strict';
-// var mainDocument = $(document);
 
-// init foundation
-// $(document).foundation();
-
-// Init all plugin when document is ready 
 $(document).on('ready', function () {
 	// 0. Init console to avoid error
 	var method;
@@ -289,10 +284,11 @@ $(document).on('ready', function () {
 function brushed() {
 	var selectionRange = d3.brushSelection(d3.select(".brush").node());
 	border_reasons.selectionChange(selectionRange);
+	console.log('test')
 }
 
 function brushed_radar() {
-	var selectionRange = d3.brushSelection(d3.select(".brushRadar").node());
+	var selectionRange_2 = d3.brushSelection(d3.select(".brushRadar").node());
 	// console.log(selectionRange)
-	radar_chart.selectionChange(selectionRange);
+	radar_chart.selectionChange(selectionRange_2);
 }

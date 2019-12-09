@@ -142,8 +142,8 @@ radarChart.prototype.wrangleData = function() {
     // vis.westSorted[0].value= vis.westSorted[0].value * 100;
     vis.westSorted = [vis.westSorted];
 
-    console.log('west',(vis.verticesWest[2]));
-    console.log('est',vis.eastSorted)
+    // console.log('west',(vis.verticesWest[2]));
+    // console.log('est',vis.eastSorted)
 
     vis.updateVis()
 };
@@ -166,10 +166,10 @@ function aveHelper(array) {
             sums += +item
         }
     });
-
-    console.log('nans',nans)
-    console.log('sums',sums)
-    console.log('outcome', (sums/(23-nans)))
+    //
+    // console.log('nans',nans)
+    // console.log('sums',sums)
+    // console.log('outcome', (sums/(23-nans)))
 
     var ave = sums/( 23- +nans);
     return ave;
@@ -190,17 +190,11 @@ radarChart.prototype.selectionChange = function (brushRegion) {
     vis.filterKeys = Object.keys(vis.data[0]).slice(0, 23);
     // console.log(+Object.keys(vis.data[0]).slice(13, 14) < 2015);
 
-    var tester = vis.filterKeys.filter(function (value) {
-        return (+value <= vis.maxRange) && (+value >= vis.minRange)
-    });
-
-    console.log('tester', tester);
-
     var new_test = vis.data[0].filter(function (element) {
         return element
     })
 
-    console.log('new test', new_test)
+
 
     // Filter data based on selection range
     // vis.filteredData = vis.data.filter(function (value) {
@@ -230,9 +224,4 @@ radarChart.prototype.selectionChange = function (brushRegion) {
     //     })
     // });
 
-
-
-
-    console.log('check dis out', vis.tempData)
-    console.log("new filtered data", vis.filteredData)
 }

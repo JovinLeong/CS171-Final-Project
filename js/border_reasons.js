@@ -134,7 +134,7 @@ borderReason.prototype.updateVis = function() {
 
 
     // This works; just need to add titling later
-    vis.barChart = vis.svg.selectAll("rect")
+    vis.barChart = vis.svg.selectAll("rect.bar-element")
         .data(vis.sortedValues);
     vis.barChart.enter().append("rect")
         .merge(vis.barChart)

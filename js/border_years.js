@@ -42,6 +42,7 @@ borderYears.prototype.createVis = function() {
 
     });
 
+
     // Creating a date range to aggregate data per year
     vis.dateRange = d3.range(1945,2015,1);
     vis.incidenceData = [];
@@ -71,6 +72,7 @@ borderYears.prototype.createVis = function() {
         .append("g")
         .attr("transform",
             "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
 
     // Add the clip path.
     vis.svg.append("clipPath")
@@ -104,15 +106,15 @@ borderYears.prototype.createVis = function() {
             return vis.line(d);
         })
 
-    //Add 'curtain' rectangle to hide entire graph
-    vis.curtain = vis.svg.append('rect')
-        .attr('x', -1 * vis.width)
-        .attr('y', -1 * vis.height)
-        .attr('height', vis.height)
-        .attr('width', vis.width)
-        .attr('class', 'curtain')
-        .attr('transform', 'rotate(180)')
-        .style('fill', '#1D1D1D');
+    // //Add 'curtain' rectangle to hide entire graph
+    // vis.curtain = vis.svg.append('rect')
+    //     .attr('x', -1 * vis.width)
+    //     .attr('y', -1 * vis.height)
+    //     .attr('height', vis.height)
+    //     .attr('width', vis.width)
+    //     .attr('class', 'curtain')
+    //     .attr('transform', 'rotate(180)')
+    //     .style('fill', '#1D1D1D');
 
     // Create a shared transition for anything we're animating
     vis.t = vis.svg.transition()
@@ -131,10 +133,20 @@ borderYears.prototype.createVis = function() {
     vis.t.select('line.guide')
         .attr('transform', 'translate(' + vis.width + ', 0)');
 
-
-    vis.brush = d3.brushX()
+    vis.brushLine = d3.brushX()
         .extent([[0,0], [vis.width, vis.height]])
         .on("brush", brushed);
+
+    // Draw brush
+    vis.svg.append("g")
+        .attr("class", "x brushLine")
+        .select("rect")
+        .call(vis.brushLine)
+        .attr("y", -6)
+        .attr("height", vis.height + 7);
+
+    vis.svg.selectAll(".brushLine")
+        .call(vis.brushLine);
 
     vis.svg.append("text")
         .attr("class", "axis-title y-title")
@@ -160,6 +172,8 @@ borderYears.prototype.createVis = function() {
         .text("Year");
 
 
+
+
     vis.svg.append("rect")
         .attr('id', 'connectedmap1rect')
         .attr("x", -1000)
@@ -176,6 +190,8 @@ borderYears.prototype.createVis = function() {
 
             });
         });
+
+
     vis.svg.append("text")
         .attr('id', 'connectedmap1text')
         .attr("x", vis.width/2)
@@ -187,12 +203,7 @@ borderYears.prototype.createVis = function() {
 
 
 
-    vis.svg.append("g")
-        .attr("class", "x brush")
-        .call(vis.brush)
-        .select("rect")
-        .attr("y", -6)
-        .attr("height", vis.height + 7);
+
 
 
 
