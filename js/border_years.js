@@ -172,36 +172,36 @@ borderYears.prototype.createVis = function() {
         .text("Year");
 
 
-
-
-    vis.svg.append("rect")
-        .attr('id', 'connectedmap1rect')
-        .attr("x", -1000)
-        .attr("y", -1000)
-        .attr("width", 4000)
-        .attr("height", 4000)
-        .style("fill", d3.rgb(29,29,29))
-        .style('opacity', 0.75)
-        .on("mouseover", function () {
-            $( "#connectedmap1rect" ).fadeOut( "slow", function () {
-
-            });
-            $( "#connectedmap1text" ).fadeOut( "slow", function () {
-
-            });
-        });
-
-
-    vis.svg.append("text")
-        .attr('id', 'connectedmap1text')
-        .attr("x", vis.width/2)
-        .attr("y", vis.height/2)
-        .attr("font-size", "25px")
-        .attr("text-anchor", "middle")
-        .attr("fill", "white")
-        .text("Drag your mouse over the chart");
-
-
+    //
+    //
+    // vis.svg.append("rect")
+    //     .attr('id', 'connectedmap1rect')
+    //     .attr("x", -1000)
+    //     .attr("y", -1000)
+    //     .attr("width", 4000)
+    //     .attr("height", 4000)
+    //     .style("fill", d3.rgb(29,29,29))
+    //     .style('opacity', 0.75)
+    //     .on("mouseover", function () {
+    //         $( "#connectedmap1rect" ).fadeOut( "slow", function () {
+    //
+    //         });
+    //         $( "#connectedmap1text" ).fadeOut( "slow", function () {
+    //
+    //         });
+    //     });
+    //
+    //
+    // vis.svg.append("text")
+    //     .attr('id', 'connectedmap1text')
+    //     .attr("x", vis.width/2)
+    //     .attr("y", vis.height/2)
+    //     .attr("font-size", "25px")
+    //     .attr("text-anchor", "middle")
+    //     .attr("fill", "white")
+    //     .text("Drag your mouse over the chart");
+    //
+    //
 
 
 
